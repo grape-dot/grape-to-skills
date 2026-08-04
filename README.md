@@ -33,8 +33,6 @@ img-antiquity/
 ├── examples/                       # 提示词生成效果示例
 │   ├── embroidery-aesthetic-cover.png
 │   └── porcelain-catalog-spread.png
-└── docs/
-    └── antiquity-prompt.pdf        # 设计文档原稿（PDF）
 ```
 
 ## 快速开始 / Quick Start
