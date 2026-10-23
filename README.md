@@ -19,7 +19,7 @@ Chinese Classical Ink Scroll × Modern Magazine Editorial — a reusable image-g
 - **参数化变量**：主题 / 用途 / 画幅 / 元素 / 版式 / 强调色 / 文字区域 / 细节密度，8 个变量自由组合
 - **严格负面词**：分组负面提示词，防塑料感、防国潮廉价感、防文字乱码
 - **主题变体公式**：内置刺绣、瓷器两个完整示例，其他工艺主题（玉器、漆器、书画…）按同一公式推导
-- **AI Skill 格式**：`SKILL.md` 可直接被 Claude Code、QoderWork 等支持 Skills 的 AI 工具加载，自动组装提示词
+- **AI Skill 格式**：`SKILL.md` 可直接被 Claude Code、WorkBuddy、QoderWork 等支持 Skills 的 AI 工具加载，自动组装提示词并调用图像生成工具
 - **中英双语**：中文原版 + 英文版，适配 Midjourney 等对中文支持有限的平台
 
 ## 目录结构 / Structure
@@ -28,7 +28,7 @@ Chinese Classical Ink Scroll × Modern Magazine Editorial — a reusable image-g
 img-antiquity/
 ├── SKILL.md                        # AI Skill 主文件（给 AI 读的操作手册）
 ├── prompts/
-│   ├── antiquity-prompt-zh.md      # 中文版完整提示词（12 章节 + 2 主题变体）
+│   ├── antiquity-prompt-zh.md      # 中文版完整提示词（§0–§12 共 13 节 + 2 主题变体）
 │   └── antiquity-prompt-en.md      # 英文版完整提示词
 ├── examples/                       # 提示词生成效果示例
 │   ├── embroidery-aesthetic-cover.png
@@ -57,7 +57,7 @@ img-antiquity/
 
 ### 方式二：作为 AI Skill 使用
 
-将本仓库放入你的 Skills 目录（如 `~/.claude/skills/`、QoderWork 的 skills 目录），AI 会在你描述"想要一张水墨杂志风封面"时自动加载 `SKILL.md` 并为你组装提示词。
+将本仓库（或其中的 `SKILL.md` + `prompts/` + `examples/`）放入你的 Skills 目录——Claude Code 为 `~/.claude/skills/`，WorkBuddy 为 `~/.workbuddy/skills/`，QoderWork 为对应 skills 目录，目录名须保持 `img-antiquity`。AI 会在你描述"想要一张水墨杂志风封面"时自动加载 `SKILL.md` 并为你组装提示词、生成图片。
 
 ## 兼容平台 / Compatible Platforms
 

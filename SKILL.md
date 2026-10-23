@@ -2,13 +2,16 @@
 name: img-antiquity
 description: >-
   Generates Eastern editorial images fusing classical Chinese ink scroll
-  aesthetics with modern magazine design (中国古典水墨卷轴 × 现代杂志编辑设计).
-  Use when the user asks for images styled as Chinese ink/embroidery/porcelain
-  culture editorials, museum-catalog posters, cultural magazine covers,
-  scroll-style layouts, or 东方/国风/古风/水墨/刺绣/瓷器/文物 editorial visuals.
-  Builds the generation prompt from templates in prompts/ and supports
-  Midjourney, Stable Diffusion, DALL·E, and Chinese image platforms.
-version: 1.0.0
+  aesthetics with modern magazine design (中国古典水墨卷轴 × 现代杂志编辑设计),
+  by assembling a style prompt from templates in prompts/ and then calling the
+  image-generation tool. Use when the user asks for 水墨/国风/古风/东方 style
+  海报、封面、杂志跨页、图录、文化刊物 visuals, or Chinese ink, embroidery
+  (刺绣), porcelain (瓷器/青花), 文物, 玉器, 漆器 editorial themes, museum-catalog
+  posters, or scroll-style layouts. Targets Midjourney, Stable Diffusion,
+  DALL·E, 即梦, 通义万相.
+license: MIT
+metadata:
+  version: 1.0.0
 ---
 
 # Img Antiquity — 东方文化编辑设计图像生成
@@ -16,6 +19,8 @@ version: 1.0.0
 ## 风格定位
 
 中国古典水墨卷轴与现代高端杂志编辑设计的融合：以浅米白/暖象牙色纸张肌理为底，朱红、哑光金、玉石绿、云蓝点缀，模块化网格 + 非对称平衡 + 大面积留白 + 纵向分栏 + 章节编号 + 细线分隔。传统艺术元素（山水、花鸟、器物、印章、云纹）以现代平面设计方式重新编排，呈现博物馆展览图录、文化刊物、品牌视觉手册的质感。**不是古画复制，也不是现代海报贴皮。**
+
+参考效果见 `examples/`：`embroidery-aesthetic-cover.png`（刺绣主题 · 杂志封面）、`porcelain-catalog-spread.png`（青花瓷 · 图录跨页）。
 
 ## 工作流程
 
@@ -32,7 +37,8 @@ version: 1.0.0
      - 概念图 → "允许少量抽象编号、章节标记和不可读占位排版，但不得生成完整中文段落。"
    - 追加 §9 负面提示词
 4. **主题变体**：若用户主题为刺绣/瓷器（或其他工艺），按 §11 变体句式替换核心媒介词与负面词，编辑版式逻辑保持不变。其他主题（玉器、漆器、书画等）按同一公式推导。
-5. **生成与交付**：将组装好的提示词交给图像生成模型；生成后向用户说明所用变量，并提示文字需后期排版。
+5. **生成与交付**：调用当前环境的图像生成工具执行该提示词——WorkBuddy 内使用 ImageGen，其他环境交给 Midjourney / Stable Diffusion / DALL·E / 即梦 / 通义万相等。生成后向用户说明所用变量与画幅比例，并提示画面内正式文字需后期排版。
+   - 若当前环境没有图像生成能力，则直接交付组装好的完整提示词（可直接粘贴使用），并说明这是提示词而非成品图。
 
 ## 关键规则（违反会破坏风格）
 

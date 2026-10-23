@@ -165,7 +165,7 @@ For a concept image with magazine structure, append:
 
 The following variations replace the core medium and elements on top of the integrated prompt while keeping the entire editorial layout logic intact.
 
-### 11.1 Embroidery Theme (see examples/embroidery-aesthetic-cover.png)
+### 11.1 Embroidery Theme (see ../examples/embroidery-aesthetic-cover.png)
 
 **Variation formula**: replace "ink scroll" with "embroidered fabric"; swap ink vocabulary for needlework vocabulary.
 
@@ -199,7 +199,7 @@ On a warm-ivory aged wood table, an embroidery hoop, thread reels, scissors, and
 
 > plastic silk shine, plastic-looking threads, cartoon embroidery, cheap cross-stitch kit look, yarn-handcraft texture, French crochet, Western lace, 3D felt, plush-toy texture, photorealistic fabric photography, repeated motifs, wrong stitch proportions, disordered embroidery structure.
 
-### 11.2 Porcelain Theme (see examples/porcelain-catalog-spread.png)
+### 11.2 Porcelain Theme (see ../examples/porcelain-catalog-spread.png)
 
 **Variation formula**: replace "ink scroll" with "blue-and-white porcelain"; swap ink vocabulary for glaze vocabulary.
 
