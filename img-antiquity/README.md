@@ -24,7 +24,7 @@ Chinese Classical Ink Scroll × Modern Magazine Editorial — a reusable image-g
 
 ## 目录结构 / Structure
 
-```
+```text
 img-antiquity/
 ├── SKILL.md                        # AI Skill 主文件（给 AI 读的操作手册）
 ├── prompts/
@@ -47,7 +47,7 @@ img-antiquity/
 
 示例（组装后的完整提示词）：
 
-```
+```text
 中国古典水墨卷轴与现代高端杂志编辑设计融合的东方视觉风格……（§0 整合版）
 主题：苏绣团扇　用途：封面　画幅比例：A4 竖版　主要视觉元素：花鸟、器物
 版式倾向：中轴分栏　主强调色：朱红　细节密度：中
