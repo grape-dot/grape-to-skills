@@ -1,0 +1,328 @@
+{
+  "meta": {
+    "production": "NUT CRISIS",
+    "scene_id": "SC 1.1",
+    "scene_title": "THE KITCHEN JOB",
+    "shots_label_zh": "镜头1.1.1至1.1.9",
+    "aspect": "16:9"
+  },
+  "world": {
+    "space_en": "a domestic kitchen seen from very low, near counter height: pale grey marble countertop running from centre to screen-right, an open wire cage with warm wood shavings on screen-left, a two-door wall cabinet directly above the counter, plain grey floor tiles below; the room reads as enormous next to the animals",
+    "space_zh": "住宅厨房，极低机位接近台面高度：浅灰大理石台面从画面中部延伸到右侧，左侧是敞开铁丝笼与暖黄木屑，台面正上方是双门吊柜，下方是灰色地砖；整个空间对两只小动物而言巨大无比",
+    "axis_en": "screen-left = cage and shavings, screen-right = countertop and the tall cabinet above it; never mirrored anywhere on the sheet",
+    "axis_zh": "画面左侧＝笼子与木屑区，画面右侧＝台面与上方高柜；全页不得镜像",
+    "scale_en": "countertop 90 cm high, wall cabinet 60 cm above it, hamster 15 cm long, guinea pig 25 cm long — roughly 6:1 against the counter, so the set always dwarfs them",
+    "scale_zh": "台面高 90 厘米，吊柜高出 60 厘米，仓鼠体长 15 厘米，豚鼠体长 25 厘米——与台面约 6:1，保证场景始终压得住主角",
+    "light_en": "single warm window key from frame-left at 45 degrees, soft cool grey fill from frame-right, no overhead light, identical in all nine panels",
+    "light_zh": "单一暖白窗光自画面左侧 45 度打入，右侧冷灰补光，无顶光，九格完全一致"
+  },
+  "palette": [
+    {
+      "id": "hamster_gold",
+      "name_zh": "仓鼠金棕",
+      "name_en": "hamster gold-brown",
+      "hex": "#B07B3E",
+      "use_en": "Jian's fur only, nowhere else on the sheet",
+      "use_zh": "仅用于阿坚毛色，全页不得他用"
+    },
+    {
+      "id": "guinea_cream",
+      "name_zh": "豚鼠奶黄",
+      "name_en": "guinea cream",
+      "hex": "#E3C892",
+      "use_en": "Doudou's fur only",
+      "use_zh": "仅用于豆豆毛色"
+    },
+    {
+      "id": "bedding_warm",
+      "name_zh": "木屑暖黄",
+      "name_en": "bedding warm yellow",
+      "hex": "#D9B679",
+      "use_en": "wood shavings in the cage only",
+      "use_zh": "仅用于笼内木屑"
+    },
+    {
+      "id": "kitchen_grey",
+      "name_zh": "厨房冷灰",
+      "name_en": "kitchen cool grey",
+      "hex": "#9AA0A6",
+      "use_en": "marble counter, cabinet fronts, floor tiles — all hard surfaces",
+      "use_zh": "大理石台面、柜门、地砖等所有硬表面"
+    },
+    {
+      "id": "nut_brown",
+      "name_zh": "坚果深棕",
+      "name_en": "nut dark brown",
+      "hex": "#5A3A22",
+      "use_en": "nuts, raisins, the burlap bag",
+      "use_zh": "坚果、葡萄干、麻袋"
+    },
+    {
+      "id": "robot_metal",
+      "name_zh": "机器人金属深灰",
+      "name_en": "robot metallic charcoal",
+      "hex": "#3C4043",
+      "use_en": "the robot vacuum only — the one permitted exception",
+      "use_zh": "仅用于扫地机器人——唯一例外色"
+    }
+  ],
+  "characters": [
+    {
+      "id": "jian",
+      "name_en": "AGENT JIAN",
+      "name_zh": "仓鼠特工阿坚",
+      "lock_en": "a very round golden hamster, plump pear-shaped body twice as wide as his head, fur warm golden-brown #B07B3E with a pale cream belly and cream cheek patches, cheeks permanently stuffed and bulging wider than his head, tiny pale pink paws, black bead eyes, short stub tail, no clothing and no accessories",
+      "lock_zh": "一只极圆的金丝熊仓鼠，梨形身体，体宽是头宽的两倍，毛色暖金棕 #B07B3E，腹部与两颊为奶白色，腮帮永远塞满、鼓得比头还宽，爪子小巧粉嫩，黑色豆豆眼，短尾，不穿衣服、不戴任何配饰",
+      "anchors": ["over-stuffed cheeks", "pear silhouette", "cream belly"],
+      "traits_en": "OVERCONFIDENT · THEATRICAL · LOYAL",
+      "traits_zh": "自信爆棚 · 戏多 · 嘴硬心软",
+      "sketch_en": "loose pencil study, three quick gesture poses: paws on hips, mid-shout, and a tiny salute",
+      "sketch_zh": "松散铅笔小稿，三个快速动态：双爪叉腰、正在喊话、以及一个极小的敬礼",
+      "render_pose_en": "standing upright with tiny paws planted on his hips, chin lifted, absolutely certain of himself",
+      "render_pose_zh": "直立站姿，两只小爪子叉在腰上，下巴微抬，坚信自己天下无敌",
+      "caption_lines": ["AGE: 1-2 YRS · LENGTH: 15 CM", "CODENAME: NUT-01"],
+      "caption_zh": ["年龄：1-2岁 · 体长：15厘米", "代号：坚果一号"],
+      "voice_en": "bright nasal tenor 320-420 Hz, 4.5-5.5 syl/s, audible inhale before each line, close-mic dry +2 dB"
+    },
+    {
+      "id": "doudou",
+      "name_en": "DOUDOU",
+      "name_zh": "豚鼠技术支援豆豆",
+      "lock_en": "a chunky cream-yellow guinea pig, long low loaf-shaped body about 1.7 times the hamster's length, fur soft butter-cream #E3C892 with a slightly darker muzzle, small floppy ears, one stalk of grass permanently held in the side of his mouth, dark round eyes at half mast, no clothing and no accessories",
+      "lock_zh": "一只敦实的奶黄色豚鼠，长条形面包状身体，长度约为仓鼠的 1.7 倍，毛色柔和的奶油黄 #E3C892，口鼻略深，小耳朵下垂，嘴角永远叼着一根草叶，深色圆眼半睁，不穿衣服、不戴任何配饰",
+      "anchors": ["grass stalk in mouth", "loaf silhouette", "half-mast eyes"],
+      "traits_en": "LAID-BACK · DEADPAN · ACCIDENTALLY USEFUL",
+      "traits_zh": "懒散 · 佛系 · 冷面吐槽 · 关键时误打误撞",
+      "sketch_en": "loose pencil study, two poses: collapsed on his side, and half-sitting while chewing",
+      "sketch_zh": "松散铅笔小稿，两个姿态：完全侧躺摊平、以及半躺半坐咀嚼",
+      "render_pose_en": "half-sitting, half-collapsed, grass still in the corner of his mouth, eyes barely open",
+      "render_pose_zh": "半躺半坐，草叶仍叼在嘴角，眼睛几乎睁不开",
+      "caption_lines": ["AGE: 1-2 YRS · LENGTH: 25 CM", "ROLE: TECH SUPPORT (DRAFTED)"],
+      "caption_zh": ["年龄：1-2岁 · 体长：25厘米", "职位：技术支援（被迫）"],
+      "voice_en": "flat baritone 140-180 Hz, 2.5-3 syl/s, muffled by half-chewed grass, 1.5 m distance with small-room reverb, never raises volume"
+    }
+  ],
+  "villain": {
+    "id": "robot",
+    "name_en": "GENERAL DISC",
+    "name_zh": "扫地机器人圆盘将军",
+    "lock_en": "the robot vacuum, a flat dark metallic-grey disc with one sticker eye on its top edge, faint scuff marks, no brand text anywhere",
+    "lock_zh": "扫地机器人，一个扁平的深金属灰圆盘，上沿贴着一只贴纸眼睛，表面有淡淡划痕，没有任何品牌字样",
+    "sketch_en": "quick loose pencil sketch, drawn slightly too dramatic for a vacuum",
+    "sketch_zh": "快速松散铅笔小稿，画得比一台吸尘器戏剧化得多",
+    "caption_lines": ["THREAT LEVEL: LOW", "ACTUAL FUNCTION: SPINS, EATS SLIPPERS"],
+    "caption_zh": ["威胁等级：低", "实际功能：转圈、卡拖鞋"]
+  },
+  "props": [
+    {
+      "id": "bowl",
+      "name_en": "the ceramic seed bowl",
+      "name_zh": "陶瓷食盆",
+      "lock_en": "a ceramic seed bowl, matte off-white with one chipped spot on the rim, diameter about twice the hamster's body, piled high with mixed nuts and exactly half a raisin resting on top",
+      "lock_zh": "陶瓷食盆，哑光米白，盆沿有一处缺口，直径约为仓鼠体长的两倍，堆满混合坚果，最上面放着半颗葡萄干",
+      "states": ["heaped", "heaped_with_gap", "half_eaten"],
+      "scale_en": "12 cm across"
+    },
+    {
+      "id": "raisin",
+      "name_en": "the half raisin",
+      "name_zh": "半颗葡萄干",
+      "lock_en": "half a dark-brown raisin, deeply wrinkled, about the size of the hamster's head",
+      "lock_zh": "半颗深棕葡萄干，褶皱很深，大小约等于仓鼠的头",
+      "states": ["beside_bowl", "in_paw"]
+    },
+    {
+      "id": "wheel",
+      "name_en": "the wire running wheel",
+      "name_zh": "钢丝跑轮",
+      "lock_en": "a wire running wheel with steel spokes and a pale blue plastic base, diameter five times the hamster's height",
+      "lock_zh": "钢丝跑轮，钢制辐条，浅蓝色塑料底座，直径约为仓鼠身高的五倍",
+      "states": ["empty", "in_use"]
+    },
+    {
+      "id": "manual",
+      "name_en": "the field manual",
+      "name_zh": "特工手册",
+      "lock_en": "a tiny spiral notebook with a hand-lettered cover reading FIELD MANUAL, pages bent, lying open and slightly crooked",
+      "lock_zh": "巴掌大的线圈笔记本，封面手写 FIELD MANUAL，书页卷边，摊开且歪歪扭扭",
+      "states": ["open_on_bedding"]
+    },
+    {
+      "id": "launcher",
+      "name_en": "the spoon launcher",
+      "name_zh": "勺子弹射器",
+      "lock_en": "a makeshift catapult: one wooden spoon lashed to a taut rubber band, anchored on the cage door frame",
+      "lock_zh": "土制弹射器：一把木勺绑在绷紧的橡皮筋上，固定在笼门框上",
+      "states": ["loaded", "fired"]
+    },
+    {
+      "id": "robot",
+      "name_en": "the robot vacuum",
+      "name_zh": "扫地机器人",
+      "lock_en": "the robot vacuum, a flat dark metallic-grey disc with one sticker eye on its top edge, faint scuff marks, no brand text anywhere",
+      "lock_zh": "扫地机器人，一个扁平的深金属灰圆盘，上沿贴着一只贴纸眼睛，表面有淡淡划痕，没有任何品牌字样",
+      "states": ["docked", "carrying_slipper", "passing"],
+      "scale_en": "30 cm across"
+    },
+    {
+      "id": "slipper",
+      "name_en": "the grey house slipper",
+      "name_zh": "灰色拖鞋",
+      "lock_en": "a soft grey house slipper, worn and slightly chewed at the heel, long enough to hide the whole hamster",
+      "lock_zh": "灰色软布拖鞋，后跟磨损且被啃过，长度足以藏下整只仓鼠",
+      "states": ["by_door", "over_hamster"]
+    },
+    {
+      "id": "straw",
+      "name_en": "the drinking straw",
+      "name_zh": "吸管",
+      "lock_en": "a single clear plastic drinking straw, bent at the joint, gripped like an ice axe",
+      "lock_zh": "一根透明塑料吸管，中段可弯折，被当作冰镐握着",
+      "states": ["in_paws"]
+    },
+    {
+      "id": "nut_bag",
+      "name_en": "the burlap nut bag",
+      "name_zh": "粗麻坚果袋",
+      "lock_en": "a small burlap nut bag, warm mid-brown #8A5A2B, one frayed corner, about one-third the hamster's height",
+      "lock_zh": "粗麻小坚果袋，暖中棕 #8A5A2B，一角磨毛，高度约为仓鼠的三分之一",
+      "states": ["upright_on_shelf", "tipping", "burst_open", "flattened_on_floor"],
+      "scale_en": "8 cm tall"
+    },
+    {
+      "id": "cake",
+      "name_en": "the birthday cake",
+      "name_zh": "生日蛋糕",
+      "lock_en": "a small round sponge cake on a plain white plate, one baby carrot standing upright in the centre, the words HAPPY BDAY JIAN spelled across the top in sunflower seeds",
+      "lock_zh": "白色平盘上的小圆海绵蛋糕，正中央插一根手指胡萝卜，蛋糕顶部用瓜子拼出 HAPPY BDAY JIAN",
+      "states": ["held_by_owner"]
+    }
+  ],
+  "shots": [
+    {
+      "n": 1,
+      "framing": "NEAR",
+      "action_en": "extreme close-up on the seed bowl as if it were a weapons cache: paws hooked over the rim, the half raisin propped at the frame edge like a field telescope",
+      "action_zh": "把食盆当军火库拍极近特写：小爪子扒着盆沿，半颗葡萄干立在画面边缘，像一具战地望远镜",
+      "props": ["bowl", "raisin"],
+      "state": { "bowl": "heaped", "raisin": "beside_bowl" },
+      "arrow_en": "primary objective",
+      "arrow_zh": "首要目标",
+      "dialogue": [{ "who": "jian", "line_en": "Inventory check. Nuts: secured." }],
+      "camera_en": "macro, lens almost touching the bowl rim, shallow focus, bowl filling two thirds of frame"
+    },
+    {
+      "n": 2,
+      "framing": "MEDIUM",
+      "action_en": "the briefing: Jian stands on top of the wheel with one paw raised mid-declaration, Doudou sprawled in the shavings chewing grass, the field manual open and crooked beside him",
+      "action_zh": "作战会议：阿坚站在跑轮顶上举爪宣布计划，豆豆摊在木屑里嚼草叶，特工手册摊在旁边歪着",
+      "props": ["wheel", "manual", "bowl"],
+      "state": { "wheel": "in_use", "manual": "open_on_bedding", "bowl": "heaped" },
+      "dialogue": [
+        { "who": "jian", "line_en": "Recon. Infiltrate. Celebrate." },
+        { "who": "doudou", "line_en": "That's a wheel." }
+      ],
+      "camera_en": "eye level with the wheel base, cage bars soft in the foreground"
+    },
+    {
+      "n": 3,
+      "framing": "NEAR",
+      "action_en": "launch: Jian fires himself out of the cage door off the spoon launcher, Doudou dragged along by a rope, shavings flying",
+      "action_zh": "弹射出发：阿坚用勺子弹射器把自己从笼门射出去，豆豆被绳子拽着被迫跟上，木屑飞起",
+      "props": ["launcher"],
+      "state": { "launcher": "fired" },
+      "arrow_en": "rebuilt centrifuge",
+      "arrow_zh": "离心训练机改装",
+      "dialogue": [
+        { "who": "jian", "line_en": "Launching!" },
+        { "who": "doudou", "line_en": "I did not agree to this." }
+      ],
+      "camera_en": "low, tight on the cage door, motion smeared shavings as speed lines"
+    },
+    {
+      "n": 4,
+      "framing": "NEAR",
+      "action_en": "encounter: Jian hides inside the slipper while the robot vacuum pushes it in circles across the floor, Jian spinning and screaming inside",
+      "action_zh": "遭遇战：阿坚躲进拖鞋，扫地机器人顶着拖鞋满屋打转，阿坚在拖鞋里跟着转圈尖叫",
+      "props": ["slipper", "robot"],
+      "state": { "slipper": "over_hamster", "robot": "carrying_slipper" },
+      "arrow_en": "enemy recon vehicle?",
+      "arrow_zh": "敌方侦察车？",
+      "dialogue": [
+        { "who": "jian", "line_en": "Enemy armor! Evasive!" },
+        { "who": "doudou", "line_en": "It's a vacuum." }
+      ],
+      "camera_en": "floor level, wide-ish within the panel, circular motion blur on the slipper"
+    },
+    {
+      "n": 5,
+      "framing": "MED-WIDE",
+      "action_en": "the counter glacier: Jian climbs the marble counter face with the straw as an ice axe, sliding back for the third time, Doudou below shoving him up with his head",
+      "action_zh": "台面冰川：阿坚用吸管当冰镐爬大理石台面侧壁，第三次滑下来，豆豆在下面用脑袋顶他上去",
+      "props": ["straw", "nut_bag"],
+      "state": { "straw": "in_paws", "nut_bag": "upright_on_shelf" },
+      "dialogue": [
+        { "who": "jian", "line_en": "Almost... there..." },
+        { "who": "doudou", "line_en": "Third time." }
+      ],
+      "camera_en": "very low angle looking up the counter face, counter edge cutting the top of frame"
+    },
+    {
+      "n": 6,
+      "framing": "MEDIUM",
+      "action_en": "the cabinet breach: Jian wedged in the cabinet door gap, rear end wiggling outside, Doudou biting a grass cake and pulling, the nut bag in sight but out of reach",
+      "action_zh": "最高柜潜入：阿坚卡在柜门缝里，屁股在外面扭，豆豆咬着草饼使劲拉，坚果袋近在眼前却够不着",
+      "props": ["nut_bag"],
+      "state": { "nut_bag": "upright_on_shelf" },
+      "dialogue": [{ "who": "jian", "line_en": "I am stuck. Tactically." }],
+      "camera_en": "side-on at cabinet height, the gap as a narrow vertical slot"
+    },
+    {
+      "n": 7,
+      "framing": "NEAR",
+      "action_en": "nut avalanche: the bag tips off the shelf and bursts, nuts scattering across the floor, Jian striking a victory pose in the middle of the wreckage, Doudou unimpressed with grass in his mouth",
+      "action_zh": "坚果雪崩：袋子被推下柜子爆开，坚果滚了一地，阿坚在废墟中央摆出特工胜利姿势，豆豆叼着草一脸无语",
+      "props": ["nut_bag"],
+      "state": { "nut_bag": "burst_open" },
+      "dialogue": [
+        { "who": "jian", "line_en": "Mission accomplished." },
+        { "who": "doudou", "line_en": "You broke the bag." }
+      ],
+      "camera_en": "slightly above floor level, nuts flying toward camera"
+    },
+    {
+      "n": 8,
+      "framing": "BEAUTY",
+      "action_en": "beauty shot: the owner's hands lower a small carrot-topped cake into frame, seed letters reading HAPPY BDAY JIAN, the seed bowl centred, Jian frozen mid-gesture, Doudou lifting his head out of the nuts to comment",
+      "action_zh": "beauty shot：主人双手把插着胡萝卜的小蛋糕端进画面，瓜子拼出 HAPPY BDAY JIAN，食盆居中，阿坚愣在原地，豆豆从坚果堆里抬头吐槽",
+      "props": ["cake", "bowl"],
+      "state": { "cake": "held_by_owner", "bowl": "heaped", "nut_bag": "flattened_on_floor" },
+      "arrow_en": "wait — this was for me?",
+      "arrow_zh": "等等——这是给我的？",
+      "dialogue": [{ "who": "doudou", "line_en": "...Happy birthday, agent." }],
+      "camera_en": "centred, soft focus, warm pool of light, shallow depth of field"
+    },
+    {
+      "n": 9,
+      "framing": "WIDE",
+      "action_en": "wide birthday: both animals eating inside the seed bowl, the owner's back at the frame edge, the robot vacuum drifting past, Jian covered in nut crumbs giving a solemn salute",
+      "action_zh": "广角生日时刻：阿坚和豆豆在食盆里开吃，主人背影在画面边缘，扫地机器人慢悠悠路过，阿坚满脸坚果屑却严肃敬礼",
+      "props": ["bowl", "robot"],
+      "state": { "bowl": "heaped", "robot": "passing" },
+      "dialogue": [{ "who": "jian", "line_en": "General Disc. Truce, today." }],
+      "camera_en": "wide from floor level, whole kitchen readable, owner's back low and out of focus at frame edge"
+    }
+  ],
+  "notes": {
+    "flow_en": "Every errand is a heist. INHALE — scout, imagine, give the order. EXHALE — launch, crash, get roasted. Stay theatrical, stay loyal, stay nuts.",
+    "flow_zh": "每个任务都是一场大戏。吸气——侦察、脑补、下令。呼气——弹射、翻车、吐槽。保持戏多，保持友谊，保持坚果。",
+    "camera_en": "Open tight on the hardware to make it tense and funny; drop low so the kitchen towers; pull back as the farce grows; land wide and warm on the real gift.",
+    "camera_zh": "以近景拍特工装备，制造紧张又滑稽的亲密感；低角度拍出厨房巨大与仓鼠渺小；随闹剧升级逐渐拉远；以广角温馨收尾，落在真正的礼物上。"
+  },
+  "inferred": [
+    "厨房左侧有窗（为解释暖侧光而补）",
+    "蛋糕上的瓜子字改为英文 HAPPY BDAY JIAN（中文四字出图易糊）",
+    "扫地机器人无品牌字样（避免生成乱码商标）",
+    "豆豆被拽的绳子、咬的草饼按道具外延处理，未单独注册"
+  ]
+}

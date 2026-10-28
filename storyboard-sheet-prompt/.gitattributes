@@ -1,0 +1,14 @@
+# 统一换行符，避免 Windows 提交把整仓库变成 CRLF
+* text=auto eol=lf
+
+# 明确二进制，别让 git 试图做文本 diff
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pdf binary
+*.mp4 binary
+
+# 生成的 md 是文档，按文本处理
+examples/**/*.md text eol=lf

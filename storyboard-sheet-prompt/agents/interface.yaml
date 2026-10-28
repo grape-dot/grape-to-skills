@@ -1,0 +1,24 @@
+interface:
+  display_name: "Storyboard Sheet Prompt"
+  short_description: "turn a scene into a locked-consistent 3x3 storyboard sheet prompt"
+  default_prompt: "Use $storyboard-sheet-prompt to turn this scene into a 16:9 hand-drawn storyboard sheet prompt. Design every character and every scene in Pixar's stylized-realistic language per references/pixar-style.md — silhouette-first, one shape language per character, eyes about a third of the face height, tactile matte materials, single warm key with one-sided rim, lifted blacks, atmospheric perspective — not the five words 'in the style of Pixar'. Reply with TWO paste-ready prompt blocks — English first, then the full Chinese version built from the same locked constants — plus a few lines on what you inferred. Do not create files, JSON, ledgers or per-cell sheets unless I ask."
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"

@@ -1,0 +1,37 @@
+{
+  "name": "storyboard-sheet-prompt",
+  "version": "1.3.0",
+  "owner": "yanfang",
+  "updated_at": "2026-10-24",
+  "status": "active",
+  "maturity_tier": "scaffold",
+  "lifecycle_stage": "personal",
+  "context_budget_tier": "lean",
+  "review_cadence": "as-needed",
+  "output_contract": "默认在回复里直接给中英两段可粘贴提示词（不建文件）；要文件才写单个 prompt.md（同为中英两段）；台账/单格稿需 --full 且用户点名",
+  "style_contract": "角色与场景强制皮克斯风格（风格化写实，非照片级写实）：剪影优先、每角色一种形状语言、眼高≈脸高1/3、SSS 限毛边/耳/鼻/颊、哑光材质、单一主光+单侧轮廓光、抬黑不切白、大气透视；禁用『in the style of Pixar』五个词顶替具体规格",
+  "changelog": [
+    "1.3.0 新增皮克斯风格硬约束：references/pixar-style.md（六轴规格 + 三段可粘贴片段 + 30 秒自检 + 出处）；SKILL.md 升为四条硬前提并加风格专节、红线第 13 条；prompt-templates 四模板植入 RENDER/DESIGN LANGUAGE；assemble.py 注入 PIXAR_RENDER/PIXAR_DESIGN 中英常量与反塑料负面，并修掉『同一个房间』『机器人色块』『给动物穿衣服』三处硬编码，中文道具状态改为 k=v 格式",
+    "1.2.0 默认改为双语：回复内同时给英文段与中文段（同一份 Bible，非互译）；脚本默认输出英+中，新增 --en-only，--zh 降级为兼容空开关",
+    "1.1.0 交付物收敛：默认单段提示词 + 内部 Bible；assemble.py 默认只写 prompt.md，新增 --stdout / --zh / --full；SKILL.md 重排为『交付规则 → 四步 → 红线』"
+  ],
+  "target_platforms": [
+    "openai",
+    "claude",
+    "generic",
+    "agent-skills-compatible"
+  ],
+  "factory_components": [
+    "references",
+    "scripts",
+    "examples",
+    "evals",
+    "tests"
+  ],
+  "core_invariant": "no panel is written before the Scene Bible exists; every canonical descriptor is reused verbatim",
+  "known_limits": [
+    "单页 16:9 承载 9 格 + 右栏 + 页脚，信息密度接近出图上限；高精度需求走分区生成",
+    "脚本只校验结构与枚举，不校验语义（道具状态是否真的讲得通仍需人读）",
+    "语音块面向 TTS / 配音，静态图无法验证"
+  ]
+}

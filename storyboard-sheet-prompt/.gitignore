@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# 默认输出落在仓库根，不进版本库
+/prompt.md
+/out/
+
+# 一次性任务的临时 board
+tmp/
+.tmp/
+
+# 出图产物
+generated-images/
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.workbuddy/
