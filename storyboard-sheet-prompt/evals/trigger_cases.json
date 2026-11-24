@@ -1,0 +1,80 @@
+{
+  "skill": "storyboard-sheet-prompt",
+  "version": "1.4.0",
+  "intent": "routing",
+  "how_to_use": "每条输入单独交给模型（不带上下文），看是否触发本 skill；expect=no_trigger 的用例允许落到通用出图/写作能力，但不得硬套九格流程。",
+  "cases": [
+    {
+      "id": "R01",
+      "input": "帮我做个手绘分镜脚本，九个镜头，讲小猫偷鱼",
+      "expect": "trigger",
+      "why": "标准主用例：情景 + 九格 + 分镜"
+    },
+    {
+      "id": "R02",
+      "input": "把这段情景转成九宫格分镜提示词：两只仓鼠在厨房抢松果",
+      "expect": "trigger",
+      "why": "同类表述，触发词『九宫格分镜』『情景转提示词』"
+    },
+    {
+      "id": "R03",
+      "input": "帮我把这幕画成分镜，要 3x3 那种，右边带角色设计",
+      "expect": "trigger",
+      "why": "点名版式，含角色设计面板"
+    },
+    {
+      "id": "R04",
+      "input": "我要给动画短片做 storyboard sheet，中英两份提示词",
+      "expect": "trigger",
+      "why": "英文触发词 + 双语交付"
+    },
+    {
+      "id": "R05",
+      "input": "这张分镜图帮我看看哪里不对",
+      "expect": "trigger",
+      "why": "评审模式（走 delivery-checklist，不重建 Bible）"
+    },
+    {
+      "id": "R06",
+      "input": "场景是深夜便利店，两个角色抢最后一瓶牛奶，要皮克斯那种感觉",
+      "expect": "trigger",
+      "why": "只给情景、未点名『分镜』，靠风格与场景语义触发"
+    },
+    {
+      "id": "R07",
+      "input": "帮我写个 Midjourney 提示词，画只橘猫坐在窗台",
+      "expect": "no_trigger",
+      "why": "单图提示词，无分镜/多格需求；应走通用提示词"
+    },
+    {
+      "id": "R08",
+      "input": "九宫格照片拼图怎么排好看",
+      "expect": "no_trigger",
+      "why": "这是排版/拼图，不是分镜脚本"
+    },
+    {
+      "id": "R09",
+      "input": "帮我做一份 20 页的比赛 PPT",
+      "expect": "no_trigger",
+      "why": "交付物是 PPT，不是提示词"
+    },
+    {
+      "id": "R10",
+      "input": "生成一张皮克斯风格的儿童绘本封面",
+      "expect": "no_trigger",
+      "why": "只要单张成图，无九格分镜结构；应走 image 生成能力"
+    },
+    {
+      "id": "R11",
+      "input": "storyboard 这个词中文怎么说",
+      "expect": "no_trigger",
+      "why": "纯术语问答"
+    },
+    {
+      "id": "R12",
+      "input": "把这段情景做成分镜，但角色要真人写实，不要卡通",
+      "expect": "trigger",
+      "why": "仍属本 skill，但需先说明与皮克斯风格锚冲突并确认（行为用例 B13）"
+    }
+  ]
+}

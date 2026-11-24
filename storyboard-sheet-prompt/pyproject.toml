@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "storyboard-sheet-prompt"
-version = "1.3.0"
+version = "1.4.0"
 description = "Turn a scene into a locked-consistent 16:9 hand-drawn storyboard sheet prompt, with a mandatory Pixar stylized-realism contract."
 readme = "README.md"
 requires-python = ">=3.9"

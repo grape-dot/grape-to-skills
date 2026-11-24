@@ -4,6 +4,8 @@
 把纸感配色、衬线大标题、投影级字号规范与逐页版式验收固化下来，
 让 Agent 直接产出可讲、可投影、可离线分发的 HTML 幻灯片。
 
+版本 `1.1.0`　许可 MIT　依赖：Node ≥ 18 + Playwright（仅验收用）、Python 3 + Pillow（仅拼图用）
+
 **它是一套风格，不是一个用途。** 汇报、路演、方案宣讲、复盘、培训、分享会、
 文化展陈、课程——凡是需要在屏幕上讲、且希望它看起来像一本装帧考究的册子，都适用。
 
@@ -38,6 +40,9 @@ rice-paper-ppt/
 ├── SKILL.md                       # AI Skill 主文件（工作流、硬约束、版式选择表）
 ├── README.md                      # 本文件
 ├── LICENSE                        # MIT
+├── manifest.json                  # 版本 / 归属 / 成熟度 / 产出契约 / 已知限制
+├── agents/
+│   └── interface.yaml             # 跨平台接口声明（默认 prompt、激活与降级策略）
 ├── assets/
 │   ├── theme.css                  # 版式系统：设计 token + 全部组件（508 行）
 │   ├── deck.js                    # 缩放 / 翻页 / 全屏 / 打印（86 行，无需修改）
@@ -50,6 +55,8 @@ rice-paper-ppt/
 ├── scripts/
 │   ├── audit.js                   # 逐页版式审计（Node + Playwright）
 │   └── contact-sheet.py           # 截图拼缩略图总览（Python + Pillow）
+├── evals/
+│   └── trigger_cases.json         # 12 条路由用例（含 6 条近邻负例）
 └── examples/
     └── preview.jpg                # 六页骨架预览
 ```
@@ -144,6 +151,12 @@ python <repo>/rice-paper-ppt/scripts/contact-sheet.py ./shots
 4. 靠减小字号或滚动条承载放不下的内容
 
 整页适配浏览器窗口的等比缩放是允许的，由 `deck.js` 统一处理。
+
+## 评估 / Evals
+
+`evals/trigger_cases.json` 有 12 条路由用例：6 条该触发（含省略触发词的「之前那套暖色纸感」）、
+6 条不该触发（`.pptx` 交付、WPS 汇报、科技风发布会、Word 美化、A2 海报、移动端响应式）。
+每条独立喂给模型，看是否命中；负例允许落到通用 PPT / 文档能力，但不得套用米纸版式与 512px 约束。
 
 ## 兼容性
 

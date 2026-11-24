@@ -1,0 +1,24 @@
+interface:
+  display_name: "Rice Paper PPT"
+  short_description: "warm rice-paper HTML slide deck with projector-grade typography and a Playwright layout audit"
+  default_prompt: "Use $rice-paper-ppt to build or restyle this deck as a 1280×720 rice-paper HTML deck. Start from assets/starter.html, keep theme.css/deck.js as-is except :root tokens, keep body text ≥20px and tables/code ≥18px, and keep the 512px content area — if content does not fit, change the structure, never shrink the type. Read references/typography-spec.md before setting sizes and references/page-patterns.md before choosing a layout. When you finish a few pages, run scripts/audit.js against a local server and fix hard issues to zero."
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"

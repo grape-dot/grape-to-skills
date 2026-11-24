@@ -1,0 +1,34 @@
+{
+  "name": "rice-paper-ppt",
+  "version": "1.1.0",
+  "owner": "yanfang",
+  "updated_at": "2026-11-24",
+  "status": "active",
+  "maturity_tier": "production",
+  "lifecycle_stage": "production",
+  "review_cadence": "per-release",
+  "output_contract": "交付 4 件套目录（index.html + theme.css + deck.js + assets/），1280×720、离线双击可讲、无需构建；不产 .pptx，不做可编辑 Office 交付",
+  "style_contract": "暖米纸 #FAF6E9 / 深林绿 #2F4A38 / 哑光金 #A87F3F；正文 20–24px、表格代码 18–22px、图注 15–17px、页脚 13–15px；内容区可用高度恒为 512px；放不下改结构，禁缩字号、禁 transform:scale/zoom、禁 overflow:hidden 藏内容",
+  "changelog": [
+    "1.1.0 工程合规：SKILL.md 补 version 字段；新增 manifest.json / agents/interface.yaml / evals/trigger_cases.json；安装与依赖、目录结构两节去重（依赖表与目录树以 README 为准），SKILL.md 5.6k→4.9k 字符"
+  ],
+  "target_platforms": [
+    "openai",
+    "claude",
+    "generic",
+    "agent-skills-compatible"
+  ],
+  "factory_components": [
+    "assets",
+    "references",
+    "scripts",
+    "evals"
+  ],
+  "core_invariant": "内容区可用高度恒为 512px；溢出改结构，绝不缩字号",
+  "known_limits": [
+    "审计脚本需要 playwright-core + Chromium，首次使用要装依赖（脚本会以 exit 2 提示）",
+    "打印导出为浏览器打印视图，分页控制不如原生 .pptx 精确",
+    "风格系统按 1280×720 定标，超宽屏 / 竖屏需另调 --fs-* token",
+    "SKILL.md 初始加载约 2.2k tokens，高于通用参考上限（1.0–1.3k）：512px 硬约束与版式选择表需常驻，字号细节已外置到 references/"
+  ]
+}

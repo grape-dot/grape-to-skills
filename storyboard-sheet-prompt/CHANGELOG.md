@@ -2,11 +2,22 @@
 
 版本号遵循 [Semantic Versioning](https://semver.org/)。
 
-## 未发布
+## 1.4.0 — 2026-11-24
+
+工程完整性修复：让包内元数据与规范、与实际文件对齐。
+
+**修复**
+- `manifest.json` 枚举值落在规范外：`maturity_tier`/`lifecycle_stage` 由 `scaffold`/`personal` 改为 `library`，`review_cadence` 由 `as-needed` 改为 `per-release`，删除非法字段 `context_budget_tier: "lean"`。
+- `pyproject.toml` 版本号与 SKILL.md、manifest 同步到 1.4.0（此前三处不一致）。
+- 补回 `.github/workflows/ci.yml`（此前 CHANGELOG 1.3.0 声称已有，实际缺失）：单元测试 + 渲染冒烟 + 元数据一致性检查。
+
+**变更**
+- frontmatter 三份 `description`（`description` / `description_zh` / `description_en`）合并为一份：宿主只读 `description`，另两份只增加初始加载成本。
+- `SKILL.md` 去重：皮克斯六轴表、语音四轴表、版式要点与 `references/pixar-style.md`、`voice-casting.md`、`sheet-layout.md` 重复的部分改为压缩要点 + 指针（9.8k → 8.5k 字符）。
 
 **新增**
-- `examples/renders/`：两张真实出图（单场景闹剧 / 双人对白），均为 1672 × 941、未修图。
-- README 中英两版新增「出来长什么样 / What comes out」小节，把这两张当作单页密度与三类失守点（分层漂成 3D 渲染、文字量超预算、道具形制漂移）的可视证据；「已知限制」相应改为"有个案、无基准"。
+- `evals/trigger_cases.json`：12 条机器可读路由用例（含 4 条近邻负例），可与 `evals/cases.md` 的行为/回归用例配合使用。
+- `examples/renders/` 两张真实出图（单场景闹剧 / 双人对白），1672 × 941、未修图；README 中英两版新增「出来长什么样 / What comes out」小节，把它们当作单页密度与三类失守点（分层漂成 3D 渲染、文字量超预算、道具形制漂移）的可视证据。
 
 ## 1.3.0 — 2026-10-24
 

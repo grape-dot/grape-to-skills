@@ -1,0 +1,24 @@
+interface:
+  display_name: "Img Antiquity"
+  short_description: "Eastern editorial image prompts: ink scroll aesthetics inside a modern magazine grid"
+  default_prompt: "Use $img-antiquity to build an image prompt for: <subject>. Pick the language template (prompts/antiquity-prompt-zh.md for Chinese, prompts/antiquity-prompt-en.md for MJ/SD-style platforms), fill the §10 variables (theme, use, aspect ratio, key elements, layout bias, accent color, text zone, detail density), append the §9 negative prompt, and for craft subjects switch the medium per the §11 variant formula. Keep 60–70% pale paper, 20–30% jade/cloud-blue/ink grey, 5–10% vermilion/matte gold; no readable text inside the image. Then call the image tool if available, and state the variables and aspect ratio used."
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"

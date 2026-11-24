@@ -216,7 +216,10 @@ Bible 是**过程产物**。它的最终形态是提示词里的 `SETTING` / `CH
 ├── scripts/assemble.py           board.json → 提示词 + 校验
 ├── examples/                     可跑范例、两种输出产物、两张真实出图（`renders/`）
 ├── tests/test_assemble.py        16 个测试，纯标准库
-└── evals/cases.md                路由 / 行为 / 一致性场景
+├── evals/
+│   ├── trigger_cases.json        12 条机器可读路由用例（7 正 / 5 负，含 1 条风格冲突用例）
+│   └── cases.md                  路由 / 行为 / 一致性场景
+└── .github/workflows/ci.yml      Python 3.9 / 3.11 / 3.13 单元测试 + 渲染冒烟 + 元数据检查
 ```
 
 ## 已知限制

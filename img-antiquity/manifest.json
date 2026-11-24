@@ -1,0 +1,32 @@
+{
+  "name": "img-antiquity",
+  "version": "1.1.0",
+  "owner": "yanfang",
+  "updated_at": "2026-11-24",
+  "status": "active",
+  "maturity_tier": "production",
+  "lifecycle_stage": "production",
+  "review_cadence": "semiannual",
+  "output_contract": "交付组装好的完整生图提示词（含变量取值 + 负面词）；当前环境有图像生成能力时直接出图，并说明所用变量与画幅比例、提示正式文字需后期排版；无图像能力时只交付提示词并声明这是提示词不是成品图",
+  "style_contract": "60–70% 浅米白/象牙纸底、20–30% 玉石绿·云蓝·水墨灰、5–10% 朱红·哑光金点缀；宣纸纤维与轻水渍，禁重度做旧；网格秩序 + 非对称 + 大留白 + 纵向分栏；默认不生成可读文字，印章编号只作视觉符号",
+  "changelog": [
+    "1.1.0 工程合规：新增『何时不用』边界（国潮电商、画种复刻、复刻既有版面、3D 写实、通用出图）；新增 manifest.json / agents/interface.yaml / evals/trigger_cases.json；示例图由 PNG 转 JPEG（5.4MB→0.8MB，尺寸与构图不变）"
+  ],
+  "target_platforms": [
+    "openai",
+    "claude",
+    "generic",
+    "agent-skills-compatible"
+  ],
+  "factory_components": [
+    "prompts",
+    "examples"
+  ],
+  "core_invariant": "编辑设计重排，不是古画复制；画面内默认不出现可读正文",
+  "known_limits": [
+    "无脚本：提示词靠人工按 §10 变量表组装，变量漏填不会被自动拦住",
+    "风格由文字描述约束，模型间保真度差异大；Midjourney 类平台需走英文模板",
+    "示例图是成品效果，不是可复现的固定种子",
+    "SKILL.md 初始加载约 1.3k tokens；提示词模板体积较大（zh 16KB / en 19KB），按需读取而非默认加载"
+  ]
+}

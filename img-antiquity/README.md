@@ -4,11 +4,13 @@
 
 Chinese Classical Ink Scroll × Modern Magazine Editorial — a reusable image-generation style prompt (Skill) that produces museum-catalog-grade cultural visuals with any mainstream image model.
 
+版本 `1.1.0`　许可 MIT　零依赖（纯提示词，不跑脚本、不联网）
+
 ## 效果展示 / Examples
 
 <p align="center">
-  <img src="examples/embroidery-aesthetic-cover.png" width="320" alt="Embroidery aesthetic cover — 刺绣美学封面" />
-  <img src="examples/porcelain-catalog-spread.png" width="400" alt="Porcelain catalog spread — 青花瓷图录跨页" />
+  <img src="examples/embroidery-aesthetic-cover.jpg" width="320" alt="Embroidery aesthetic cover — 刺绣美学封面" />
+  <img src="examples/porcelain-catalog-spread.jpg" width="400" alt="Porcelain catalog spread — 青花瓷图录跨页" />
 </p>
 
 左：刺绣主题 · 杂志封面（宋绣/苏绣/蜀绣）　右：青花瓷主题 · 展览图录跨页（明宣德青花）
@@ -27,13 +29,26 @@ Chinese Classical Ink Scroll × Modern Magazine Editorial — a reusable image-g
 ```text
 img-antiquity/
 ├── SKILL.md                        # AI Skill 主文件（给 AI 读的操作手册）
+├── manifest.json                   # 版本 / 归属 / 产出契约 / 已知限制
+├── agents/
+│   └── interface.yaml              # 跨平台接口声明（默认 prompt、激活与降级策略）
 ├── prompts/
 │   ├── antiquity-prompt-zh.md      # 中文版完整提示词（§0–§12 共 13 节 + 2 主题变体）
 │   └── antiquity-prompt-en.md      # 英文版完整提示词
-├── examples/                       # 提示词生成效果示例
-│   ├── embroidery-aesthetic-cover.png
-│   └── porcelain-catalog-spread.png
+├── evals/
+│   └── trigger_cases.json          # 12 条路由用例（6 正 / 6 负）
+└── examples/                       # 提示词生成效果示例
+    ├── embroidery-aesthetic-cover.jpg
+    └── porcelain-catalog-spread.jpg
 ```
+
+## 适用与不适用 / Scope
+
+**适用**：水墨 / 国风 / 古风 / 东方题材的海报、封面、杂志跨页、图录、文化刊物与展陈视觉；
+刺绣、瓷器、玉器、漆器、文物等工艺主题的系列图。
+
+**不适用**：现代国潮与电商促销主图（要高饱和、大字报）；日式浮世绘、敦煌壁画等具体画种复刻；
+复刻既有画作或图录的版面与文字；3D/CG 写实产品图；与东方器物语境无关的通用出图。
 
 ## 快速开始 / Quick Start
 

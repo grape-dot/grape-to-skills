@@ -251,7 +251,10 @@ lot to ask of one image — see [Known limits](#known-limits).
 │   ├── full/                     --full split package
 │   └── renders/                  two real sheets, unretouched
 ├── tests/test_assemble.py        16 tests, stdlib only
-└── evals/cases.md                routing / behaviour / consistency scenarios
+├── evals/
+│   ├── trigger_cases.json        12 machine-readable routing cases (7 positive / 5 negative)
+│   └── cases.md                  routing / behaviour / consistency scenarios
+└── .github/workflows/ci.yml      Python 3.9 / 3.11 / 3.13 unit tests + render smoke + metadata check
 ```
 
 ## Known limits

@@ -1,19 +1,9 @@
 ---
 name: storyboard-sheet-prompt
-version: 1.3.0
+version: 1.4.0
 display_name: 手绘分镜脚本提示词
 display_name_en: Storyboard Sheet Prompt
-description: "Turn a scene into a locked-consistent 16:9 hand-drawn storyboard sheet prompt (3x3 red-ink panels, right-side character design panel with graphite sketch + Pixar-style 3D portrait, three handwritten note boxes). Every character and every scene must be designed in Pixar's stylized-realistic language — silhouette-first, one shape language, eyes about a third of the face height, tactile non-glossy materials, single warm key with one-sided rim, lifted blacks — never generic 'in the style of Pixar' 3D. Builds a Scene Bible internally so props, colors and characters never drift between panels, then returns TWO paste-ready prompts — English first, then the full Chinese version from the same constants. No JSON, no ledger, no per-cell files unless asked. 把一段情景转成手绘动画分镜脚本页的出图提示词，角色与场景强制按皮克斯风格化写实语言设计；触发词：分镜、分镜脚本、九宫格分镜、storyboard、角色设计页、皮克斯风格、镜头提示词、情景转提示词。"
-description_zh: |-
-  把一段故事情景转成一张 16:9「手绘动画分镜脚本页」的出图提示词：左侧 3×3 九格分镜（细红框、蓝箭头注释、手写镜号与动作说明）、右侧「角色设计与选角」面板（铅笔素描 + 皮克斯风 3D 肖像 + 图注）、底部三个手写笔记框（流程意图 / 镜头笔记 / 五色调色板）。
-  核心不是逐格翻译画面，而是**先在内部建一份场景资产锁定表（Scene Bible）**——空间方位、道具清单与状态链、角色造型常量、五色板、光位、视轴——再让九格共用同一份字符串，从底层掐掉"这格黑那格红、这格杯子那格盒子"的漂移。
-  **默认在回复里直接交付中英两段可直接粘贴的提示词**（同一份 Bible 写出来，不是互译），不产 JSON、不产台账、不产单格稿；Bible 是过程材料，活在提示词里，不单独成文。
-  触发词：分镜、分镜脚本、storyboard、九宫格分镜、3×3 分镜、镜头提示词、角色设计页、动画电影前期、情景转提示词、把这幕画成分镜。
-description_en: |-
-  Turn a scene description into a production-grade image prompt for a hand-drawn 16:9 storyboard sheet: 3x3 red-ink panels with handwritten shot numbers and blue arrow notes, a right-side character design & casting panel (graphite sketch + Pixar-style 3D portrait + captions), and three handwritten note boxes at the bottom.
-  Enforces a Scene Bible (space, prop registry with state chains, character locks, palette, light direction, screen axis) internally before any panel wording, so all nine panels cite one set of constants and props never drift.
-  Default output is TWO paste-ready prompts — English, then the full Chinese version built from the same constants. No JSON, no continuity ledger, no per-cell files, no delivery doc — those only on explicit request.
-  Triggers: storyboard, storyboard sheet, 3x3 storyboard, animatic board, character design page, scene to prompt.
+description: "Turn one scene into a locked-consistent 16:9 hand-drawn storyboard sheet prompt: 3×3 red-ink panels with handwritten shot numbers and blue arrow notes, right-side character design panel (graphite sketch + Pixar-style 3D portrait), three handwritten note boxes. Designs every character and scene in Pixar's stylized-realistic language — silhouette-first, one shape language, eyes about a third of the face height, matte tactile materials, single warm key with one-sided rim, lifted blacks — never the five words 'in the style of Pixar'. Builds a Scene Bible internally so props, colors, light and screen axis never drift, then returns TWO paste-ready prompts — English first, then the full Chinese version built from the same constants. No JSON, no ledger, no per-cell files unless asked. 把一段情景转成手绘动画分镜脚本页的出图提示词，角色与场景强制按皮克斯风格化写实设计；触发词：分镜、分镜脚本、九宫格分镜、3×3 分镜、storyboard、角色设计页、皮克斯风格、镜头提示词、动画电影前期、情景转提示词、把这幕画成分镜。"
 metadata:
   author: yanfang
   philosophy: "lock the bible first, then write nine panels that all cite it — but ship one prompt, not a filing cabinet"
@@ -63,16 +53,16 @@ Bible 是**过程**，不是交付物。它必须存在于提示词的 SETTING /
 
 ## 风格硬约束：皮克斯（第 4 条前提的展开）
 
-皮克斯自己的立场是"写实从来不是目标"——造型往外推、材质往里收、光被人为编排，三样同时对才像。只加风格词，模型会退化成"圆脸大眼 + 塑料高光"，那是最像 AI 的假皮克斯。
+皮克斯自己的立场是"写实从来不是目标"——造型往外推、材质往里收、光被人为编排，三样同时对才像。只加风格词，模型会退化成"圆脸大眼 + 塑料高光"，那是最像 AI 的假皮克斯。六轴硬指标（写进提示词时要数字化）：
 
-| 轴 | 硬指标（写进提示词时要数字化） |
+| 轴 | 一句话硬指标 |
 | --- | --- |
-| 造型 | 剪影填黑缩小仍可辨；每角色**一种**主动力形状（圆/方/三角）；幼态头身比 1:2–1:3；眼高约占脸高 1/3 且位置偏低；五官做减法；留一处刻意的不完美 |
-| 材质 | 次表面散射只给毛边/耳/鼻/颊，短散射距离偏暖；粗糙度毛 0.35–0.55、布 0.6–0.8；手绘感纹理；次要物件降细节；**禁止塑料/蜡感高光** |
-| 光 | 单一主光方向，面积光为主；轮廓光**只打一侧**；阴影可带天光色；允许违反物理补光；禁止处处黄金时刻 |
-| 色 | 一段落一组色彩关系；高饱和靠明度分层与冷暖对比，不靠堆色相；暗部不死黑、高光不切白；一格只有一个最亮焦点 |
-| 空间 | 大气透视把远景化开；尺度可夸张但重力/接触阴影必须对；35mm 上下、低机位、浅景深；构图不许正中对称 |
-| 表演 | 表情夸张 15–20% 到破形为止；眼睛必须有服从主光的 catchlight；一个镜头只演一个情绪 |
+| 造型 | 剪影填黑缩小仍可辨；每角色**一种**主动力形状；幼态头身比 1:2–1:3；眼高≈脸高 1/3 且偏低；五官做减法；留一处刻意不完美 |
+| 材质 | SSS 只给毛边/耳/鼻/颊；粗糙度毛 0.35–0.55、布 0.6–0.8；**禁止塑料/蜡感高光** |
+| 光 | 单一主光、面积光为主；轮廓光**只打一侧**；允许违反物理补光；禁止处处黄金时刻 |
+| 色 | 一组色彩关系；高饱和靠明度分层与冷暖对比；暗部不死黑、高光不切白；一格一个最亮焦点 |
+| 空间 | 大气透视化开远景；尺度可夸张但重力/接触阴影必须对；35mm 上下、低机位、浅景深；不正中对称 |
+| 表演 | 表情夸张 15–20% 到破形；眼睛必须有服从主光的 catchlight；一个镜头只演一个情绪 |
 
 **分层落法（别把整页做成 3D）**：纸面仍是白纸 + 细抖红框 + 石墨速写 + 蓝墨箭头；九格里的**世界**读作皮克斯电影分镜；右栏 3D 肖像是全页唯一的"完成品"。提示词里写一句就够：
 
@@ -83,7 +73,7 @@ drawing medium is pencil, the world inside the frame is Pixar.
 
 **与限色预算不冲突**：皮克斯的"色彩丰富"来自明度分层和冷暖对比，不是色相数量。六色够用，不够时先加明度台阶，别加色相。
 
-完整规格、三段可粘贴片段（场景 / 角色 / 负面）、30 秒自检与出处见 `references/pixar-style.md`。
+完整规格、三段可粘贴片段（场景 / 角色 / 负面）、30 秒自检与出处见 `references/pixar-style.md`——**每一单写提示词前都要读**。
 
 ## 四步
 
@@ -178,24 +168,13 @@ python scripts/assemble.py board.json --full          # 拆分包（中英分文
 
 16:9 单页、白纸微纹理、**一张纸的俯视扫描**（不是立体场景）。页眉 6–8%；左区 63–66% 放 3×3 红框网格，每格 16:9；右区 30–33% 竖排「CHARACTER DESIGN & CASTING」；页脚 16–20% 三个手写框（宽比 1 : 1.15 : 0.85）。
 
-- 红框要**细**（1.5–2px、略抖、四角略出头），一加粗就变成 PPT 描边。
-- 标注写在框**外**，压在画面里必糊。
-- 页面文字用英文（模型对英文手写更稳），只有左上角大镜号用中文。
-- 三种笔：石墨铅笔（画面）、红墨（框）、蓝墨（箭头）；右栏两张 3D 肖像是唯一"精细"的东西，别把 3D 也画成手绘。
-- 崩坏点全集见 `references/sheet-layout.md`。
+- 红框要**细**（1.5–2px、略抖、四角略出头），一加粗就变成 PPT 描边；标注写在框**外**，压在画面里必糊。
+- 三种笔不许混：石墨铅笔（画面）、红墨（框）、蓝墨（箭头）；右栏两张 3D 肖像是全页唯一"精细"的东西，别把 3D 也画成手绘。
+- 页面文字用英文（模型对英文手写更稳），只有左上角大镜号用中文。崩坏点全集见 `references/sheet-layout.md`。
 
 ## 语音反差（要点）
 
-反差来自四条可量化轴的差值，不是形容词：
-
-| 轴 | 快角色 | 慢角色 |
-| --- | --- | --- |
-| 音高中心 | 高、窄、上扬 | 中低、平、几乎单音 |
-| 语速 | 4.5–5.5 音节/秒 | 2.5–3 音节/秒 |
-| 句长 | 短命令句 + 代号自称 | 3–6 词，拖尾收 |
-| 气口 | 句前抢吸一口气 | 长呼气、咀嚼声、叹气 |
-
-再叠两条混音差：一个贴麦（干声、+2dB），一个离麦（带房间感、永不提音量）。提示词里只写**声学参数**，不写 `funny voice`。
+反差来自四条可量化轴的差值，不是形容词：**音高中心**（快角色高窄上扬 / 慢角色中低平直）、**语速**（4.5–5.5 / 2.5–3 音节每秒）、**句长**（短命令句+代号自称 / 3–6 词拖尾收）、**气口**（句前抢吸一口 / 长呼气、咀嚼声、叹气）；再叠一条混音差：一个贴麦干声 +2dB，一个离麦带房间感且永不提音量。提示词里只写**声学参数**，不写 `funny voice`。
 
 对白规范：全英文、每格 ≤2 句、每句 ≤8 词、整页 ≤6 句；写不出反差就做"互换测试"——换给另一个角色说还成立，就是没反差，重写。完整四轴与可粘贴声学块见 `references/voice-casting.md`。
 

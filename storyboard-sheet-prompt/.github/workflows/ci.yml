@@ -1,0 +1,49 @@
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "storyboard-sheet-prompt/**"
+  pull_request:
+    paths:
+      - "storyboard-sheet-prompt/**"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: storyboard-sheet-prompt
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Unit tests (stdlib only)
+        run: python -m unittest discover -s tests -v
+      - name: Render smoke test
+        run: python scripts/assemble.py examples/nut-crisis.json --stdout > /dev/null
+      - name: Manifest and frontmatter sanity
+        run: |
+          python - <<'PY'
+          import json, pathlib, re, sys
+          root = pathlib.Path(".")
+          m = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+          required = {"name","version","owner","updated_at","status","maturity_tier","lifecycle_stage","review_cadence"}
+          missing = required - m.keys()
+          assert not missing, f"manifest missing: {missing}"
+          assert m["status"] in {"experimental","active","deprecated"}
+          assert m["maturity_tier"] in {"scaffold","production","library","governed"}
+          assert m["lifecycle_stage"] in {"scaffold","production","library","governed"}
+          assert m["review_cadence"] in {"monthly","quarterly","semiannual","annual","per-release"}
+          fm = (root / "SKILL.md").read_text(encoding="utf-8").split("---", 2)[1]
+          skill_version = re.search(r'^version:\s*"?([\d.]+)"?', fm, re.M).group(1)
+          assert skill_version == m["version"], f"SKILL.md {skill_version} != manifest {m['version']}"
+          print("metadata ok:", m["version"])
+          PY

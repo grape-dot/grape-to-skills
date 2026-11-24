@@ -1,0 +1,80 @@
+{
+  "skill": "rice-paper-ppt",
+  "version": "1.1.0",
+  "intent": "routing",
+  "how_to_use": "每条输入单独交给模型（不带上下文），看是否触发本 skill；expect=no_trigger 的用例允许落到 PPT/文档类能力，但不得套用米纸版式与 512px 约束。",
+  "cases": [
+    {
+      "id": "R01",
+      "input": "帮我做一份米纸风的 HTML 幻灯片，讲我们团队的季度复盘",
+      "expect": "trigger",
+      "why": "显式点名米纸风 + HTML 幻灯片"
+    },
+    {
+      "id": "R02",
+      "input": "这份 deck 字太小了，帮我放大到投影能看清，别那么空",
+      "expect": "trigger",
+      "why": "典型改版诉求：放大字号 + 消除空旷，正是本 skill 的主场景"
+    },
+    {
+      "id": "R03",
+      "input": "把我们那份 html 课件换成米纸质感、深绿哑光金那套配色",
+      "expect": "trigger",
+      "why": "既有 HTML 重排 + 指定配色"
+    },
+    {
+      "id": "R04",
+      "input": "做个纸感的中式编辑风幻灯片，用于文化展陈讲解",
+      "expect": "trigger",
+      "why": "触发词『纸感』『中式编辑风』，非教学场合也应命中（已通用化）"
+    },
+    {
+      "id": "R05",
+      "input": "我做好了 20 页 HTML 幻灯片，帮我逐页检查有没有溢出、字号是不是低于 18px",
+      "expect": "trigger",
+      "why": "验收模式：跑 audit.js + 逐页修"
+    },
+    {
+      "id": "R06",
+      "input": "帮我做一份可编辑的 .pptx，明天要在公司模板里改",
+      "expect": "no_trigger",
+      "why": "交付物必须是 Office 文件，应由 PPTX 能力处理"
+    },
+    {
+      "id": "R07",
+      "input": "用 WPS 做一份党建汇报演示文稿",
+      "expect": "no_trigger",
+      "why": "没有 HTML 与米纸风诉求"
+    },
+    {
+      "id": "R08",
+      "input": "帮我做个科技风发布会 PPT，要发光渐变和玻璃拟态",
+      "expect": "no_trigger",
+      "why": "视觉方向与本 skill 明确互斥（见『不用』）"
+    },
+    {
+      "id": "R09",
+      "input": "这份 Word 报告排版太丑了，帮我美化一下",
+      "expect": "no_trigger",
+      "why": "文档而非幻灯片"
+    },
+    {
+      "id": "R10",
+      "input": "做一个米纸质感的活动海报，A2 竖版",
+      "expect": "no_trigger",
+      "why": "同为纸感视觉，但产物是海报不是 1280×720 deck，易混淆需明确排除"
+    },
+    {
+      "id": "R11",
+      "input": "帮我把这个网页改成移动端响应式布局",
+      "expect": "no_trigger",
+      "why": "前端适配需求，与版式系统无关"
+    },
+    {
+      "id": "R12",
+      "input": "做个 HTML 幻灯片，就用你之前那套暖色纸感、深绿的版式",
+      "expect": "trigger",
+      "why": "省略触发词，靠『之前那套』+ 配色描述命中"
+    }
+  ]
+}

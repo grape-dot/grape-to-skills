@@ -1,5 +1,6 @@
 ---
 name: rice-paper-ppt
+version: 1.1.0
 description: 制作或改版「米纸质感」风格的 HTML 幻灯片时使用：1280×720 单页文件式 deck，暖米纸底 + 深林绿 + 哑光金的中式编辑版式，衬线大标题、投影级字号（正文不低于 20px，表格/代码不低于 18px），自带 theme.css 版式系统、6 页可运行骨架、十种版式配方与 Playwright 逐页版式审计脚本。适用于汇报、路演、方案宣讲、培训、分享会、文化展陈、课程等任何需要大屏投影且讲究纸感的场合，也适用于把已有同类 HTML 幻灯片按这套规范重构（放大字号、消除空旷、修溢出、重排层级）。触发词：米纸风 PPT、中式学术风幻灯片、纸感 deck、把这份 PPT 改成米纸风格、HTML 幻灯片改版、放大字号、排得专业点。
 license: MIT
 ---
@@ -28,27 +29,13 @@ license: MIT
 
 **不用**：交付物必须是可编辑 `.pptx`；或用户要的是科技风、玻璃拟态、霓虹发光那一路视觉。
 
-## 安装
+## 安装与依赖
 
-把本目录整体复制到 Agent 的技能目录即可：
-
-```bash
-# WorkBuddy
-cp -r rice-paper-ppt ~/.workbuddy/skills/
-# Claude Code
-cp -r rice-paper-ppt ~/.claude/skills/
-```
-
-依赖只用于验收环节，写作本身零依赖：
-
-| 依赖 | 用途 | 安装 |
-|---|---|---|
-| Node.js ≥ 18 | 运行 `scripts/audit.js` | 常规安装 |
-| `playwright-core` + Chromium | 逐页真实渲染与截图 | `npm i -D playwright-core && npx playwright install chromium` |
-| Python 3 + Pillow | 运行 `scripts/contact-sheet.py` 拼缩略图 | `pip install pillow` |
-
-已有 Chrome/Chromium 时不必再下载浏览器，用 `CHROME_PATH` 指过去即可；
-`playwright-core` 装在非常规位置时用 `PW_CORE` 指定模块路径。
+整目录复制到 Agent 技能目录即可（`cp -r rice-paper-ppt ~/.workbuddy/skills/`）。
+**写作本身零依赖**，只有验收环节要 Node ≥ 18 + `playwright-core`/Chromium（跑 `scripts/audit.js`）
+与 Python 3 + Pillow（跑 `scripts/contact-sheet.py`）。
+已有 Chrome/Chromium 时用 `CHROME_PATH` 指向它，不必再下载浏览器；`playwright-core`
+装在非常规位置时用 `PW_CORE` 指定模块路径。完整依赖表与安装命令见 `README.md`。
 
 ## 交付物
 
@@ -152,26 +139,9 @@ python <skill>/scripts/contact-sheet.py ./shots     # 拼成缩略图总览
 
 ## 目录结构
 
-```
-rice-paper-ppt/
-├── SKILL.md                       # 本文件：工作流与硬约束
-├── README.md                      # 对外介绍（效果、结构、快速开始）
-├── LICENSE                        # MIT
-├── assets/
-│   ├── theme.css                  # 版式系统（token + 全部组件）
-│   ├── deck.js                    # 缩放 / 翻页 / 全屏 / 打印
-│   ├── starter.html               # 6 页可运行骨架
-│   └── example.jpg                # 占位图
-├── references/
-│   ├── typography-spec.md         # 排版与字号规范原文（验收标准）
-│   ├── components.md              # 类名词典 + 可复制片段
-│   └── page-patterns.md           # 十种版式配方 + 症状表
-├── scripts/
-│   ├── audit.js                   # 逐页版式审计
-│   └── contact-sheet.py           # 截图拼缩略图
-└── examples/
-    └── preview.jpg                # 六页骨架预览
-```
+`SKILL.md`（本文件：工作流与硬约束）· `references/`（字号规范 / 类名词典 / 版式配方）·
+`assets/`（theme.css、deck.js、starter.html、占位图）· `scripts/`（audit.js、contact-sheet.py）·
+`examples/preview.jpg`。完整目录树与逐文件说明见 `README.md`。
 
 ## 参考资料
 
