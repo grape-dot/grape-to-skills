@@ -1,10 +1,96 @@
-// 幻灯片控制：自适应缩放、翻页、目录定位、打印
+// 幻灯片控制：自适应缩放、翻页、目录定位、页码、视频控件、打印
 (function () {
   const deck = document.getElementById('deck');
   const slides = Array.from(deck.querySelectorAll('.slide'));
   const hud = document.querySelector('.hud');
   const pbar = document.querySelector('.pbar');
   let cur = 0;
+
+  // 页码：统一写成「当前页 / 总页」，按 DOM 顺序自动填，手写数字只作兜底
+  const pad = (n) => String(n).padStart(2, '0');
+  slides.forEach((s, i) => {
+    const pn = s.querySelector('.pn, .sec-pn, .cv-pn, .end-pn');
+    if (pn) pn.textContent = pad(i + 1) + ' / ' + slides.length;
+  });
+
+  // 视频控件：给每个 .vid 容器补「播放 / 暂停 + 可拖拽进度条」
+  const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.1v13.8L19.2 12z"/></svg>';
+  const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="7" y="5" width="3.6" height="14" rx="1.1"/><rect x="13.4" y="5" width="3.6" height="14" rx="1.1"/></svg>';
+  const mmss = (t) => {
+    if (!isFinite(t) || t < 0) t = 0;
+    const m = Math.floor(t / 60), s = Math.floor(t % 60);
+    return m + ':' + String(s).padStart(2, '0');
+  };
+
+  document.querySelectorAll('.vid').forEach((box) => {
+    const v = box.querySelector('video');
+    if (!v || box.querySelector('.vctl')) return;
+
+    const ctl = document.createElement('div');
+    ctl.className = 'vctl';
+    ctl.innerHTML =
+      '<button class="vpp" type="button" aria-label="播放 / 暂停">' + ICON_PLAY + '</button>' +
+      '<div class="vbar" role="slider" tabindex="0" aria-label="播放进度" title="点击或拖动跳转">' +
+        '<div class="vtrack"><div class="vfill"></div></div>' +
+      '</div>' +
+      '<span class="vtime">0:00 / 0:00</span>';
+    box.appendChild(ctl);
+
+    const pp = ctl.querySelector('.vpp');
+    const bar = ctl.querySelector('.vbar');
+    const fill = ctl.querySelector('.vfill');
+    const time = ctl.querySelector('.vtime');
+
+    function paint() {
+      const d = isFinite(v.duration) ? v.duration : 0;
+      const c = isFinite(v.currentTime) ? v.currentTime : 0;
+      fill.style.width = (d ? Math.min(100, (c / d) * 100) : 0) + '%';
+      time.textContent = mmss(c) + ' / ' + mmss(d);
+      pp.innerHTML = v.paused ? ICON_PLAY : ICON_PAUSE;
+    }
+
+    function toggle() {
+      if (v.paused) {
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      } else {
+        v.pause();
+      }
+    }
+
+    let dragging = false;
+    function seekTo(e) {
+      const r = bar.getBoundingClientRect();
+      if (!r.width) return;
+      const ratio = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      if (isFinite(v.duration) && v.duration > 0) v.currentTime = ratio * v.duration;
+      paint();
+    }
+
+    pp.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
+    v.addEventListener('click', toggle);
+    bar.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      dragging = true;
+      if (bar.setPointerCapture) bar.setPointerCapture(e.pointerId);
+      seekTo(e);
+    });
+    bar.addEventListener('pointermove', (e) => { if (dragging) seekTo(e); });
+    bar.addEventListener('pointerup', () => { dragging = false; });
+    bar.addEventListener('pointercancel', () => { dragging = false; });
+    bar.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      e.stopPropagation();
+      const step = e.key === 'ArrowRight' ? 1 : -1;
+      v.currentTime = Math.min(v.duration || 0, Math.max(0, v.currentTime + step));
+      paint();
+    });
+    ['loadedmetadata', 'durationchange', 'timeupdate', 'play', 'pause', 'seeked'].forEach((ev) =>
+      v.addEventListener(ev, paint)
+    );
+    paint();
+  });
 
   function fit() {
     const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);

@@ -1,8 +1,8 @@
 {
   "skill": "rice-paper-ppt",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "intent": "routing",
-  "how_to_use": "每条输入单独交给模型（不带上下文），看是否触发本 skill；expect=no_trigger 的用例允许落到 PPT/文档类能力，但不得套用米纸版式与 512px 约束。",
+  "how_to_use": "每条输入单独交给模型（不带上下文），看是否触发本 skill；expect=no_trigger 的用例允许落到 PPT/文档类能力，但不得套用米纸版式、512px 约束与文案规范。",
   "cases": [
     {
       "id": "R01",
@@ -75,6 +75,18 @@
       "input": "做个 HTML 幻灯片，就用你之前那套暖色纸感、深绿的版式",
       "expect": "trigger",
       "why": "省略触发词，靠『之前那套』+ 配色描述命中"
+    },
+    {
+      "id": "R13",
+      "input": "这份 PPT 的标题和正文太长、还有一堆『不是…而是…』的套话，帮我按文案规范改严谨",
+      "expect": "trigger",
+      "why": "文案层诉求：标题精简 + 机械化对比句式 + 规范语言，命中 copywriting-spec"
+    },
+    {
+      "id": "R14",
+      "input": "帮我把这份课件的措辞统一一下，术语前后一致，去掉口语化引导语和 AI 味",
+      "expect": "trigger",
+      "why": "术语一致性 + 口语化引导语 + AI 模板腔，属文案规范第 04–05 节"
     }
   ]
 }

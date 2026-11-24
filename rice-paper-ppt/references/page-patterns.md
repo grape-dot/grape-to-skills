@@ -13,9 +13,104 @@
 
 ## 2. 章节分隔页
 
-- 结构：超大编号（224px，右下角出血）+ 大标题（60px）+ 一句引导 + 3 条学习目标 + 一句格言（右侧竖排）。
-- 允许留白，但**不能只有一个小标题漂在中间**——编号本身就是视觉主体。
+- 底色：`<section class="slide plate">`，深绿渐变 + 金色左竖条 + 右上角米色幽灵编号。
+  **底色不加重，翻页时就没有“换章”的感觉**——只换标题是不够的。
+- 章板上配色整套换掉：标题米白 `#F4ECDA`、引导 `#BFC9B9`、金标 `#C8A96A`、页脚 `#8FA08A`、
+  编号 `rgba(233,223,196,.11)`。这些 `.plate` 规则已在 `theme.css` 里写好，加个 class 就生效。
+- 结构：超大编号（224px，右上出血）+ 大标题（60px）+ 一句引导 + 3 条学习目标 + 一句格言（右下）+ **本章徽记**（右侧空白处）。
+- 徽记排位固定：`right:92px; top:268px; width:300px`；环 184px、图标 96×96、金线 26×1、小标 12.5px。
+  上面让开 `.sec-num`（占到 y≈250），下面让开 `.sec-mark`（`bottom:78px`）。
 - 坑：`.sec-num` 用 `right` 负值出血时，不要同时给它 `opacity` 之外的滤镜，打印会掉。
+- 坑：图标别超过 104px，环内 9px 处的虚线内圈会被顶穿。
+- 坑：深底上别再抄正文页的墨绿字，`#2F4A38` 在章板上等于隐形。图标一律 `currentColor`。
+- 三条要点**必须自带名词**：写「Remotion 链 / 手拼链」，不要写「一条链 / 另一条链」。
+  章节页是学生翻到这一章唯一会看的一屏，靠正文上文才懂的指代（这个、那个、另一条）在这里等于没说。
+  加粗只给命名的那两三个字（`.plate .sec-pts li b` 会提亮到米白），别整句加粗。
+
+### 2b. 徽记图标库（复制即用）
+
+外壳固定，只换 `<svg>` 里的图形与 `.em-lb` 的小标：
+
+```html
+<div class="sec-emblem">
+  <div class="ring">
+    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.4"
+         stroke-linecap="round" stroke-linejoin="round">
+      <!-- 下面七个片段任选其一 -->
+    </svg>
+  </div>
+  <div class="em-rule"></div>
+  <div class="em-lb">CHAPTER 01</div>
+</div>
+```
+
+主线条一律 `stroke="currentColor"`（实心件用 `fill="currentColor"`），由 `.sec-emblem` 的 `color` 决定：
+米纸页是墨绿，章板上自动变米白。金色小件写死 `#A87F3F` 即可——`.plate` 里有规则把它提亮到 `#CDA96A`。
+SVG 的 presentation attribute 不吃 `var()`，所以别在图标里写 `var(--green)`。
+
+| 这一章讲什么 | 图形 | 片段 |
+|---|---|---|
+| 帧、视频是什么 | 胶片条 + 播放三角 | ① |
+| 故事、分镜、镜头 | 2×2 分镜格 | ② |
+| 生图、视觉资产 | 叠层 + 图片 | ③ |
+| 提示词迭代 | 文本框 + 双箭头 | ④ |
+| 一致性、系列化 | 三个人像 + 基线 | ⑤ |
+| 技能、文件、自动化 | 文件 + 星芒 | ⑥ |
+| 导出、交付、上线 | 屏幕 + 上行箭头 | ⑦ |
+
+```html
+<!-- ① 胶片条 + 播放 -->
+<rect x="10" y="34" width="100" height="52" rx="3" />
+<path d="M18 42h84" stroke-width="2" stroke-dasharray="3 7" />
+<path d="M18 78h84" stroke-width="2" stroke-dasharray="3 7" />
+<path d="M50 48 72 60 50 72Z" fill="#A87F3F" stroke="none" />
+
+<!-- ② 2×2 分镜格 -->
+<rect x="16" y="22" width="38" height="30" rx="2.5" />
+<rect x="66" y="22" width="38" height="30" rx="2.5" />
+<rect x="16" y="64" width="38" height="30" rx="2.5" />
+<rect x="66" y="64" width="38" height="30" rx="2.5" stroke="#A87F3F" />
+<circle cx="85" cy="79" r="5.5" stroke="#A87F3F" />
+
+<!-- ③ 叠层 + 图片 -->
+<rect x="38" y="20" width="64" height="48" rx="3" stroke-dasharray="5 5" opacity=".5" />
+<rect x="18" y="40" width="64" height="48" rx="3" />
+<circle cx="34" cy="56" r="5" stroke="#A87F3F" />
+<path d="M22 82 40 64 54 76 62 68 78 82" />
+
+<!-- ④ 文本框 + 双箭头（两版对照） -->
+<rect x="14" y="26" width="92" height="40" rx="3" />
+<path d="M26 38h68M26 48h50M26 58h30" stroke-width="2.2" />
+<path d="M34 88h52" stroke="#A87F3F" stroke-width="2.2" />
+<path d="M40 82 34 88 40 94" stroke="#A87F3F" stroke-width="2.2" />
+<path d="M80 82 86 88 80 94" stroke="#A87F3F" stroke-width="2.2" />
+
+<!-- ⑤ 三个人像 + 基线（同一个角色，反复出现） -->
+<circle cx="26" cy="40" r="9.5" />
+<path d="M11 74a15 15 0 0 1 30 0" />
+<circle cx="60" cy="40" r="9.5" />
+<path d="M45 74a15 15 0 0 1 30 0" />
+<circle cx="94" cy="40" r="9.5" />
+<path d="M79 74a15 15 0 0 1 30 0" />
+<path d="M12 88h96" stroke="#A87F3F" stroke-width="2.4" />
+
+<!-- ⑥ 文件 + 星芒（技能包） -->
+<path d="M30 18h32l16 16v68H30z" />
+<path d="M62 18v16h16" />
+<path d="M40 52h28M40 63h28M40 74h16" stroke-width="2.2" />
+<path d="M92 78 95 87 104 90 95 93 92 102 89 93 80 90 89 87Z" fill="#A87F3F" stroke="none" />
+
+<!-- ⑦ 屏幕 + 上行箭头（导出 / 交付） -->
+<rect x="12" y="30" width="96" height="54" rx="4" />
+<path d="M60 70V46" stroke="#A87F3F" />
+<path d="M52 54 60 46 68 54" stroke="#A87F3F" />
+<path d="M60 84v12" />
+<path d="M46 100h28" />
+```
+
+**要放品牌图标时**（Remotion、Figma、微信…）：保留官方 SVG 的路径几何，`viewBox` 也照抄
+（Remotion 是 `viewBox="20 30 363 363"`），只把 `fill` 换成本稿主色，小标写品牌名。
+不要自己重画 logo——重画出来的东西两不像，比不放更糟。
 
 ## 3. 图文案例页（最常用）
 
@@ -65,6 +160,18 @@
 
 - 结构：主题卡（题干）+ 3–4 条要求 `.bar` + 评分表 + 一条总结。
 - 用 `g2`（左题右要求）比三张竖卡更省空间、也不空。
+
+## 11. 视频页
+
+- 结构：`.vid`（16:9，`overflow:hidden`）里放 `<video muted loop autoplay playsinline>` + `.snd` 开声音按钮 +
+  `.vid-print` 打印兜底图；说明文字用 `.vt`，默认在**左上角**。
+- `deck.js` 会给每个 `.vid` 自动挂 `.vctl`：播放/暂停 + 可拖拽进度条 + `0:12 / 1:44` 时间码。
+  所以**页面里不写控件**，也不许加原生 `controls`。
+- 一页最多两块视频；并排时用 `.g2`，每块宽度 ≥ 480px，窄了时间码会挤成一坨。
+- 打印态会自动隐藏视频、显示 `.vid-print`，所以**每段视频都要配 poster + 同名首帧图**。
+- 坑：往 `.vid` 里再加 `bottom:10px` 的浮层，会和进度条叠在一起；底部整条留给控件。
+- 坑：本地用 `python -m http.server` 验收时进度条拖不动——它不支持 Range 请求，浏览器没法 seek。
+  换 `file://` 直开、或用一个支持 `Accept-Ranges` 的静态服务再验。
 
 ---
 

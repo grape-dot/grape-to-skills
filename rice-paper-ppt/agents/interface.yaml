@@ -1,7 +1,7 @@
 interface:
   display_name: "Rice Paper PPT"
-  short_description: "warm rice-paper HTML slide deck with projector-grade typography and a Playwright layout audit"
-  default_prompt: "Use $rice-paper-ppt to build or restyle this deck as a 1280×720 rice-paper HTML deck. Start from assets/starter.html, keep theme.css/deck.js as-is except :root tokens, keep body text ≥20px and tables/code ≥18px, and keep the 512px content area — if content does not fit, change the structure, never shrink the type. Read references/typography-spec.md before setting sizes and references/page-patterns.md before choosing a layout. When you finish a few pages, run scripts/audit.js against a local server and fix hard issues to zero."
+  short_description: "warm rice-paper HTML slide deck with projector-grade typography, a writing-style spec, and a Playwright layout audit"
+  default_prompt: "Use $rice-paper-ppt to build or restyle this deck as a 1280×720 rice-paper HTML deck. Start from assets/starter.html, keep theme.css/deck.js as-is except :root tokens, keep body text ≥20px and tables/code ≥18px, and keep the 512px content area — if content does not fit, change the structure, never shrink the type. Read references/typography-spec.md before setting sizes and references/page-patterns.md before choosing a layout. Draft all titles and body copy against references/copywriting-spec.md: noun-phrase titles, one idea per sentence, consistent terminology; avoid mechanical contrast patterns, colloquial lead-ins, and empty marketing slogans. After drafting, run the section 08 language review page by page and apply fixes silently. When you finish a few pages, run scripts/audit.js against a local server and fix hard issues to zero."
 compatibility:
   canonical_format: "agent-skills"
   adapter_targets:

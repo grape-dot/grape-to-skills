@@ -1,16 +1,15 @@
 # rice-paper-ppt
 
-**米纸质感 HTML 幻灯片** — 一套「暖米纸 + 深林绿 + 哑光金」的中文编辑版式系统（Skill），
-把纸感配色、衬线大标题、投影级字号规范与逐页版式验收固化下来，
-让 Agent 直接产出可讲、可投影、可离线分发的 HTML 幻灯片。
+**米纸质感 HTML 幻灯片** — 一套「暖米纸 + 深林绿 + 哑光金」的中文演示文稿规范（Skill），
+视觉层固化纸感配色、衬线大标题、投影级字号与逐页版式验收，
+文案层固化标题、句式、术语与标点规范，让 Agent 直接产出可讲、可投影、可离线分发、
+语言严谨的 HTML 幻灯片。
 
-版本 `1.1.0`　许可 MIT　依赖：Node ≥ 18 + Playwright（仅验收用）、Python 3 + Pillow（仅拼图用）
-
-**它是一套风格，不是一个用途。** 汇报、路演、方案宣讲、复盘、培训、分享会、
+**它是一套规范，不是一个用途。** 汇报、路演、方案宣讲、复盘、培训、分享会、
 文化展陈、课程——凡是需要在屏幕上讲、且希望它看起来像一本装帧考究的册子，都适用。
 
 A warm rice-paper HTML slide style — 16:9, 1280×720, forest green and matte gold with
-serif display type, typography scaled for projection, plus a Playwright-based layout audit.
+serif display type, projection-scaled typography, a writing-style spec, and a Playwright layout audit.
 
 <p align="center">
   <img src="examples/preview.jpg" width="820" alt="六页骨架：封面 / 章节 / 图文 / 表格 / 流程 / 结语" />
@@ -27,11 +26,17 @@ serif display type, typography scaled for projection, plus a Playwright-based la
   不依赖网络、不依赖构建、不需要 Office。
 - **六页可运行骨架**：封面 / 章节 / 图文 / 表格 / 流程 / 结语，改文案即成片，不从空白页写起。
 - **十种版式配方**：按「页面作用」选版面，相邻页强制换版式，避免通篇卡片网格。
+- **页码「当前 / 总页」**：正文、章节页、封面、结语四处统一格式，`deck.js` 按 DOM 顺序自动回填，不会逐段漂号。
+- **章节首页是深绿章板**：底色一重，翻章立刻能感觉到；板上放大编号 + 本章徽记（印章圆环 + 单色线稿），
+  图案就是这一章要讲的东西。七个现成图标可复制，品牌工具（Remotion 等）可放官方图标改单色。
+  开工前会先问一次：默认由 AI 设计，还是你出创意。
+- **文案语言规范**：`references/copywriting-spec.md` 约束标题命名、句式、正文结构、术语与标点，
+  禁用机械化对比句式、口语化引导语与空泛营销表达；骨架示例文案已按规范改写，成稿后逐页审查。
 - **可验证的验收**：`scripts/audit.js` 用 Playwright 逐页真实渲染，检出内容溢出、越界、
   静默裁切、容器内溢、过小字号五类问题，返回退出码可当 CI 闸门。
 - **样式单点控制**：所有字号 / 间距都是 `:root` 里的 CSS 变量，整体放大缩小改一处即可。
 - **完整交互**：方向键 / Home / End / 数字键翻页、`f` 全屏、`p` 打印、`#N` 深链、
-  窗口自适应等比缩放、视频播放与声音开关。
+  窗口自适应等比缩放、视频播放与声音开关，视频自带暂停按钮与可拖拽进度条（`.vctl` 自动挂载）。
 
 ## 目录结构 / Structure
 
@@ -40,23 +45,24 @@ rice-paper-ppt/
 ├── SKILL.md                       # AI Skill 主文件（工作流、硬约束、版式选择表）
 ├── README.md                      # 本文件
 ├── LICENSE                        # MIT
-├── manifest.json                  # 版本 / 归属 / 成熟度 / 产出契约 / 已知限制
+├── manifest.json                  # 版本 / 归属 / 成熟度 / 产出契约
 ├── agents/
 │   └── interface.yaml             # 跨平台接口声明（默认 prompt、激活与降级策略）
 ├── assets/
-│   ├── theme.css                  # 版式系统：设计 token + 全部组件（508 行）
-│   ├── deck.js                    # 缩放 / 翻页 / 全屏 / 打印（86 行，无需修改）
-│   ├── starter.html               # 6 页可运行骨架
+│   ├── theme.css                  # 版式系统：设计 token + 全部组件（594 行）
+│   ├── deck.js                    # 缩放 / 翻页 / 全屏 / 打印 / 页码回填 / 视频控件（172 行）
+│   ├── starter.html               # 6 页可运行骨架（文案已按规范改写）
 │   └── example.jpg                # 占位图
 ├── references/
-│   ├── typography-spec.md         # 排版与字号规范原文（11 节，验收标准）
+│   ├── typography-spec.md         # 视觉层：排版与字号规范原文（11 节，验收标准）
+│   ├── copywriting-spec.md        # 文案层：标题 / 句式 / 术语 / 标点规范（8 节，验收标准）
 │   ├── components.md              # 类名词典 + 可复制组件片段 + 硬坐标
 │   └── page-patterns.md           # 10 种版式配方 + 空旷 / 拥挤症状表
 ├── scripts/
 │   ├── audit.js                   # 逐页版式审计（Node + Playwright）
 │   └── contact-sheet.py           # 截图拼缩略图总览（Python + Pillow）
 ├── evals/
-│   └── trigger_cases.json         # 12 条路由用例（含 6 条近邻负例）
+│   └── trigger_cases.json         # 路由用例（含触发与近邻负例）
 └── examples/
     └── preview.jpg                # 六页骨架预览
 ```
@@ -142,6 +148,8 @@ python <repo>/rice-paper-ppt/scripts/contact-sheet.py ./shots
 ## 设计原则
 
 内容优先级从高到低：**内容正确性 > 投影可读性 > 信息层级 > 空间利用率 > 视觉美观 > 装饰效果**。
+文案与视觉分别以 `references/copywriting-spec.md` 与 `references/typography-spec.md` 为验收标准，
+以准确传递信息为首要目标，以专业术语建立表达体系，以页面结构体现逻辑关系。
 
 四条禁令（会掩盖问题，不是解决问题）：
 
@@ -151,12 +159,6 @@ python <repo>/rice-paper-ppt/scripts/contact-sheet.py ./shots
 4. 靠减小字号或滚动条承载放不下的内容
 
 整页适配浏览器窗口的等比缩放是允许的，由 `deck.js` 统一处理。
-
-## 评估 / Evals
-
-`evals/trigger_cases.json` 有 12 条路由用例：6 条该触发（含省略触发词的「之前那套暖色纸感」）、
-6 条不该触发（`.pptx` 交付、WPS 汇报、科技风发布会、Word 美化、A2 海报、移动端响应式）。
-每条独立喂给模型，看是否命中；负例允许落到通用 PPT / 文档能力，但不得套用米纸版式与 512px 约束。
 
 ## 兼容性
 

@@ -129,8 +129,26 @@
 
 - **永远 `object-fit:contain` + 浅色底**。默认 `cover` 会裁掉主体，关键图不能裁。
 - 横图给宽度、竖图给高度：先量原图比例，再定容器高宽，避免两侧大片留白。
-- 视频：`<div class="vid"><video id="v-x" src="…" poster="…" muted loop autoplay playsinline></video>`，
-  加一个 `<button class="snd" data-for="v-x">` 让用户点一下开声音（浏览器禁止自动有声播放）。
+- 视频（`.vctl` 由 `deck.js` 自动注入，页面里只写这三层）：
+
+```html
+<div class="vid">
+  <video id="v-a" src="assets/a.mp4" poster="assets/a.jpg" muted loop autoplay playsinline></video>
+  <button class="snd" type="button" data-for="v-a">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+      <path d="M4 9.5h3.4L12 5.6v12.8L7.4 14.5H4z"/><path d="M16 9.4a3.6 3.6 0 010 5.2"/>
+      <path d="M18.6 6.8a7.2 7.2 0 010 10.4"/>
+    </svg>
+    开声音
+  </button>
+  <img class="vid-print" src="assets/a.jpg" alt="首帧图">   <!-- 打印态兜底 -->
+  <div class="vt">V0 成片 · 默认参数</div>                 <!-- 自动在左上角 -->
+</div>
+```
+
+- 不要加原生 `controls`；`.vt` 默认在左上角，**底部整条留给进度条**，别再往 `bottom` 放浮层。
+- `.vctl` 结构（仅供改样式时参考，别手写）：
+  `.vpp` 播放/暂停圆按钮 · `.vbar > .vtrack > .vfill` 进度条 · `.vtime` 时间码。
 
 ## 九、流程与步骤
 
@@ -164,5 +182,31 @@
 三者的完整标记见 `assets/starter.html`，直接改文案即可：
 
 - 封面 `.slide.cover`：`.cv-art`（右侧渐变或配图）+ `.cv-top` + `.cv-pill` + `.cv-t1` + `.cv-t2` + `.cv-hr` + `.cv-sub` + `.cv-feats`（固定 4 个 `.cv-feat`，多一个就换行）。
-- 章节页：`.sec-rule` + `.sec-num`（超大编号）+ `.sec-body`（`.sec-en`/`.sec-h`/`.sec-lead`）+ `.sec-pts`（3 条）+ `.sec-foot` + `.sec-mark`。
+- 章节页（**深绿章板** `<section class="slide plate">`）：`.sec-rule` + `.sec-num`（超大编号）+ `.sec-body`（`.sec-en`/`.sec-h`/`.sec-lead`）+ `.sec-pts`（3 条）+ `.sec-foot` + `.sec-mark` + **`.sec-emblem`（徽记）**。
+  `.plate` 会把标题、引导、要点、编号、页脚整套换成米白/金配色，不用逐页写内联色。
 - 结语 `.slide.end`：深绿底，`.end-t` 大字结论 + `.end-l` 分隔线 + `.end-s` 收束段 + `.end-sign` 落款。
+
+### 页码：四个挂点，一个格式
+
+一律「当前页 / 总页」（`04 / 57`），按**物理页序**数，章节页也占号；`deck.js` 会按 DOM 顺序重新回填：
+
+| 页面 | 类 | 位置 |
+|---|---|---|
+| 正文页 | `.foot .pn` | 页脚右侧，跟 `.foot` 同一行 |
+| 章节页 | `.sec-pn` | `right:96px; bottom:30px`，与左侧 `.sec-foot` 同一基线 |
+| 封面 | `.cv-pn` | `right:56px; top:664px`，米纸上的字要浅色 `rgba(247,240,222,.74)` |
+| 结语 | `.end-pn` | `left:66px; bottom:46px`，深绿底上用 `#6E7D6A` |
+
+### 章节页徽记 `.sec-emblem`
+
+```html
+<div class="sec-emblem">
+  <div class="ring"><svg viewBox="0 0 120 120" …>…</svg></div>
+  <div class="em-rule"></div>
+  <div class="em-lb">STORYBOARD</div>
+</div>
+```
+
+`.ring` 是 184px 圆环（内嵌 9px 虚线金圈），图标固定 96×96，`.em-lb` 是 12.5px 加宽字距的英文小标。
+图标用 `stroke="currentColor"`，颜色跟着 `.sec-emblem { color }` 走（章板上自动变米白）。
+图标库与选型见 `page-patterns.md` 第 2b 节。

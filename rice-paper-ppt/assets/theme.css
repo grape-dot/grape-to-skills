@@ -311,9 +311,35 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .vid .snd:hover { background: var(--green); }
 .vid .snd.gone { display: none; }
 .vid .vt {
-  position: absolute; left: 10px; bottom: 10px; z-index: 2;
+  position: absolute; left: 10px; top: 10px; z-index: 2;
   font-size: 14px; letter-spacing: .08em; color: #F3EADA;
   background: rgba(18,26,22,.66); padding: 4px 9px; border-radius: 3px;
+}
+/* 视频控件：播放/暂停 + 可拖拽进度条（deck.js 自动注入，视频页不许缺） */
+.vctl {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 12px 9px;
+  background: linear-gradient(to top, rgba(12,17,23,.9) 0%, rgba(12,17,23,.42) 44%, rgba(12,17,23,0) 100%);
+}
+.vctl .vpp {
+  flex: 0 0 auto; width: 30px; height: 30px; padding: 0;
+  border: 0; border-radius: 50%; background: rgba(243,234,218,.94); color: #1B241D;
+  display: grid; place-items: center; cursor: pointer;
+}
+.vctl .vpp:hover { background: #FFFDF4; }
+.vctl .vpp svg { width: 15px; height: 15px; display: block; }
+.vctl .vbar { flex: 1 1 auto; padding: 9px 0; cursor: pointer; touch-action: none; }
+.vctl .vbar:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.vctl .vtrack { position: relative; height: 4px; border-radius: 999px; background: rgba(243,234,218,.3); }
+.vctl .vfill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 999px; background: #F3EADA; }
+.vctl .vfill::after {
+  content: ""; position: absolute; right: -4px; top: 50%; width: 8px; height: 8px;
+  margin-top: -4px; border-radius: 50%; background: #F3EADA;
+}
+.vctl .vtime {
+  flex: 0 0 auto; font-family: var(--num); font-size: 12px; letter-spacing: .02em;
+  color: #E4DBC5; font-variant-numeric: tabular-nums;
 }
 
 /* ── 代码 / 终端 ──────────────────────────────────────────── */
@@ -387,6 +413,11 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .cv-fd { margin-top: 4px; font-size: 14px; color: #7C8374; white-space: nowrap; }
 .cv-mark { position: absolute; left: 56px; top: 668px; display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: .24em; color: #6E7565; }
 .cv-mark::after { content: ""; width: 380px; height: 1px; background: #D9CFB4; }
+.cv-pn {
+  position: absolute; right: 56px; top: 664px;
+  font-family: var(--num); font-size: 11px; letter-spacing: .24em;
+  color: rgba(247, 240, 222, .74);
+}
 .cv-sign {
   position: absolute; left: 1046px; top: 566px; width: 190px;
   font-family: "KaiTi", "STKaiti", var(--serif); font-size: 28px; line-height: 1.45;
@@ -420,6 +451,56 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   font-family: var(--serif); font-size: 27px; line-height: 1.7; color: #6C7A6B;
   text-align: right; letter-spacing: .04em;
 }
+/* 章节页徽记：印章圆环 + 单色线稿（本章讲什么，就画什么） */
+.sec-emblem {
+  position: absolute; right: 92px; top: 268px; width: 300px;
+  display: flex; flex-direction: column; align-items: center;
+  color: var(--green);
+}
+.sec-emblem .ring {
+  position: relative; width: 184px; height: 184px; border-radius: 50%;
+  border: 1px solid #DED3B8; display: grid; place-items: center;
+}
+.sec-emblem .ring::before {
+  content: ""; position: absolute; inset: 9px; border-radius: 50%;
+  border: 1px dashed rgba(168,127,63,.32);
+}
+.sec-emblem .ring > svg { width: 96px; height: 96px; position: relative; }
+.sec-emblem .em-rule { width: 26px; height: 1px; background: var(--gold); opacity: .55; margin: 16px 0 9px; }
+.sec-emblem .em-lb {
+  font-family: var(--num); font-size: 12.5px; letter-spacing: .24em;
+  color: var(--ink-3); text-indent: .24em;
+}
+.sec-pn {
+  position: absolute; right: 96px; bottom: 30px;
+  font-family: var(--num); font-size: 12px; letter-spacing: .16em; color: var(--ink-3);
+}
+
+/* ── 模块首页：深绿章板（底色加重，翻到这一页立刻知道换章了） ── */
+.slide.plate {
+  background:
+    radial-gradient(120% 92% at 86% 14%, rgba(168,127,63,.15) 0%, rgba(168,127,63,0) 58%),
+    linear-gradient(155deg, #2C4436 0%, #1E2E25 58%, #17241C 100%);
+}
+.plate .sec-rule { background: linear-gradient(180deg, #C8A96A 0%, #8A6830 100%); }
+.plate .sec-num { color: rgba(233,223,196,.11); }
+.plate .sec-en { color: #C8A96A; }
+.plate .sec-h { color: #F4ECDA; }
+.plate .sec-lead { color: #BFC9B9; }
+.plate .sec-lead b { color: #F4ECDA; }
+.plate .sec-pts { border-top-color: rgba(200,169,106,.3); }
+.plate .sec-pts li { color: #C9D2C3; }
+.plate .sec-pts li::before { background: #C8A96A; }
+.plate .sec-pts li b { color: #F4ECDA; }
+.plate .sec-foot, .plate .sec-pn { color: #8FA08A; }
+.plate .sec-mark { color: #A6B29E; }
+.plate .sec-emblem { color: #F1E8D3; }
+.plate .sec-emblem .ring { border-color: rgba(200,169,106,.44); }
+.plate .sec-emblem .ring::before { border-color: rgba(200,169,106,.24); }
+.plate .sec-emblem .em-lb { color: #96A491; }
+.plate .sec-emblem .em-rule { background: #C8A96A; }
+.plate .sec-emblem [fill="#A87F3F"] { fill: #CDA96A; }
+.plate .sec-emblem [stroke="#A87F3F"] { stroke: #CDA96A; }
 
 /* ── 结构图 / 多模块总览 ───────────────────────────────────── */
 .mapwrap { display: grid; grid-template-columns: 636px 1fr; gap: 26px; height: 100%; }
@@ -459,6 +540,10 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   position: absolute; right: 62px; bottom: 56px;
   font-family: "KaiTi", "STKaiti", var(--serif); font-size: 28px; line-height: 1.5;
   letter-spacing: .12em; color: #8B9A86; transform: rotate(-4deg);
+}
+.end-pn {
+  position: absolute; left: 66px; bottom: 46px;
+  font-family: var(--num); font-size: 12px; letter-spacing: .18em; color: #6E7D6A;
 }
 
 /* ── 高密度卡片（同一卡片内多行键值） ──────────────────── */
@@ -504,5 +589,6 @@ body.shot .hud, body.shot .pbar { display: none; }
   .hud, .pbar { display: none !important; }
   .vid video { display: none !important; }
   .vid .snd { display: none !important; }
+  .vid .vctl { display: none !important; }
   .vid .vid-print { display: block !important; width: 100%; height: 100%; object-fit: cover; }
 }
