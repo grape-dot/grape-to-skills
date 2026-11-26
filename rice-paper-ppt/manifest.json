@@ -1,16 +1,17 @@
 {
   "name": "rice-paper-ppt",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "owner": "yanfang",
-  "updated_at": "2026-11-24",
+  "updated_at": "2026-11-26",
   "status": "active",
   "maturity_tier": "production",
   "lifecycle_stage": "production",
   "review_cadence": "per-release",
   "output_contract": "交付 4 件套目录（index.html + theme.css + deck.js + assets/），1280×720、离线双击可讲、无需构建；不产 .pptx，不做可编辑 Office 交付",
   "style_contract": "暖米纸 #FAF6E9 / 深林绿 #2F4A38 / 哑光金 #A87F3F；正文 20–24px、表格代码 18–22px、图注 15–17px、页脚 13–15px；内容区可用高度恒为 512px；放不下改结构，禁缩字号、禁 transform:scale/zoom、禁 overflow:hidden 藏内容",
-  "copywriting_contract": "视觉与文案双层规范：文案层按 references/copywriting-spec.md（8 节）约束标题命名、句式、正文结构、术语与标点；禁用机械化对比句式、口语化引导语、空泛营销表达与无必要连接词；成稿后逐页执行第 08 节八项语言审查，问题直接改定、不展示审查过程",
+  "copywriting_contract": "视觉与文案双层、文案分语言与信息结构两份：语言表达按 references/copywriting-spec.md（8 节）约束标题命名、句式、术语口径与标点，禁用机械化对比句式、口语化引导语与空泛营销表达，成稿后逐页执行第 08 节八项语言审查；信息结构按 references/content-structure-spec.md（12 节）约束专业术语提炼、禁用模糊代称、长段压缩、章节封面定位与信息可视化，成稿后执行第 10 节 A–H 八项结构审查；问题直接改定、不展示审查过程",
   "changelog": [
+    "1.3.0 信息结构规范落地：新增 references/content-structure-spec.md（12 节 PPT 专业文案精炼与信息结构化规范原文存档），文案层升为语言+结构两份验收标准；SKILL.md 接入第 1 步结构化、第 1.8 步定稿、第 5 步 A–H 结构审查，补触发词/何时使用/目录/参考表/易错项；manifest、interface.yaml、README、evals 同步；原文照录，章板三条要点与格言按核心关键词和信息增量衔接；改动前备份至 ~/.workbuddy/skill-backups/rice-paper-ppt-20261126.tar.gz",
     "1.2.0 文案层落地：新增 references/copywriting-spec.md（8 节文案规范原文存档）；SKILL.md 升级为视觉+文案双层规范，新增第 1.8 步文案定稿与第 5 步逐页语言审查，description 扩展文案触发词；assets/starter.html 六页示例文案按规范重写；以安装副本为基底统一两端，保留页码回填、章节徽记、视频控件功能；README 与工程元数据同步",
     "1.1.0 工程合规：SKILL.md 补 version 字段；新增 manifest.json / agents/interface.yaml / evals/trigger_cases.json；安装与依赖、目录结构两节去重（依赖表与目录树以 README 为准），SKILL.md 5.6k→4.9k 字符"
   ],

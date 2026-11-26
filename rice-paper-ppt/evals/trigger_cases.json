@@ -1,6 +1,6 @@
 {
   "skill": "rice-paper-ppt",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "intent": "routing",
   "how_to_use": "每条输入单独交给模型（不带上下文），看是否触发本 skill；expect=no_trigger 的用例允许落到 PPT/文档类能力，但不得套用米纸版式、512px 约束与文案规范。",
   "cases": [
@@ -87,6 +87,18 @@
       "input": "帮我把这份课件的措辞统一一下，术语前后一致，去掉口语化引导语和 AI 味",
       "expect": "trigger",
       "why": "术语一致性 + 口语化引导语 + AI 模板腔，属文案规范第 04–05 节"
+    },
+    {
+      "id": "R15",
+      "input": "这页 PPT 写『两条链、几个步骤』太空了，帮我换成具体技术名称并按流程重排",
+      "expect": "trigger",
+      "why": "模糊代称 + 信息层级重构，命中 content-structure-spec 第 2、4、8 节"
+    },
+    {
+      "id": "R16",
+      "input": "把这份米纸风 deck 的章节封面精简一下，只留主题，别塞那些介绍性的小字",
+      "expect": "trigger",
+      "why": "米纸风 + 章节封面精炼，命中 content-structure-spec 第 5 节与章板衔接约定"
     }
   ]
 }

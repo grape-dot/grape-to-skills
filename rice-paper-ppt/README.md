@@ -30,8 +30,11 @@ serif display type, projection-scaled typography, a writing-style spec, and a Pl
 - **章节首页是深绿章板**：底色一重，翻章立刻能感觉到；板上放大编号 + 本章徽记（印章圆环 + 单色线稿），
   图案就是这一章要讲的东西。七个现成图标可复制，品牌工具（Remotion 等）可放官方图标改单色。
   开工前会先问一次：默认由 AI 设计，还是你出创意。
-- **文案语言规范**：`references/copywriting-spec.md` 约束标题命名、句式、正文结构、术语与标点，
-  禁用机械化对比句式、口语化引导语与空泛营销表达；骨架示例文案已按规范改写，成稿后逐页审查。
+- **文案语言规范**：`references/copywriting-spec.md` 约束标题命名、句式、正文结构、术语口径与标点，
+  禁用机械化对比句式、口语化引导语与空泛营销表达。
+- **信息结构规范**：`references/content-structure-spec.md` 约束专业术语提炼、信息层级重构、内容压缩、
+  章节封面定位与信息可视化，禁用「两条链 / 几个步骤」等模糊代称；成稿后语言审查（第 08 节）与
+  结构审查（A–H）双轨执行，骨架示例文案已按两份规范改写。
 - **可验证的验收**：`scripts/audit.js` 用 Playwright 逐页真实渲染，检出内容溢出、越界、
   静默裁切、容器内溢、过小字号五类问题，返回退出码可当 CI 闸门。
 - **样式单点控制**：所有字号 / 间距都是 `:root` 里的 CSS 变量，整体放大缩小改一处即可。
@@ -55,7 +58,8 @@ rice-paper-ppt/
 │   └── example.jpg                # 占位图
 ├── references/
 │   ├── typography-spec.md         # 视觉层：排版与字号规范原文（11 节，验收标准）
-│   ├── copywriting-spec.md        # 文案层：标题 / 句式 / 术语 / 标点规范（8 节，验收标准）
+│   ├── copywriting-spec.md        # 文案层·语言：标题 / 句式 / 术语口径 / 标点（8 节，验收标准）
+│   ├── content-structure-spec.md # 文案层·结构：术语提炼 / 压缩 / 章节封面 / 可视化（12 节，验收标准）
 │   ├── components.md              # 类名词典 + 可复制组件片段 + 硬坐标
 │   └── page-patterns.md           # 10 种版式配方 + 空旷 / 拥挤症状表
 ├── scripts/
@@ -148,7 +152,9 @@ python <repo>/rice-paper-ppt/scripts/contact-sheet.py ./shots
 ## 设计原则
 
 内容优先级从高到低：**内容正确性 > 投影可读性 > 信息层级 > 空间利用率 > 视觉美观 > 装饰效果**。
-文案与视觉分别以 `references/copywriting-spec.md` 与 `references/typography-spec.md` 为验收标准，
+文案分语言与结构两份，分别以 `references/copywriting-spec.md`（措辞/句式/标点）、
+`references/content-structure-spec.md`（术语/层级/压缩/可视化）为验收标准，
+视觉以 `references/typography-spec.md` 为验收标准；措辞冲突以前者为准、信息结构与术语命名以后者为准。
 以准确传递信息为首要目标，以专业术语建立表达体系，以页面结构体现逻辑关系。
 
 四条禁令（会掩盖问题，不是解决问题）：
