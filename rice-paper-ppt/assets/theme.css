@@ -293,30 +293,72 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .figcap { font-size: var(--fs-note); line-height: 1.5; color: var(--ink-3); margin-top: 8px; }
 .figcap b { color: var(--ink-2); }
 
-/* ── 图片墙：多图排版四式 ────────────────────────────────────
+/* ── 图片墙：多图排版四式（立体拼贴）─────────────────────────
    A 矩形错落 / B 波浪贯通 / C 斜切网格 / D 弧形底托
-   原则：墙内等宽等高、接缝 2–3px，形态差异只由遮罩边缘产生。
+   立体感只有四个来源：暖白拼缝 / 沿轮廓的柔投影 / 照片白边 / 位置错落与倾斜。
+   不做发光、玻璃、彩色阴影。缝用纸色 #FFFDF6，投影用暖褐 rgba(74,58,34)。
    用法与坑见 references/page-patterns.md 第 12 节。 */
-.wall { display: flex; gap: 3px; min-height: 0; }
+.wall { display: flex; gap: 3px; min-height: 0; background: #FFFDF6; }
 .wall img { flex: 1 1 0; min-width: 0; height: 100%; object-fit: cover; display: block; }
 
-/* A：顶边齐平，偶数列矮 14%，底边错落 */
-.w-stag { align-items: flex-start; }
-.w-stag img:nth-child(even) { height: 86%; }
-
-/* B：整条图墙一起被曲线切；path 是像素坐标，墙宽必须等于内容区 1188px */
-.w-wave {
-  height: 330px;
-  clip-path: path("M0 34 C 120 6 260 64 400 32 C 540 2 680 62 820 30 C 950 4 1080 52 1188 24 L1188 296 C 1080 322 980 284 860 304 C 720 328 600 288 470 308 C 340 330 220 290 100 312 C 62 320 28 308 0 316 Z");
+/* A：四张散落成照片卡——白边、投影、底部融进纸面、位置上下错落
+   照片卡必须包一层 .pc：阴影要挂在卡片上，不能挂在 img 上，否则被渐隐一起淡掉 */
+.w-stag {
+  gap: 18px; height: 380px; align-items: flex-start;
+  background: none; padding: 0 2px;
+}
+.w-stag .pc {
+  position: relative; flex: 1 1 0; min-width: 0; height: 300px; padding: 7px;
+  background: #FFFDF6;
+  box-shadow: 0 24px 38px -14px rgba(74,58,34,.50), 0 4px 10px rgba(74,58,34,.18);
+}
+.w-stag .pc:nth-child(even) { margin-top: 66px; }
+.w-stag .pc img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.w-stag .pc::after {
+  content: ""; position: absolute; left: 7px; right: 7px; bottom: 7px; height: 24px;
+  background: linear-gradient(to top, #FFFDF6 0%, rgba(255,253,246,.62) 42%, rgba(255,253,246,0) 100%);
 }
 
-/* C：倾斜只发生在容器上，图片反向校正并放大补角 */
-.w-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 3px; min-height: 0; }
-.w-skew { transform: skewX(-8deg); overflow: hidden; width: calc(100% - 48px); margin-left: auto; }
+/* B：整条图墙一起被曲线切，投影跟着曲线走；path 是像素坐标，墙宽须为 1188px */
+.w-wave {
+  position: relative;
+  height: 330px;
+  clip-path: path("M0 34 C 120 6 260 64 400 32 C 540 2 680 62 820 30 C 950 4 1080 52 1188 24 L1188 296 C 1080 322 980 284 860 304 C 720 328 600 288 470 308 C 340 330 220 290 100 312 C 62 320 28 308 0 316 Z");
+  filter: drop-shadow(8px 10px 10px rgba(74,58,34,.42)) drop-shadow(0 24px 34px rgba(74,58,34,.34));
+}
+
+/* C：倾斜只发生在容器上，图片反向校正并放大补角；整块悬在纸面上 */
+.w-scene { position: relative; display: flex; min-height: 0; }
+.w-scene::after {
+  content: ""; position: absolute; left: 10%; right: 2%; bottom: 2px; height: 46px;
+  background: radial-gradient(ellipse at 50% 30%, rgba(74,58,34,.34), rgba(74,58,34,0) 72%);
+  filter: blur(8px); pointer-events: none;
+}
+.w-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 3px; min-height: 0; background: #FFFDF6; }
+.w-skew {
+  position: relative;
+  transform: skewX(-8deg); overflow: hidden; width: calc(100% - 48px); margin-left: auto;
+  box-shadow: 0 26px 40px -16px rgba(74,58,34,.40), 0 4px 10px rgba(74,58,34,.14);
+}
 .w-skew img { width: 100%; height: 100%; object-fit: cover; transform: skewX(8deg) scale(1.18); display: block; }
 
-/* D：底边大圆角弧裙，中间高两端低 */
-.w-arc { height: 340px; border-radius: 0 0 46% 46% / 0 0 16% 16%; overflow: hidden; }
+/* D：上下双弧，投影沿弧线；path 同样是像素坐标，宽 1188px */
+.w-arc {
+  position: relative;
+  height: 348px;
+  clip-path: path("M0 8 C 300 56 888 56 1188 8 L1188 300 C 888 348 300 348 0 300 Z");
+  filter: drop-shadow(7px 14px 9px rgba(52,44,30,.46)) drop-shadow(0 28px 36px rgba(52,44,30,.30));
+}
+
+/* 立体的最后一道：沿遮罩轮廓压一层顶亮底暗，读出弯曲受光 */
+.w-wave::after,
+.w-arc::after,
+.w-skew::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.50) 0, rgba(255,255,255,0) 14%),
+    linear-gradient(to top, rgba(40,30,16,.34) 0, rgba(40,30,16,0) 18%);
+}
 
 /* 图墙标题带：一条标题 + 一条图注，不逐图配字 */
 .wcap { text-align: center; }

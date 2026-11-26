@@ -132,13 +132,16 @@
 
 ### 图片墙（多图排版）
 
-一页并置 4 张以上同题材图片时用 `.wall` 加一个修饰类，**不要给每张图各包一张卡**：
+一页并置 4 张以上同题材图片时用 `.wall` 加一个修饰类，**不要给每张图各包一张卡**。
+立体感只靠四件事：暖白拼缝、沿轮廓的柔投影、边缘顶亮底暗、位置错落；不做发光与玻璃：
 
 ```html
-<!-- A 齐边错落：顶边齐平，底边错落 -->
-<div class="wall w-stag grow">
-  <img src="assets/a1.jpg" alt=""><img src="assets/a2.jpg" alt="">
-  <img src="assets/a3.jpg" alt=""><img src="assets/a4.jpg" alt="">
+<!-- A 齐边错落：四张照片卡，白边 + 投影 + 底部渐隐 + 上下错落 -->
+<div class="wall w-stag">
+  <div class="pc"><img src="assets/a1.jpg" alt=""></div>
+  <div class="pc"><img src="assets/a2.jpg" alt=""></div>
+  <div class="pc"><img src="assets/a3.jpg" alt=""></div>
+  <div class="pc"><img src="assets/a4.jpg" alt=""></div>
 </div>
 <div class="wcap"><div class="wt">同一场景的四次取景</div><div class="figcap">图注：只承担并置比较。</div></div>
 
@@ -148,53 +151,39 @@
   <img src="assets/b4.jpg" alt=""><img src="assets/b5.jpg" alt="">
 </div>
 
-<!-- C 斜切网格：左文右墙 -->
+<!-- C 斜切网格：左文右墙，外面再包一层 .w-scene 提供悬空投影带 -->
 <div class="grow" style="display:grid;grid-template-columns:34% 1fr;gap:28px">
   <div class="col" style="justify-content:center;gap:10px">
     <div class="wt" style="margin:0">八张过程图沿斜线铺开</div>
     <div class="cb sm">左列只给结论，图墙承担细节与数量。</div>
   </div>
-  <div class="wall w-grid w-skew">
-    <img src="assets/c1.jpg" alt=""><img src="assets/c2.jpg" alt=""><img src="assets/c3.jpg" alt=""><img src="assets/c4.jpg" alt="">
-    <img src="assets/c5.jpg" alt=""><img src="assets/c6.jpg" alt=""><img src="assets/c7.jpg" alt=""><img src="assets/c8.jpg" alt="">
+  <div class="w-scene">
+    <div class="wall w-grid w-skew">
+      <img src="assets/c1.jpg" alt=""><img src="assets/c2.jpg" alt=""><img src="assets/c3.jpg" alt=""><img src="assets/c4.jpg" alt="">
+      <img src="assets/c5.jpg" alt=""><img src="assets/c6.jpg" alt=""><img src="assets/c7.jpg" alt=""><img src="assets/c8.jpg" alt="">
+    </div>
   </div>
 </div>
 
-<!-- D 弧形底托：标题在墙上方 -->
+<!-- D 弧形底托：标题在墙上方，宽 1188px -->
 <div class="wcap">
   <div class="wt" style="font-size:var(--fs-h1)">五张图托住一句结论</div>
   <div class="figcap">图注：弧裙裁掉的是边角，主体先挪到安全区。</div>
 </div>
-<div class="wall w-arc grow">
+<div class="wall w-arc">
   <img src="assets/d1.jpg" alt=""><img src="assets/d2.jpg" alt=""><img src="assets/d3.jpg" alt="">
   <img src="assets/d4.jpg" alt=""><img src="assets/d5.jpg" alt="">
 </div>
 ```
 
-- 墙内所有图等宽、等高，缝 2–3px；不加各自的圆角、边框、投影——一加就退回“卡片堆”。
-- `cover` 只在「同题材并置、单张不承担唯一证据」时使用，主体落居中 60% 安全区；唯一证据图仍 `contain` + 浅色底。
+- **缝**：3px，容器底色 `#FFFDF6`；缝要读成白纸，不能是透明间隙。
+- **投影**：裁剪类（B/C/D）一律 `drop-shadow`，`box-shadow` 会被 `clip-path` 裁掉；
+  A 的照片卡反过来——阴影挂在 `.pc` 上，挂在 `img` 上会被底部渐隐一起淡掉。
+- **明暗**：`::after` 压一层顶亮底暗（白 50% → 透明 14%、暗 34% → 透明 18%），补弯曲受光。
+- **错落**：A 只改位置（`margin-top`），不旋转照片；B/D 的弧线不要用 `border-radius` 代替 `path`。
 - `.wall` 已带 `min-height:0`；`.w-arc` / `.w-skew` 的 `overflow:hidden` 只裁图片，容器内不放文字。
-- 四式的选型、尺寸与坑见 `page-patterns.md` 第 12 节。
-- 视频（`.vctl` 由 `deck.js` 自动注入，页面里只写这三层）：
-
-```html
-<div class="vid">
-  <video id="v-a" src="assets/a.mp4" poster="assets/a.jpg" muted loop autoplay playsinline></video>
-  <button class="snd" type="button" data-for="v-a">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-      <path d="M4 9.5h3.4L12 5.6v12.8L7.4 14.5H4z"/><path d="M16 9.4a3.6 3.6 0 010 5.2"/>
-      <path d="M18.6 6.8a7.2 7.2 0 010 10.4"/>
-    </svg>
-    开声音
-  </button>
-  <img class="vid-print" src="assets/a.jpg" alt="首帧图">   <!-- 打印态兜底 -->
-  <div class="vt">V0 成片 · 默认参数</div>                 <!-- 自动在左上角 -->
-</div>
-```
-
-- 不要加原生 `controls`；`.vt` 默认在左上角，**底部整条留给进度条**，别再往 `bottom` 放浮层。
-- `.vctl` 结构（仅供改样式时参考，别手写）：
-  `.vpp` 播放/暂停圆按钮 · `.vbar > .vtrack > .vfill` 进度条 · `.vtime` 时间码。
+- `cover` 只在「同题材并置、单张不承担唯一证据」时使用，主体落居中 60% 安全区；唯一证据图仍 `contain` + 浅色底。
+- 四式的尺寸、坑与选型见 `page-patterns.md` 第 12 节。
 
 ## 九、流程与步骤
 
