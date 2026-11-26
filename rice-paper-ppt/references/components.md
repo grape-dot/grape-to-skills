@@ -127,8 +127,54 @@
 <div class="figcap">图注：说明在看什么，不要重复标题。</div>
 ```
 
-- **永远 `object-fit:contain` + 浅色底**。默认 `cover` 会裁掉主体，关键图不能裁。
+- **永远 `object-fit:contain` + 浅色底**。默认 `cover` 会裁掉主体，关键图不能裁；唯一例外是下方图片墙。
 - 横图给宽度、竖图给高度：先量原图比例，再定容器高宽，避免两侧大片留白。
+
+### 图片墙（多图排版）
+
+一页并置 4 张以上同题材图片时用 `.wall` 加一个修饰类，**不要给每张图各包一张卡**：
+
+```html
+<!-- A 齐边错落：顶边齐平，底边错落 -->
+<div class="wall w-stag grow">
+  <img src="assets/a1.jpg" alt=""><img src="assets/a2.jpg" alt="">
+  <img src="assets/a3.jpg" alt=""><img src="assets/a4.jpg" alt="">
+</div>
+<div class="wcap"><div class="wt">同一场景的四次取景</div><div class="figcap">图注：只承担并置比较。</div></div>
+
+<!-- B 波浪贯通：墙宽必须等于内容区 1188px -->
+<div class="wall w-wave">
+  <img src="assets/b1.jpg" alt=""><img src="assets/b2.jpg" alt=""><img src="assets/b3.jpg" alt="">
+  <img src="assets/b4.jpg" alt=""><img src="assets/b5.jpg" alt="">
+</div>
+
+<!-- C 斜切网格：左文右墙 -->
+<div class="grow" style="display:grid;grid-template-columns:34% 1fr;gap:28px">
+  <div class="col" style="justify-content:center;gap:10px">
+    <div class="wt" style="margin:0">八张过程图沿斜线铺开</div>
+    <div class="cb sm">左列只给结论，图墙承担细节与数量。</div>
+  </div>
+  <div class="wall w-grid w-skew">
+    <img src="assets/c1.jpg" alt=""><img src="assets/c2.jpg" alt=""><img src="assets/c3.jpg" alt=""><img src="assets/c4.jpg" alt="">
+    <img src="assets/c5.jpg" alt=""><img src="assets/c6.jpg" alt=""><img src="assets/c7.jpg" alt=""><img src="assets/c8.jpg" alt="">
+  </div>
+</div>
+
+<!-- D 弧形底托：标题在墙上方 -->
+<div class="wcap">
+  <div class="wt" style="font-size:var(--fs-h1)">五张图托住一句结论</div>
+  <div class="figcap">图注：弧裙裁掉的是边角，主体先挪到安全区。</div>
+</div>
+<div class="wall w-arc grow">
+  <img src="assets/d1.jpg" alt=""><img src="assets/d2.jpg" alt=""><img src="assets/d3.jpg" alt="">
+  <img src="assets/d4.jpg" alt=""><img src="assets/d5.jpg" alt="">
+</div>
+```
+
+- 墙内所有图等宽、等高，缝 2–3px；不加各自的圆角、边框、投影——一加就退回“卡片堆”。
+- `cover` 只在「同题材并置、单张不承担唯一证据」时使用，主体落居中 60% 安全区；唯一证据图仍 `contain` + 浅色底。
+- `.wall` 已带 `min-height:0`；`.w-arc` / `.w-skew` 的 `overflow:hidden` 只裁图片，容器内不放文字。
+- 四式的选型、尺寸与坑见 `page-patterns.md` 第 12 节。
 - 视频（`.vctl` 由 `deck.js` 自动注入，页面里只写这三层）：
 
 ```html

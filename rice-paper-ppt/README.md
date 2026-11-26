@@ -25,7 +25,10 @@ serif display type, projection-scaled typography, a writing-style spec, and a Pl
 - **一支文件即成品**：`index.html` + `theme.css` + `deck.js` + `assets/`，双击就能讲，
   不依赖网络、不依赖构建、不需要 Office。
 - **六页可运行骨架**：封面 / 章节 / 图文 / 表格 / 流程 / 结语，改文案即成片，不从空白页写起。
-- **十种版式配方**：按「页面作用」选版面，相邻页强制换版式，避免通篇卡片网格。
+- **十二种版式配方**：按「页面作用」选版面，相邻页强制换版式，避免通篇卡片网格。
+- **多图排版四式**：一组同题材图并置时，用几何遮罩切整墙图——矩形错落讲并列、波浪贯通讲连续、
+  斜切网格讲层进、弧形底托讲收束。墙内等宽等缝、不给每张图单独配卡片，`theme.css` 已内置
+  `.wall` 四式与标题带，尺寸与坑见 `references/page-patterns.md` 第 12 节。
 - **页码「当前 / 总页」**：正文、章节页、封面、结语四处统一格式，`deck.js` 按 DOM 顺序自动回填，不会逐段漂号。
 - **章节首页是深绿章板**：底色一重，翻章立刻能感觉到；板上放大编号 + 本章徽记（印章圆环 + 单色线稿），
   图案就是这一章要讲的东西。七个现成图标可复制，品牌工具（Remotion 等）可放官方图标改单色。
@@ -52,7 +55,7 @@ rice-paper-ppt/
 ├── agents/
 │   └── interface.yaml             # 跨平台接口声明（默认 prompt、激活与降级策略）
 ├── assets/
-│   ├── theme.css                  # 版式系统：设计 token + 全部组件（594 行）
+│   ├── theme.css                  # 版式系统：设计 token + 全部组件（628 行）
 │   ├── deck.js                    # 缩放 / 翻页 / 全屏 / 打印 / 页码回填 / 视频控件（172 行）
 │   ├── starter.html               # 6 页可运行骨架（文案已按规范改写）
 │   └── example.jpg                # 占位图
@@ -61,7 +64,7 @@ rice-paper-ppt/
 │   ├── copywriting-spec.md        # 文案层·语言：标题 / 句式 / 术语口径 / 标点（8 节，验收标准）
 │   ├── content-structure-spec.md # 文案层·结构：术语提炼 / 压缩 / 章节封面 / 可视化（12 节，验收标准）
 │   ├── components.md              # 类名词典 + 可复制组件片段 + 硬坐标
-│   └── page-patterns.md           # 10 种版式配方 + 空旷 / 拥挤症状表
+│   └── page-patterns.md           # 12 种版式配方 + 空旷 / 拥挤症状表
 ├── scripts/
 │   ├── audit.js                   # 逐页版式审计（Node + Playwright）
 │   └── contact-sheet.py           # 截图拼缩略图总览（Python + Pillow）
