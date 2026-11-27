@@ -58,11 +58,21 @@ serif display type, projection-scaled typography, a writing-style spec, and a Pl
 （或一个 `perspective`）决定外轮廓，墙内等宽、2–3px 暖白缝，投影沿轮廓落下。
 第五式 E 换几何语言：一条内联 SVG 里七块各裁各形、各填各图，白缝靠同一批 path 再描一遍。
 
-<p align="center">
-  <img src="examples/wall-four.jpg" width="900" alt="同一组四张横构图素材在四式下的对照：A 齐边错落式 / B 波浪贯通式 / C 纵深渐进式 / D 不对称叶片式" />
-</p>
+下面四张都是 1280×720 的整页实拍，不是拼图：标题即式名，标题下那句就是这一式的形态定义，
+其余部分全是这一式的真实渲染。用的是同一组四张约 3:2 的横构图素材，所以裁切差异可以直接对比。
 
-同一组素材（约 3:2 横构图）在四式下的实际裁切差异一眼可见：C 的格子最接近原比例、几乎不裁，
+<table>
+  <tr>
+    <td width="50%"><img src="examples/wall-stagger.jpg" alt="A 齐边错落式：多张图片独立排列，通过上下错位形成节奏感" /></td>
+    <td width="50%"><img src="examples/wall-wave.jpg" alt="B 波浪贯通式：多张图片沿连续波浪曲线拼接，形成整体画面" /></td>
+  </tr>
+  <tr>
+    <td><img src="examples/wall-depth.jpg" alt="C 纵深渐进式：图片按纵向层次递进排列，营造空间纵深感" /></td>
+    <td><img src="examples/wall-fan.jpg" alt="D 不对称叶片式：图片以不对称弧形边缘连接，形成叶片般的视觉效果" /></td>
+  </tr>
+</table>
+
+同一组素材在四式下的裁切差异一眼可见：C 的格子最接近原比例、几乎不裁，
 A 保留 67%，B / D 的竖格只留 57%。
 
 E 不是「摊开」而是「走进去」：带子绕一圈半，七块从顶部横带一路盘到右下角的两块并排。
@@ -122,7 +132,10 @@ rice-paper-ppt/
 │   └── trigger_cases.json         # 路由用例（含触发与近邻负例）
 └── examples/
     ├── preview.jpg                # 六页骨架预览
-    ├── wall-four.jpg              # 图片墙四式同素材对照（A/B/C/D）
+    ├── wall-stagger.jpg           # A 齐边错落式 1280×720 整页实拍
+    ├── wall-wave.jpg              # B 波浪贯通式
+    ├── wall-depth.jpg             # C 纵深渐进式
+    ├── wall-fan.jpg               # D 不对称叶片式
     └── wall-coil.jpg              # E 盘旋丝带单页示例
 ```
 
