@@ -376,8 +376,9 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
     linear-gradient(to top, rgba(40,30,16,.34) 0, rgba(40,30,16,0) 18%);
 }
 
-/* ── 图墙入场：纯 CSS，不加外部库，离线与打印都安全 ──────────
-   静态形态已经成立，动画只做「浮起 / 转正」一件事，120ms 内结束不抢讲者节奏。 */
+/* ── 图墙入场：默认纯 CSS，零依赖 ────────────────────────────
+   静态形态已经成立，动画只做「浮起 / 转正」一件事，0.7s 内结束不抢讲者节奏。
+   若引入 assets/fx.js 并检测到 GSAP，会加上 html.fx-js 改由 GSAP 编排，下面的 CSS 入场自动让位。 */
 @media (prefers-reduced-motion: no-preference) {
   @keyframes wallRise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes wallFade { from { opacity: 0; } to { opacity: 1; } }
@@ -394,6 +395,13 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   .slide.on .w-fan img:nth-child(5) { animation-delay: .28s; }
   .slide.on .w-depth { animation: wallTurn .8s cubic-bezier(.22,.75,.2,1) both; }
 }
+
+/* 增强层接管时让位：fx.js 只在检测到 GSAP 时加 .fx-js，避免两套动画叠加 */
+.fx-js .slide.on .w-stag .pc,
+.fx-js .slide.on .w-wave,
+.fx-js .slide.on .w-fan,
+.fx-js .slide.on .w-fan img,
+.fx-js .slide.on .w-depth { animation: none; }
 
 /* 图墙标题带：一条标题 + 一条图注，不逐图配字 */
 .wcap { text-align: center; }
@@ -695,6 +703,8 @@ body.shot .hud, body.shot .pbar { display: none; }
 @media print {
   @page { size: 1280px 720px; margin: 0; }
   html, body { background: #fff; overflow: visible; }
+  /* 动画与 transition 一律停掉：纸张上只留终态，别把 tween 中间帧印进去 */
+  *, *::before, *::after { animation: none !important; transition: none !important; }
   #deck { position: static; transform: none !important; width: auto; height: auto; }
   .slide { position: relative !important; visibility: visible !important; opacity: 1 !important; break-after: page; page-break-after: always; }
   .hud, .pbar { display: none !important; }

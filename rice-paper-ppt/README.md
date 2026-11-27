@@ -32,6 +32,11 @@ serif display type, projection-scaled typography, a writing-style spec, and a Pl
   配卡片；立体感来自暖白拼缝、沿轮廓的柔和投影、边缘顶亮底暗与尺寸错落，不用发光和玻璃。
   近大远小必须 `perspective` + `rotateY`，`skewX` 只有斜切没有纵深。`theme.css` 已内置四式、
   标题带与 0.7s 入场动画，参数换算与坑见 `references/page-patterns.md` 第 12 节。
+- **可选增强层**：HTML 是载体，不是能力上限。`assets/fx.js` 只在检测到 GSAP 时才接管编排
+  （图墙浮起 / 扇形逐张 / 纵深转正），没有 GSAP 就自动退回纯 CSS，不多一个依赖；
+  需要真实顶点位移或网格 warp 时，用 `data-fx` + `RP.fx.register` 挂 WebGL / Canvas，
+  返回清理函数即可在离页时销毁上下文。约束的是交付物——静态可回退、依赖本地化、
+  打印与截图回到终态——不是技术选型。
 - **页码「当前 / 总页」**：正文、章节页、封面、结语四处统一格式，`deck.js` 按 DOM 顺序自动回填，不会逐段漂号。
 - **章节首页是深绿章板**：底色一重，翻章立刻能感觉到；板上放大编号 + 本章徽记（印章圆环 + 单色线稿），
   图案就是这一章要讲的东西。七个现成图标可复制，品牌工具（Remotion 等）可放官方图标改单色。
@@ -58,9 +63,10 @@ rice-paper-ppt/
 ├── agents/
 │   └── interface.yaml             # 跨平台接口声明（默认 prompt、激活与降级策略）
 ├── assets/
-│   ├── theme.css                  # 版式系统：设计 token + 全部组件（705 行）
+│   ├── theme.css                  # 版式系统：设计 token + 全部组件（715 行）
 │   ├── deck.js                    # 缩放 / 翻页 / 全屏 / 打印 / 页码回填 / 视频控件（172 行）
 │   ├── starter.html               # 6 页可运行骨架（文案已按规范改写）
+│   ├── fx.js                      # 可选增强层：GSAP 编排 + WebGL/Canvas 注册接口
 │   └── example.jpg                # 占位图
 ├── references/
 │   ├── typography-spec.md         # 视觉层：排版与字号规范原文（11 节，验收标准）

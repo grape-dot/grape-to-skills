@@ -1,6 +1,6 @@
 {
   "skill": "rice-paper-ppt",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "intent": "routing",
   "how_to_use": "每条输入单独交给模型（不带上下文），看是否触发本 skill；expect=no_trigger 的用例允许落到 PPT/文档类能力，但不得套用米纸版式、512px 约束与文案规范。",
   "cases": [
@@ -129,6 +129,18 @@
       "input": "五张图左边最高，中间矮一点，右边再高回来但别超过左边",
       "expect": "trigger",
       "why": "不对称高度渐变，命中 D 式扇形"
+    },
+    {
+      "id": "R22",
+      "input": "这组图能不能用 webgl 做成真的在起伏？必要的话可以用 gsap",
+      "expect": "trigger",
+      "why": "允许 WebGL/GSAP，走第 12 节技术选型与 fx.js 增强层，而非直接拒绝"
+    },
+    {
+      "id": "R23",
+      "input": "加上动画可以，但要保证断网和打印出来还是对的",
+      "expect": "trigger",
+      "why": "静态回退 + 依赖本地化 + 三种场景回终态，命中增强层五条底线"
     }
   ]
 }

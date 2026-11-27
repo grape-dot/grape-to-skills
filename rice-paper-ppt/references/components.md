@@ -188,7 +188,8 @@
   改角度要同步降高度，否则右缘放大后会压页脚。
 - `.wall` 已带 `min-height:0`；`.w-depth` 绝对定位，容器 `.w-depth-stage` 必须留出高度。
 - `cover` 只在「同题材并置、单张不承担唯一证据」时使用，主体落居中 60% 安全区；唯一证据图仍 `contain` + 浅色底。
-- 四式的尺寸、坑、动画与选型见 `page-patterns.md` 第 12 节。
+- 四式的尺寸、坑与选型见 `page-patterns.md` 第 12 节；要换 GSAP 编排或加 WebGL 特效，
+  按同节末「技术选型与增强层」引入 `assets/fx.js`，用 `data-fx` + `RP.fx.register` 挂载。
 
 ## 九、流程与步骤
 

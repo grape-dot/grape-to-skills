@@ -283,16 +283,88 @@ B / C / D 的完整骨架见 `references/components.md` 第八节「图片墙」
 7. **节奏**：一套 deck 里图墙最多出现两次，且形状不同；不与图文分栏页相邻，否则连看两页都是“图 + 字”。
 8. **入场动画**：`theme.css` 已内置 0.7s 的浮起与转正（`.w-wave` / `.w-fan` 上浮、`.w-depth` 从更深处转正、
    `.w-fan img` 逐张淡入），随 `.slide.on` 触发，且只在 `prefers-reduced-motion: no-preference` 下生效。
-   别再引入第三方动画库：印刷、截图、放映三种场景都要保证静态成品就是对的。
+   要换成 GSAP 编排就引入 `assets/fx.js`，它会自动让 CSS 入场退位；引入后仍须满足下一节的五条底线。
 
-### 为什么不用 WebGL / GSAP
+### 技术选型与增强层（可选）
 
-这一节的问题全部是**静态版式**问题：曲线裁切、透视缩放、高度差、投影。三样都有原生解法——
-`clip-path:path()` 给曲线，`perspective + rotateY` 给纵深，`flex + height` 给扇形，`drop-shadow` 给轮廓投影。
-换成 WebGL 会把图片变成一块 canvas：文字不可选、打印要走截图、离线和低配机器都可能黑屏；
-GSAP 是外部依赖，断网即失效，且这套 deck 的交付形态是“一个能双击打开的 html 文件”。
-**判断标准只有一条：静态时是否已经正确。** 只有在静态就对、且确实需要运动时，才轮到动画；
-这里恰好原生 CSS 已经够用。
+**HTML 是交付载体，不是能力上限。** 一套 deck 的底线是「双击能开、断网能放、打印能出、文字可选」，
+在这个前提下用 CSS、GSAP 还是 WebGL，按效果择优，不预设禁令。
+判断顺序三步，不跳步：
+
+1. **静态是否正确**——把 JS 全关掉，版面还立得住吗？立不住先修静态，别拿动画盖住问题。
+2. **原生能不能做到**——下表第一列能覆盖，就不引入依赖。
+3. **值不值得**——只有「原生明显吃亏 + 效果确实服务内容」才升级；装饰性动效不配付这个代价。
+
+| 要达到的效果 | 首选 | 什么时候该升级 |
+|---|---|---|
+| 曲线裁切、斜边、弧裙 | `clip-path:path()` | 需要多段布尔运算 → SVG `<mask>` |
+| 近大远小纵深 | `perspective + rotateY` | GSAP 不额外加分，仍是同一个矩阵 |
+| 高度错落、扇形 | `flex + height` | — |
+| 沿轮廓投影 | `filter:drop-shadow()` | 数百张图的场景才轮到 shadow map |
+| 入场浮起、逐张淡入 | CSS `@keyframes` | 元素 > 6、需要暂停 / 回放 / 错峰序列 → GSAP 时间轴 |
+| 路径运动、物理回弹、滚动联动 | GSAP（`stagger` / `MotionPathPlugin` / 自写 rAF） | — |
+| 整条图墙真实起伏、顶点位移、液体 | WebGL（Three.js 或原生 WebGL，平面 + 顶点着色器） | CSS 只能整块遮罩，做不了单像素位移 |
+| 图像网格 warp、置换、故障 | WebGL + 置换贴图 | 数据量小时 Canvas2D 逐像素更省 |
+| 大量粒子、逐帧绘制 | Canvas2D / WebGL | — |
+
+**接入方式已内置：`assets/fx.js`（零依赖，可选）。**
+
+```html
+<!-- 引入顺序：gsap（可选，放 assets/vendor/）→ fx.js → deck.js -->
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/fx.js"></script>
+<script src="deck.js"></script>
+```
+
+`gsap.min.js` 不建议进仓库：`npm i gsap` 后把 `node_modules/gsap/dist/gsap.min.js` 拷进项目
+`assets/vendor/` 即可（约 70KB），随项目一起分发，断网也能放。
+
+- 没检测到 `gsap`：`fx.js` 直接退出，`theme.css` 的 CSS 入场照常生效，页面不多一个字节的依赖。
+- 检测到 `gsap`：加 `html.fx-js`，CSS 入场让位，改由时间轴编排（图墙浮起、扇形逐张、纵深转正）。
+- 自定义效果用 `data-fx` 声明 + `RP.fx.register` 注册，**返回值是清理函数**，离页自动销毁：
+
+```html
+<div class="w-wave" data-fx="wave-gl"><img src="assets/b1.jpg" alt="">…</div>
+```
+
+```js
+// 只有确实需要单张图独立起伏时才上 WebGL；否则原来的 clip-path 就够
+RP.fx.register('wave-gl', function (el, api) {
+  const canvas = document.createElement('canvas');
+  const gl = canvas.getContext('webgl');           // 上下文由本配方持有
+  el.appendChild(canvas);
+  let raf = requestAnimationFrame(function loop(t) { /* 顶点位移 + 绘制 */ raf = requestAnimationFrame(loop); });
+  return function () {                             // 离页：停帧、删上下文、清引用
+    cancelAnimationFrame(raf);
+    gl.getExtension('WEBGL_lose_context') && gl.getExtension('WEBGL_lose_context').loseContext();
+    canvas.remove();
+  };
+});
+```
+
+**五条底线（约束交付物，不约束技术选型）：**
+
+1. **静态回退**：JS 未执行 / 依赖 404 时版面已经正确。增强层只叠加运动，不许改尺寸与位置。
+2. **依赖本地化**：GSAP 等放 `assets/vendor/` 或内联；CDN 只是可选回退，不能是唯一来源。
+3. **三种场景回终态**：`@media print`（已全局停动画）、截图模式 `?shot`（`fx.js` 直接不播）、
+   `prefers-reduced-motion`（不接管）。终态必须等于静态 CSS 的样子。
+4. **文字不进 canvas**——唯一硬约束。标题、正文、图注永远留在 DOM 里：
+   canvas 里的字不可选、不可搜、不可无障碍读，打印还会糊。
+5. **性能预算**：一页最多一个 WebGL 上下文，纹理 ≤ 2048px，离页必须销毁；
+   首帧 200ms 内可交互，动效不得挡住翻页键。
+
+**不要做的三件事**：为了炫技加动效；用动画掩盖版式毛病；把 CDN 当唯一依赖来源。
+
+### 三式可选增强
+
+静态版式已经把形态做对，动效只加「叙事」。以下都属可选，不加也成立：
+
+- **B 波浪带**：GSAP 给 `clip-path` 做轻微位移动画即可伪造流动（比 WebGL 轻一个数量级）；
+  只有要「每张图各自起伏」时才上 WebGL 顶点位移。
+- **C 纵深墙**：逐列 stagger + 轻微 `y` 视差，比整块转正更像「插进纸里」；
+  注意 `transformPerspective` 要跟着写，否则 `rotateY` 丢透视。
+- **D 扇形**：五张依次落位、末尾一点回弹，节奏对上讲解的「一张、一张」。
+- **A 照片卡**：四张错峰落下，落定后不再漂浮——持续漂浮会读成「没摆稳」。
 
 ---
 

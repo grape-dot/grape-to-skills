@@ -1,6 +1,6 @@
 {
   "name": "rice-paper-ppt",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "owner": "yanfang",
   "updated_at": "2026-11-26",
   "status": "active",
@@ -11,6 +11,7 @@
   "style_contract": "暖米纸 #FAF6E9 / 深林绿 #2F4A38 / 哑光金 #A87F3F；正文 20–24px、表格代码 18–22px、图注 15–17px、页脚 13–15px；内容区可用高度恒为 512px；放不下改结构，禁缩字号、禁 transform:scale/zoom、禁 overflow:hidden 藏内容（遮罩裁图除外）；多图并置走图片墙四式（矩形错落 / 波浪贯通 / 纵深梯形 / 不对称扇形），墙内等宽等缝 2–3px、不逐图配卡，cover 仅限同题材并置且主体在居中 60% 安全区",
   "copywriting_contract": "视觉与文案双层、文案分语言与信息结构两份：语言表达按 references/copywriting-spec.md（8 节）约束标题命名、句式、术语口径与标点，禁用机械化对比句式、口语化引导语与空泛营销表达，成稿后逐页执行第 08 节八项语言审查；信息结构按 references/content-structure-spec.md（12 节）约束专业术语提炼、禁用模糊代称、长段压缩、章节封面定位与信息可视化，成稿后执行第 10 节 A–H 八项结构审查；问题直接改定、不展示审查过程",
   "changelog": [
+    "1.5.1 技术选型不再写死：上一版把「不用 WebGL / GSAP」写成了规范，等于限制发挥。改为三步判断（静态是否正确 → 原生能否做到 → 值不值得升级）+ 效果—手段对照表，明确 HTML 只是交付载体。新增可选增强层 assets/fx.js（零依赖：无 GSAP 时整层退出、CSS 入场照旧；有 GSAP 时加 html.fx-js 让 CSS 让位，接管图墙浮起/扇形逐张/纵深转正；提供 RP.fx.register + data-fx 契约，配方返回清理函数即可在离页销毁 WebGL 上下文与 rAF）。theme.css 增加 .fx-js 让位规则与 @media print 全局停动画；page-patterns 第 12 节末改为「技术选型与增强层」并给五条底线（静态回退/依赖本地化/打印与截图与减弱动效回终态/文字不进 canvas/性能预算）；SKILL 易错项由「禁用库」改为「把增强当底线 + 写死技术路线」；README、interface、evals（R22–R23）同步。实测：真 GSAP 3.12.5 接管后终态计算样式与静态 CSS 一致（wave/fan 无残留 inline，depth matrix3d 即 rotateY(-25deg)），离页 cleanup 正常触发，无 GSAP 时 fx-js 不添加",
     "1.5.0 三式重做：1.4.1 的 B/C/D 形态不成立——B 是一串小碎波不是飘带、C 用 skewX 只有斜切没有近大远小、D 是左右对称拱门。改法：B 改成四张通栏大 S（宽 1280 出血铺满、带宽恒定 260、只起伏一次、右端最低）；C 改为真透视 perspective(1600px) rotateY(-25deg)、宽 1100 高 420、右缘 calc(-1*pad-x) 出血贴边、左右高度比 1.34、左缘落在 x≈410；D 改为高度渐变 100/82/76/79/86 的不对称扇形、投影挂容器走 alpha 轮廓而非逐张卡片；新增纯 CSS 0.7s 入场动画（wallRise/wallFade/wallTurn，随 .slide.on 触发，prefers-reduced-motion 生效，无第三方库）；page-patterns 第 12 节重写并新增「为什么不用 WebGL／GSAP」；components/SKILL 自检与易错项同步；三式以真实素材 1280×720 重渲验证",
     "1.4.1 图片墙立体化：1.4.0 的四式只有平面遮罩裁切，缺拼缝与投影，投影仪上读成贴纸。改为立体拼贴——3px 暖白拼缝（容器底 #FFFDF6）、裁剪类一律 filter:drop-shadow 沿轮廓投影（box-shadow 会被 clip-path 裁掉）、::after 压顶亮底暗、A 式改照片卡结构（.pc 白边 7px + 双层投影 + 24px 底部渐隐 + 奇偶下移 66px 错落，阴影必须挂在 .pc 上否则被渐隐一起淡掉）、C 加 .w-scene 悬空投影带、D 由 border-radius 改 path 双弧；page-patterns 第 12 节重写为「立体四件事」并补材质禁令（禁发光/玻璃/彩色阴影/内发光）；components、SKILL 自检与易错项同步；四式以真实素材 1280×720 重渲验证",
     "1.4.0 多图排版规范落地：page-patterns.md 新增第 12 节「图片墙四式」（矩形错落 / 波浪贯通 / 斜切网格 / 弧形底托），给出母题—内容关系对应表、四式尺寸与实测坑、八条通用规则；theme.css 新增 .wall + .w-stag/.w-wave/.w-grid.w-skew/.w-arc 与 .wcap/.wt 标题带（628 行）；components.md 第八节补可复制骨架；SKILL.md 配方表加「并置一组图」、第 5 步自检加多图页、易错项补三条、description 与触发词扩展；README、interface.yaml、evals（R17/R18）同步；四式均经 1280×720 真实渲染验证，B 补 .bar 收束、C 收窄 48px 防斜角出界",
