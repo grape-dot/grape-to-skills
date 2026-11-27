@@ -216,6 +216,20 @@
 </div>
 ```
 
+<!-- E2 封面满幅：path 与上面完全一样，只改两处 —— class 加 cv-coil、stroke 2.2 → 6。
+     塔按页高 720 定宽 637、右移 30px 出血，上下顶到画布边；样式在 theme.css「封面 · E 式满幅盘绕塔」 -->
+<section class="slide cover">
+  <div class="kick" style="position:absolute;left:46px;top:44px">模块 06 · 收束</div>
+  <h1 class="cv-hero"><span>山河</span><span>七景</span></h1>
+  <div class="cv-couplet"><div>一路盘绕七段景</div><div>七段风景收一处</div></div>
+  <div class="cv-lede">
+    <p>七块同题材取景沿丝带自上而下盘绕：缝是纸白，投影只挂整座塔，读者跟着带子走到底。</p>
+    <p class="en">Seven shots on one ribbon — paper-white seams, one shadow under the whole tower.</p>
+  </div>
+  <!-- 这里放同一个 <svg>，class="w-coil cv-coil"，stroke-width="6" -->
+</section>
+```
+
 - **缝**：3px，B/C 用容器底色 `#FFFDF6`，缝读成白纸；A/D 不留底色，缝露纸底即可。
 - **投影**：裁剪类（B）一律 `drop-shadow`，`box-shadow` 会被 `clip-path` 裁掉；
   A 的阴影挂 `.pc`（挂 `img` 会被底部渐隐一起淡掉）；D 的投影挂**容器**，

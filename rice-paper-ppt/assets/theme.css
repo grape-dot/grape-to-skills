@@ -560,6 +560,29 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   letter-spacing: .12em; color: #35493B; transform: rotate(-7deg); transform-origin: left center;
 }
 
+/* ── 封面 · E 式满幅盘绕塔（右半出血）────────────────────────
+   与 .cover 一起用：塔按页高 720 定宽 637，右移 30px 出血，上下顶到画布边缘。
+   必须写在 .w-coil 之后——两者特异度相同，靠顺序把 width:100% 覆盖掉。 */
+.cv-coil {
+  position: absolute; right: -30px; top: 0; width: 637px; height: auto; display: block;
+  filter: drop-shadow(0 18px 26px rgba(74,58,34,.26));
+}
+.cv-hero {
+  position: absolute; left: 44px; top: 104px; margin: 0;
+  font-family: var(--serif); font-size: 158px; font-weight: 900; line-height: 1;
+  letter-spacing: .02em; color: var(--ink);
+}
+.cv-hero span { display: block; }
+.cv-couplet { position: absolute; left: 478px; top: 118px; display: flex; gap: 30px; }
+.cv-couplet div {
+  writing-mode: vertical-rl; text-orientation: upright;
+  font-family: var(--serif); font-size: 23px; line-height: 1.7;
+  letter-spacing: .36em; color: var(--ink-2);
+}
+.cv-lede { position: absolute; left: 46px; bottom: 100px; width: 500px; margin: 0; }
+.cv-lede p { margin: 0; font-size: 20px; line-height: 1.72; color: var(--ink-2); }
+.cv-lede .en { margin-top: 9px; font-size: 14px; line-height: 1.6; letter-spacing: .04em; color: var(--ink-3); }
+
 /* ── 章节页 ───────────────────────────────────────────────── */
 .sec-num {
   position: absolute; right: 40px; top: 26px;
