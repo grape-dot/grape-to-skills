@@ -279,7 +279,7 @@ rice-paper-ppt/
 │   └── contact-sheet.py           # 截图拼缩略图
 └── examples/
     ├── preview.jpg                # 六页骨架预览
-    ├── wall-four|coil|sec-crest|curve.html  # 1–4 / 5 / 6–7 / 8–11 式可运行示例页
+    ├── wall-stagger|wave|depth|fan|coil|sec|crest|grid|fold|arc|arc-inner.html  # 十一式一式一页
     ├── wall-stagger|wave|depth|fan.jpg      # 1–4 式 1280×720 整页实拍
     ├── wall-coil.jpg              # 5 螺旋长卷式整页通栏实拍（637×720 三边出血）
     ├── wall-sec|crest.jpg         # 6–7 式整页实拍

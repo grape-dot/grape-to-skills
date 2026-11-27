@@ -177,11 +177,11 @@ rice-paper-ppt/
 │   └── trigger_cases.json         # 路由用例（含触发与近邻负例）
 └── examples/
     ├── preview.jpg                # 六页骨架预览
-    ├── wall-four.html             # 1–4 式示例页（可运行，deck 翻页）
+    ├── wall-stagger|wave|depth|fan.html  # 1–4 式示例页（一式一页，可运行）
     ├── wall-coil.html             # 5 式整页通栏示例页
-    ├── wall-sec-crest.html        # 6–7 式示例页
-    ├── wall-curve.html            # 8–11 式示例页
-    ├── wall-stagger|wave|depth|fan.jpg  # 1–4 式 1280×720 整页实拍
+    ├── wall-sec|crest.html        # 6–7 式示例页
+    ├── wall-grid|fold|arc|arc-inner.html # 8–11 式示例页
+    ├── wall-stagger|wave|depth|fan.jpg  # 1–4 式 1280×720 整页实拍（与同名 html 一一对应）
     ├── wall-coil.jpg              # 5 式整页通栏实拍
     ├── wall-sec|crest.jpg         # 6–7 式实拍
     ├── wall-grid|fold|arc|arc-inner.jpg # 8–11 式实拍
