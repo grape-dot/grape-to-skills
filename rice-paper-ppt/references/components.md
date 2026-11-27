@@ -305,6 +305,20 @@
   <div class="ai"><img src="assets/j3.jpg" alt=""></div>
   <div class="ai"><img src="assets/j4.jpg" alt=""></div>
 </div>
+
+<!-- 12 峰谷天际线式：九扇底边对齐（奇数扇），高度表 .w-sky nth-child 左右镜像（端塔 300 →
+     158 → 178 → 198 → 主塔满高 380）；.pk 压暗做全页唯一深色锚点，内容优先选暗调图 -->
+<div class="wall w-sky">
+  <div class="pc"><img src="assets/k1.jpg" alt=""></div>
+  <div class="pc"><img src="assets/k2.jpg" alt=""></div>
+  <div class="pc"><img src="assets/k3.jpg" alt=""></div>
+  <div class="pc"><img src="assets/k4.jpg" alt=""></div>
+  <div class="pc pk"><img src="assets/k5.jpg" alt=""></div>
+  <div class="pc"><img src="assets/k4.jpg" alt=""></div>
+  <div class="pc"><img src="assets/k3.jpg" alt=""></div>
+  <div class="pc"><img src="assets/k2.jpg" alt=""></div>
+  <div class="pc"><img src="assets/k1.jpg" alt=""></div>
+</div>
 ```
 
 - **缝**：3px，2 / 3 用容器底色 `#FFFDF6`，缝读成白纸；A/D 不留底色，缝露纸底即可。
@@ -321,7 +335,7 @@
   改角度要同步降高度，否则右缘放大后会压页脚。
 - `.wall` 已带 `min-height:0`；`.w-depth` 绝对定位，容器 `.w-depth-stage` 必须留出高度。
 - `cover` 只在「同题材并置、单张不承担唯一证据」时使用，主体落居中 60% 安全区；唯一证据图仍 `contain` + 浅色底。
-- 十一式的尺寸、坑与选型见 `page-patterns.md` 第 12 节；要换 GSAP 编排或加 WebGL 特效，
+- 十二式的尺寸、坑与选型见 `page-patterns.md` 第 12 节；要换 GSAP 编排或加 WebGL 特效，
   按同节末「技术选型与增强层」引入 `assets/fx.js`，用 `data-fx` + `RP.fx.register` 挂载。
 
 ## 九、流程与步骤

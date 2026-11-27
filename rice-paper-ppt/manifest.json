@@ -1,6 +1,6 @@
 {
   "name": "rice-paper-ppt",
-  "version": "1.7.4",
+  "version": "1.8.0",
   "owner": "yanfang",
   "updated_at": "2026-11-27",
   "status": "active",
@@ -11,6 +11,7 @@
   "style_contract": "暖米纸 #FAF6E9 / 深林绿 #2F4A38 / 哑光金 #A87F3F；正文 20–24px、表格代码 18–22px、图注 15–17px、页脚 13–15px；内容区可用高度恒为 512px；放不下改结构，禁缩字号、禁 transform:scale/zoom、禁 overflow:hidden 藏内容（遮罩裁图除外）；多图并置走图片墙十一式（1 齐边错落式 / 2 波浪贯通式 / 3 纵深渐进式 / 4 不对称叶片式 / 5 螺旋长卷式 / 6 半圆扇面式 / 7 弧形切幅式 / 8 矩阵网格式 / 9 折页长卷式 / 10 弧幕连屏式 / 11 弧幕连屏式·内弧），墙内等宽等缝 2–3px、不逐图配卡，cover 仅限同题材并置且主体在居中 60% 安全区",
   "copywriting_contract": "视觉与文案双层、文案分语言与信息结构两份：语言表达按 references/copywriting-spec.md（8 节）约束标题命名、句式、术语口径与标点，禁用机械化对比句式、口语化引导语与空泛营销表达，成稿后逐页执行第 08 节八项语言审查；信息结构按 references/content-structure-spec.md（12 节）约束专业术语提炼、禁用模糊代称、长段压缩、章节封面定位与信息可视化，成稿后执行第 10 节 A–H 八项结构审查；问题直接改定、不展示审查过程",
   "changelog": [
+    "1.8.0 图片墙新增 12 峰谷天际线式（.w-sky，用户参考图定制）：九扇竖幅底边对齐排成一行（align-items:flex-end、等宽 flex:1、缝 10px），高度表 nth-child 左右镜像对称（端塔 300 → 158 → 178 → 198 → 主塔满高 380），正中 .pk 压暗（brightness .55 + 降饱和）做全页唯一深色锚点；端塔外缘补侧光、贴地影一条整影（平铺无裁切可用伪元素）；入场动画谷扇从左到右逐扇浮起、主塔最后从更高处落下。新增 examples/wall-sky.html 与实拍、全部页脚总页数 11 → 12 并重渲；文档同步：SKILL（description/配方表/选母题/自检/易错项新增「峰谷天际线不对称」/目录树，头部 version 顺带从滞留的 1.7.1 修正为 1.8.0）、README（特性段/主章节 12 条目与参数表/目录树）、page-patterns §12（总表/图数/12 小节）、components 第八节 12 骨架、interface.yaml、evals R30。",
     "1.7.4 矩阵网格式按参考图重做：从 2×2 四格改为 5×3 十五格卷成一段圆柱面——每列是棱柱面的一片（translateZ(-R) rotateY(φ) translateZ(R)，R=678=列宽212÷2sin9°，φ=−36/−18/0/18/36），中列正对观众、越往外越窄越暗；关键坑：五列必须 absolute 叠在容器中点，用 flex 排开时静态位置与圆柱位移叠加、列距翻倍散开（实测踩过）；格 202×132、横竖缝同宽 10px、图不够相邻重复。theme.css .w-cyl 段重写、wall-grid.html 与实拍重渲，page-patterns §12.8 / components / README / SKILL / interface.yaml / evals R27 同步。",
     "1.7.3 示例页一式一页：三个合页（wall-four / wall-sec-crest / wall-curve）拆成 10 个单式页面（wall-stagger / wave / depth / fan / sec / crest / grid / fold / arc / arc-inner.html），加上既有 wall-coil.html 共 11 页、与 11 张 1280×720 实拍一一对应；顺带修掉 wall-sec-crest 页素材替换遗留的多余引号（src=\"img/vgX.jpg\"\"），渲染脚本 render-examples.js 改为一页一图直接渲染；11 张实拍全部重渲，结果与拆分前逐张一致。",
     "1.7.2 示例素材库换血（用户整理）：img/ 收敛为梵高六张 vg1–vg6（vg2 麦田黄房子换 1388×1133 高清版、新增 vg5 托斯卡纳田园 1200×900 与 vg6 白玫瑰瓶花 735×582，三张用户给的哈希名 PNG 统一转 JPG q92 并按 vg 系列命名，删掉 canyon/dune/grass/lake/meadow/peak/pine/ridge/valley/w1–w6 等 16 张旧图）；wall-sec-crest.html（6–7 式）素材从 valley/canyon/ridge/dune 改挂 vg1/vg2/vg3/vg5；11 张整页实拍全部重渲。",

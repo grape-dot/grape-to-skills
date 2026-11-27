@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>图片墙 第 12 式 · 峰谷天际线式 · rice-paper-ppt 示例</title>
+  <link rel="stylesheet" href="../assets/theme.css">
+</head>
+
+<body>
+  <div class="pbar"></div>
+  <div id="deck">
+
+    <!-- 12 峰谷天际线式：九扇竖幅底边对齐（align-items:flex-end），高度对称起伏——
+         端塔 300 → 158 → 178 → 198 → 主塔满高 380（高度表在 .w-sky 的 nth-child 里）。
+         正中 .pk 压暗（brightness .55 + 降饱和）做全页唯一深色锚点，本例用暗调的 vg4 星月夜；
+         端塔外缘补侧光、贴地影一条整影。对称是这一式的骨架，换图别破坏高度对称。
+         动画：谷扇从左到右逐扇浮起，主塔最后从更高处落下。 -->
+    <section class="slide on">
+      <div class="sh">
+        <div class="kick">图片墙 · 第 12 式</div>
+        <h1 class="stitle">峰谷天际线式</h1>
+      </div>
+      <div class="sb">
+        <p class="lead">多张竖幅<b>底边对齐排成一行</b>，高度对称起伏成峰谷，正中一扇深色主塔拔起压轴。</p>
+        <div class="wall w-sky">
+          <div class="pc"><img src="img/vg1.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg2.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg3.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg6.jpg" alt=""></div>
+          <div class="pc pk"><img src="img/vg4.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg6.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg3.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg2.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg1.jpg" alt=""></div>
+        </div>
+        <div class="figcap">图注：九扇底边对齐，高度向中央递减再由主塔拔起；主塔压暗做全页唯一深色锚点，端塔外缘补侧光。</div>
+      </div>
+      <div class="foot"><span>图片墙 · 第 12 式　峰谷天际线式</span><span>12 / 12</span></div>
+    </section>
+  </div>
+  <script src="../assets/deck.js"></script>
+</body>
+
+</html>
