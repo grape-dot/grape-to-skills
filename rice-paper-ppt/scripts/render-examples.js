@@ -1,9 +1,9 @@
-// 一式一页：examples/wall-*.html（14 页）→ 同名 *.jpg（1280×720、q92；需 playwright-core + chromium）
+// 一式一页：examples/wall-*.html（15 页）→ 同名 *.jpg（1280×720、q92；需 playwright-core + chromium）
 const pw = require('D:/nodejs/node_global/node_modules/@playwright/cli/node_modules/playwright-core');
 const EXE = 'C:/Users/yanfang/AppData/Local/ms-playwright/chromium-1248/chrome-win64/chrome.exe';
 const BASE = 'file:///D:/grape-to-skills/rice-paper-ppt/examples/';
 const pages = ['wall-stagger', 'wall-wave', 'wall-depth', 'wall-fan', 'wall-coil', 'wall-sec',
-               'wall-crest', 'wall-grid', 'wall-fold', 'wall-arc', 'wall-arc-inner', 'wall-sky', 'wall-tarc', 'wall-conc'];
+               'wall-crest', 'wall-grid', 'wall-fold', 'wall-arc', 'wall-arc-inner', 'wall-sky', 'wall-tarc', 'wall-conc', 'wall-tilt'];
 (async () => {
   const browser = await pw.chromium.launch({ executablePath: EXE });
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1 });
