@@ -723,29 +723,31 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
     linear-gradient(to top, rgba(34,24,12,.22) 0, rgba(34,24,12,0) 12%);
 }
 
-/* ── 14 弧形内凹式：整面一条 path，上缘内凹、下缘反向拱起，中腰收拢两侧舒展 ──────────
+/* ── 14 弧形内凹式：三向出血——上缘一条内凹弧，下缘铺满页底、左右贴纸边 ──────────────
    与 10/11 弧幕的分野：弧幕是整条带子朝一个方向弯（同一弧向、讲环幕）；
-   这一式上下两条弧方向相反——上缘从两侧向中间下沉、下缘从两侧向中间抬起，
-   中腰被双向收窄（约端栏的 69%），读出柔和的进深层次。
-   裁切挂内层 .cin 的 path()，投影挂外层 .w-conc 的 drop-shadow——
-   clip 会裁掉元素自身的影子。path 坐标按 1176×380 容器写死，容器变宽要重算。 */
+   这一式只有上缘一条弧——从两侧向中间下沉的内凹弧，两侧舒展、中腰收拢；
+   下缘是平直的、直接铺到页底（三向出血：左右贴边 + 底部越出 .sb 的 58px 留白），
+   读出「一块整面从页底长上来、顶边被掰出弧线」的柔和层次。
+   定位写在 .sb 内绝对定位（.sb 本身 absolute，是包含块）：bottom:-58px 恰好吃掉
+   .sb 的底部留白落到页底；高度 470 写死，path 按 1280×470 写死、宽度一变就错位。
+   裁切挂内层 .cin 的 path()；投影只有上弧裸露可见，挂外层 .w-conc 的 drop-shadow
+   向上打（clip 会裁掉元素自身的影子）。页底被图墙占用，本式**不设页脚条**，
+   图注写进 lead 行。 */
 .w-conc {
-  width: 100%; height: 380px; background: none;
-  filter: drop-shadow(0 16px 20px rgba(74,58,34,.20)) drop-shadow(0 3px 6px rgba(74,58,34,.10));
+  position: absolute; left: calc(var(--pad-x) * -1); right: calc(var(--pad-x) * -1);
+  bottom: -58px; height: 470px; background: none;
+  filter: drop-shadow(0 -10px 16px rgba(74,58,34,.18)) drop-shadow(0 -2px 5px rgba(74,58,34,.10));
 }
 .w-conc .cin {
   display: flex; gap: 8px; width: 100%; height: 100%;
-  clip-path: path("M0 30 Q588 170 1176 30 L1176 380 Q588 304 0 380 Z");
+  clip-path: path("M0 40 Q640 250 1280 40 L1280 470 L0 470 Z");
 }
 .w-conc .cl { position: relative; flex: 1 1 0; min-width: 0; }
 .w-conc .cl img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* 受光随弧走：底缘压暗，两端补极浅侧影；::after 在 .cin 内，跟着同一条 path 裁 */
+/* 受光随弧走：底缘压暗沉到页底；::after 在 .cin 内，跟着同一条 path 裁 */
 .w-conc .cin::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background:
-    linear-gradient(to top, rgba(34,24,12,.22) 0, rgba(34,24,12,0) 14%),
-    linear-gradient(to right, rgba(34,24,12,.10) 0, rgba(34,24,12,0) 8%),
-    linear-gradient(to left, rgba(34,24,12,.10) 0, rgba(34,24,12,0) 8%);
+  background: linear-gradient(to top, rgba(34,24,12,.22) 0, rgba(34,24,12,0) 14%);
 }
 
 /* ── 15 斜切折页式：左右两翼竖幅，底边向中脊斜切收拢，中脊下方展开漏斗托图注 ──────────

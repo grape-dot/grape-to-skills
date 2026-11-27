@@ -340,8 +340,9 @@
   </svg>
 </div>
 
-<!-- 14 弧形内凹式：整面一条 path——裁切挂内层 .cin（1176×380 坐标写死），投影挂外层 .w-conc
-     的 drop-shadow（clip 裁自身影子）；上缘端 30 → 中 100、下缘端 380 → 中 342，中腰约端栏 69% -->
+<!-- 14 弧形内凹式：三向出血——.w-conc 在 .sb 内绝对定位（left/right 负边距贴纸边、
+     bottom:-58px 铺到页底，不设页脚条）；裁切挂内层 .cin（1280×470 写死：
+     上缘内凹弧端 40 → 中 145，下缘平直），投影挂外层 drop-shadow 向上打（clip 裁自身影子） -->
 <div class="wall w-conc">
   <div class="cin">
     <div class="cl"><img src="assets/m1.jpg" alt=""></div>

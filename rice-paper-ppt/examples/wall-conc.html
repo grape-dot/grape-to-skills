@@ -11,10 +11,11 @@
   <div class="pbar"></div>
   <div id="deck">
 
-    <!-- 14 弧形内凹式：整面一条 path——上缘从两侧向中间下沉、下缘反向拱起，
-         中腰被双向收窄（约端栏 69%），读出柔和的进深层次。
-         裁切挂内层 .cin 的 path()（1176×380 坐标写死），投影挂外层 .w-conc 的 drop-shadow；
-         ::after 在 .cin 内跟着同一条 path 裁。弧向与 10/11 弧幕不同：那式整条带子同向弯。
+    <!-- 14 弧形内凹式：三向出血——上缘一条从两侧向中间下沉的内凹弧，
+         下缘平直铺满页底、左右贴纸边（.sb 内绝对定位，bottom:-58px 吃掉底部留白）。
+         裁切挂内层 .cin 的 path()（1280×470 坐标写死），投影只有上弧裸露可见，
+         挂外层 .w-conc 的 drop-shadow 向上打；::after 在 .cin 内跟着同一条 path 裁。
+         弧向与 10/11 弧幕不同：那式整条带子同向弯。页底被图墙占用，本式不设页脚条。
          动画：三栏从左到右逐栏浮起，被外轮廓逐栏揭出。 -->
     <section class="slide on">
       <div class="sh">
@@ -22,7 +23,8 @@
         <h1 class="stitle">弧形内凹式</h1>
       </div>
       <div class="sb">
-        <p class="lead">图片顶部与底部形成<b>相反方向的弧形曲线</b>，整体呈现中间收拢、两侧舒展的视觉效果，搭配多图分栏，营造柔和的空间层次。</p>
+        <p class="lead">图片顶部形成<b>内凹弧线</b>，底部铺满页底、左右贴边，整体呈现中间收拢、两侧舒展的视觉效果，搭配多图分栏，营造柔和的空间层次。</p>
+        <div class="figcap">图注：上缘内凹下沉、两侧舒展，下缘铺满页底；三栏等宽贴住左右纸边，白缝随弧线贯通。</div>
         <div class="wall w-conc">
           <div class="cin">
             <div class="cl"><img src="img/vg6.jpg" alt=""></div>
@@ -30,9 +32,7 @@
             <div class="cl"><img src="img/vg5.jpg" alt=""></div>
           </div>
         </div>
-        <div class="figcap">图注：上缘内凹下沉、下缘反向拱起，中腰收拢约为端栏七成；三栏等宽，白缝随弧线贯通。</div>
       </div>
-      <div class="foot"><span>图片墙 · 第 14 式　弧形内凹式</span><span>14 / 15</span></div>
     </section>
   </div>
   <script src="../assets/deck.js"></script>
