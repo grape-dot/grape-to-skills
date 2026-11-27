@@ -185,7 +185,7 @@ rice-paper-ppt/
     ├── wall-coil.jpg              # 5 式整页通栏实拍
     ├── wall-sec|crest.jpg         # 6–7 式实拍
     ├── wall-grid|fold|arc|arc-inner.jpg # 8–11 式实拍
-    └── img/                       # 示例素材（vg1–4 梵高四张等）
+    └── img/                       # 示例素材（vg1–6 梵高六张，3:2 与 4:3 横构图为主）
 ```
 
 ## 快速开始 / Quick Start
