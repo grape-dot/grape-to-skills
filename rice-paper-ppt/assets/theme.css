@@ -319,13 +319,14 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   background: linear-gradient(to top, #FFFDF6 0%, rgba(255,253,246,.62) 42%, rgba(255,253,246,0) 100%);
 }
 
-/* B：一整条大 S 通栏贯通——只起伏一次，四张等宽，左右出血铺满画布
-   path 按墙宽 1280px 写死：宽度一变曲线就错位。带宽恒定 260px，起伏约 80px */
+/* B：一整条 S 形飘带——四张等宽，左右出血铺满画布
+   path 按墙宽 1280px 写死：宽度一变曲线就错位。带宽恒定 270px，起伏 100px。
+   曲线自参考图逐列量得：波峰在 20%、波谷在 81%、右端回升（不是对称拱门）。 */
 .w-wave {
   position: relative;
   width: calc(100% + var(--pad-x) * 2); margin-left: calc(var(--pad-x) * -1);
   height: 400px;
-  clip-path: path("M0 85 C 170 68 330 42 470 35 C 700 28 1010 80 1280 115 L1280 375 C 1010 320 700 288 470 295 C 330 302 170 328 0 345 Z");
+  clip-path: path("M0 74 C23 68 91 46 136 39 C181 32 227 31 272 31 C317 31 363 35 408 40 C453 45 499 55 544 63 C589 71 634 80 679 89 C724 98 770 108 815 114 C860 120 913 124 951 127 C989 130 1012 131 1042 130 C1072 129 1101 126 1131 121 C1161 116 1198 105 1223 98 C1248 91 1270 81 1280 78 L1280 348 C1270 351 1248 361 1223 368 C1198 375 1161 386 1131 391 C1101 396 1072 399 1042 400 C1012 401 989 400 951 397 C913 394 860 390 815 384 C770 378 724 368 679 359 C634 350 589 341 544 333 C499 325 453 315 408 310 C363 305 317 301 272 301 C227 301 181 302 136 309 C91 316 23 338 0 344 Z");
   filter: drop-shadow(8px 12px 10px rgba(74,58,34,.40)) drop-shadow(0 26px 38px rgba(74,58,34,.30));
 }
 
@@ -349,27 +350,25 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
     linear-gradient(to top, rgba(40,30,16,.26) 0, rgba(40,30,16,0) 17%);
 }
 
-/* D：不对称扇形——左端最高，中间最矮，右端回升但不超过左端
-   只改高度、不加遮罩：每张都是完整矩形，高度差连起来就是那条弧
-   投影挂在容器上（drop-shadow 沿图片实际轮廓走），整条才读成一块，而不是五张卡 */
+/* D：不对称叶片——左端最厚 357、中间最薄 231、右端回升 283（不超过左端）
+   关键是「一条遮罩裁整墙」，不是五张各改高度：图片同为满高矩形，
+   上下边缘由同一条 path 连续裁出，所以接缝处不会出现台阶。
+   曲线同样按参考图逐列量得：顶边左高右低并微回升，底边中间上拱。 */
 .w-fan {
   position: relative;
   width: calc(100% + var(--pad-x) * 2); margin-left: calc(var(--pad-x) * -1);
-  height: 350px; align-items: center;
-  background: none; gap: 3px;
+  height: 400px; display: flex; align-items: stretch; gap: 3px;
+  background: #FFFDF6;
+  clip-path: path("M0 13 C31 17 125 26 186 35 C247 44 314 57 367 64 C420 71 448 74 503 78 C558 82 634 88 700 90 C766 92 827 94 900 93 C973 92 1082 87 1137 84 C1192 81 1204 79 1228 77 C1252 75 1271 74 1280 74 L1280 357 C1264 356 1214 352 1183 349 C1152 346 1122 342 1091 339 C1060 336 1045 335 1000 332 C955 329 856 324 819 322 C782 320 798 321 775 321 C752 321 714 321 684 321 C654 321 632 321 594 322 C556 323 511 323 458 328 C405 333 336 342 276 350 C216 358 141 370 95 373 C49 376 16 370 0 370 Z");
   filter: drop-shadow(0 22px 26px rgba(74,58,34,.34)) drop-shadow(0 4px 8px rgba(74,58,34,.16));
 }
 .w-fan img {
   flex: 1 1 0; min-width: 0; height: 100%; object-fit: cover; display: block;
 }
-.w-fan img:nth-child(1) { height: 100%; }
-.w-fan img:nth-child(2) { height: 82%; }
-.w-fan img:nth-child(3) { height: 76%; }
-.w-fan img:nth-child(4) { height: 79%; }
-.w-fan img:nth-child(5) { height: 86%; }
 
 /* 立体的最后一道：沿遮罩轮廓压一层顶亮底暗，读出弯曲受光 */
-.w-wave::after {
+.w-wave::after,
+.w-fan::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background:
     linear-gradient(to bottom, rgba(255,255,255,.50) 0, rgba(255,255,255,0) 14%),

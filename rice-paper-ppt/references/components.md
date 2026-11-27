@@ -166,14 +166,14 @@
   </div>
 </div>
 
-<!-- D 不对称扇形：左高、中小、右回升；标题在扇面上方 -->
-<div class="wcap">
-  <div class="wt" style="font-size:var(--fs-h1)">五张图托住一句结论</div>
-  <div class="figcap">图注：左端最大，中间最矮，右端回升但不超过左端。</div>
-</div>
-<div class="wall w-fan">
-  <img src="assets/d1.jpg" alt=""><img src="assets/d2.jpg" alt=""><img src="assets/d3.jpg" alt="">
-  <img src="assets/d4.jpg" alt=""><img src="assets/d5.jpg" alt="">
+<!-- D 不对称叶片：标题在上、图注在叶片下方的凹口里 -->
+<div class="sb" style="justify-content:center">
+  <div class="wcap"><div class="wt" style="font-size:var(--fs-h1); margin:0">五张图托住一句结论</div></div>
+  <div class="wall w-fan">
+    <img src="assets/d1.jpg" alt=""><img src="assets/d2.jpg" alt=""><img src="assets/d3.jpg" alt="">
+    <img src="assets/d4.jpg" alt=""><img src="assets/d5.jpg" alt="">
+  </div>
+  <div class="figcap" style="margin:0; text-align:center">图注：左端最厚，中间最薄，右端回升但不超过左端。</div>
 </div>
 ```
 
@@ -184,6 +184,8 @@
 - **明暗**：B/C 的 `::after` 压一层顶亮底暗（白 50% → 透明 14%、暗 34% → 透明 18%）。
 - **出血**：B/D 用 `width: calc(100% + 92px); margin-left: calc(var(--pad-x) * -1)` 左右铺满；
   C 用 `right: calc(var(--pad-x) * -1)` 只让右缘贴边。
+- **连续轮廓**：B/D 的上下缘都由容器一条 `clip-path:path()` 裁出，图片一律 `height:100%`；
+  逐张改高度会留台阶（D 以前就是这么错的）。
 - **纵深**：C 是 `perspective(1600px) rotateY(-25deg)`，宽 1100、高 420、`transform-origin:100% 50%`。
   改角度要同步降高度，否则右缘放大后会压页脚。
 - `.wall` 已带 `min-height:0`；`.w-depth` 绝对定位，容器 `.w-depth-stage` 必须留出高度。
