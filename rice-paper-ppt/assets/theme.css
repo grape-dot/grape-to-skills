@@ -293,11 +293,13 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .figcap { font-size: var(--fs-note); line-height: 1.5; color: var(--ink-3); margin-top: 8px; }
 .figcap b { color: var(--ink-2); }
 
-/* ── 图片墙：多图排版十二式（立体拼贴）─────────────────────────
+/* ── 图片墙：多图排版十四式（立体拼贴）─────────────────────────
    1 齐边错落 / 2 波浪贯通 / 3 纵深渐进 / 4 不对称叶片 / 5 螺旋长卷 / 6 半圆扇面
-   7 弧形切幅 / 8 矩阵网格 / 9 折页长卷 / 10 弧幕连屏 / 11 弧幕连屏·内弧 / 12 峰谷天际线
+   7 弧形切幅 / 8 矩阵网格 / 9 斜切折页 / 10 弧幕连屏 / 11 弧幕连屏·内弧 / 12 峰谷天际线
+   13 四季弧线 / 14 弧形内凹
    类名：1 .w-stag · 2 .w-wave · 3 .w-depth · 4 .w-fan · 5 .w-coil · 6 .w-sec
    7 .w-crest · 8 .w-cyl · 9 .w-fold · 10/11 .w-arc（内弧加 .sag）· 12 .w-sky（主塔加 .pk）
+   13 .w-tarc · 14 .w-conc
    立体感只有四个来源：暖白拼缝 / 沿轮廓的柔投影 / 照片白边 / 位置错落与倾斜。
    不做发光、玻璃、彩色阴影。缝用纸色 #FFFDF6，投影用暖褐 rgba(74,58,34)。
    用法与坑见 references/page-patterns.md 第 12 节。 */
@@ -688,6 +690,70 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   filter: blur(4px); pointer-events: none;
 }
 
+/* ── 13 四季弧线式：四扇底边对齐，顶边沿拱形时间轴起伏，弧顶偏右、节点钉顶边 ──────────
+   与 12 峰谷天际线的分野：那一式对称压轴、靠深色主塔收束；这一式讲「时间」，
+   弧是单向行进的——从第 1 扇爬到第 3 扇顶点、第 4 扇缓缓回落，
+   顶点不放正中（放正中就退回 12 的对称骨架了）。
+   每扇顶边左上钉一枚哑光金节点（暖白描边），读成钉在弧形时间轴上的四帧。
+   高度表 244 → 300 → 348（峰）→ 320：爬升缓、回落更缓，才有「逐季而行」的方向感。 */
+.w-tarc {
+  position: relative;
+  display: flex; align-items: flex-end; gap: 10px;
+  width: 100%; height: 380px; background: none;
+}
+.w-tarc .pc {
+  position: relative; flex: 1 1 0; min-width: 0;
+  box-shadow: 0 14px 18px rgba(74,58,34,.16), 0 3px 6px rgba(74,58,34,.10);
+}
+.w-tarc .pc img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.w-tarc .pc:nth-child(1) { height: 244px; }
+.w-tarc .pc:nth-child(2) { height: 300px; }
+.w-tarc .pc:nth-child(3) { height: 348px; }
+.w-tarc .pc:nth-child(4) { height: 320px; }
+/* 时间节点 */
+.w-tarc .pc::before {
+  content: ""; position: absolute; top: -7px; left: 16px; width: 12px; height: 12px; z-index: 2;
+  border-radius: 50%; background: var(--gold); border: 2px solid #FFFDF6;
+}
+/* 受光：共用顶亮底暗；贴地影一条整影压在底边线上 */
+.w-tarc .pc::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.24) 0, rgba(255,251,238,0) 16%),
+    linear-gradient(to top, rgba(34,24,12,.20) 0, rgba(34,24,12,0) 14%);
+}
+.w-tarc::before {
+  content: ""; position: absolute; left: 1%; right: 1%; bottom: -16px; height: 26px;
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(52,38,20,.30) 0, rgba(52,38,20,.10) 48%, rgba(52,38,20,0) 74%);
+  filter: blur(4px); pointer-events: none;
+}
+
+/* ── 14 弧形内凹式：整面一条 path，上缘内凹、下缘反向拱起，中腰收拢两侧舒展 ──────────
+   与 10/11 弧幕的分野：弧幕是整条带子朝一个方向弯（同一弧向、讲环幕）；
+   这一式上下两条弧方向相反——上缘从两侧向中间下沉、下缘从两侧向中间抬起，
+   中腰被双向收窄（约端栏的 69%），读出柔和的进深层次。
+   裁切挂内层 .cin 的 path()，投影挂外层 .w-conc 的 drop-shadow——
+   clip 会裁掉元素自身的影子。path 坐标按 1176×380 容器写死，容器变宽要重算。 */
+.w-conc {
+  width: 100%; height: 380px; background: none;
+  filter: drop-shadow(0 16px 20px rgba(74,58,34,.20)) drop-shadow(0 3px 6px rgba(74,58,34,.10));
+}
+.w-conc .cin {
+  display: flex; gap: 8px; width: 100%; height: 100%;
+  clip-path: path("M0 30 Q588 170 1176 30 L1176 380 Q588 304 0 380 Z");
+}
+.w-conc .cl { position: relative; flex: 1 1 0; min-width: 0; }
+.w-conc .cl img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* 受光随弧走：底缘压暗，两端补极浅侧影；::after 在 .cin 内，跟着同一条 path 裁 */
+.w-conc .cin::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(34,24,12,.22) 0, rgba(34,24,12,0) 14%),
+    linear-gradient(to right, rgba(34,24,12,.10) 0, rgba(34,24,12,0) 8%),
+    linear-gradient(to left, rgba(34,24,12,.10) 0, rgba(34,24,12,0) 8%);
+}
+
 /* ── 图墙入场：默认纯 CSS，零依赖 ────────────────────────────
    静态形态已经成立，动画只做「浮起 / 转正」一件事，0.7s 内结束不抢讲者节奏。
    若引入 assets/fx.js 并检测到 GSAP，会加上 html.fx-js 改由 GSAP 编排，下面的 CSS 入场自动让位。 */
@@ -718,7 +784,11 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   .slide.on .w-cyl .cc:nth-child(3) { animation-delay: .12s; }
   .slide.on .w-cyl .cc:nth-child(4) { animation-delay: .18s; }
   .slide.on .w-cyl .cc:nth-child(5) { animation-delay: .24s; }
-  .slide.on .w-fold { animation: wallRise .7s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-fold .lf { animation: wallRise .6s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-fold .lf:nth-child(3), .slide.on .w-fold .lf:nth-child(5) { animation-delay: 0s; }
+  .slide.on .w-fold .lf:nth-child(2), .slide.on .w-fold .lf:nth-child(6) { animation-delay: .09s; }
+  .slide.on .w-fold .lf:nth-child(1), .slide.on .w-fold .lf:nth-child(7) { animation-delay: .18s; }
+  .slide.on .w-fold .funnel { animation: wallFade .7s ease-out both; animation-delay: .30s; }
   .slide.on .w-arc .ai { animation: wallFade .55s ease-out both; }
   .slide.on .w-arc .ai:nth-child(2) { animation-delay: .07s; }
   .slide.on .w-arc .ai:nth-child(3) { animation-delay: .14s; }
@@ -726,6 +796,13 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   .slide.on .w-arc .ai:nth-child(5) { animation-delay: .28s; }
   .slide.on .w-sky .pc { animation: wallRise .6s cubic-bezier(.22,.75,.2,1) both; }
   .slide.on .w-sky .pc.pk { animation: wallRise .75s cubic-bezier(.22,.75,.2,1) both; animation-delay: .20s; }
+  .slide.on .w-tarc .pc { animation: wallRise .6s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-tarc .pc:nth-child(2) { animation-delay: .07s; }
+  .slide.on .w-tarc .pc:nth-child(3) { animation-delay: .14s; }
+  .slide.on .w-tarc .pc:nth-child(4) { animation-delay: .21s; }
+  .slide.on .w-conc .cl { animation: wallRise .6s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-conc .cl:nth-child(2) { animation-delay: .08s; }
+  .slide.on .w-conc .cl:nth-child(3) { animation-delay: .16s; }
   .slide.on .w-sky .pc:nth-child(2), .slide.on .w-sky .pc:nth-last-child(2) { animation-delay: .05s; }
   .slide.on .w-sky .pc:nth-child(3), .slide.on .w-sky .pc:nth-last-child(3) { animation-delay: .10s; }
   .slide.on .w-sky .pc:nth-child(4), .slide.on .w-sky .pc:nth-last-child(4) { animation-delay: .15s; }
@@ -738,11 +815,14 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .fx-js .slide.on .w-fan img,
 .fx-js .slide.on .w-coil,
 .fx-js .slide.on .w-sky .pc,
+.fx-js .slide.on .w-tarc .pc,
+.fx-js .slide.on .w-conc .cl,
 .fx-js .slide.on .w-sec,
 .fx-js .slide.on .w-sec .sd img,
 .fx-js .slide.on .w-crest,
 .fx-js .slide.on .w-cyl .cc,
-.fx-js .slide.on .w-fold,
+.fx-js .slide.on .w-fold .lf,
+.fx-js .slide.on .w-fold .funnel,
 .fx-js .slide.on .w-arc img,
 .fx-js .slide.on .w-depth { animation: none; }
 

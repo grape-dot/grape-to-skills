@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>图片墙 第 14 式 · 弧形内凹式 · rice-paper-ppt 示例</title>
+  <link rel="stylesheet" href="../assets/theme.css">
+</head>
+
+<body>
+  <div class="pbar"></div>
+  <div id="deck">
+
+    <!-- 14 弧形内凹式：整面一条 path——上缘从两侧向中间下沉、下缘反向拱起，
+         中腰被双向收窄（约端栏 69%），读出柔和的进深层次。
+         裁切挂内层 .cin 的 path()（1176×380 坐标写死），投影挂外层 .w-conc 的 drop-shadow；
+         ::after 在 .cin 内跟着同一条 path 裁。弧向与 10/11 弧幕不同：那式整条带子同向弯。
+         动画：三栏从左到右逐栏浮起，被外轮廓逐栏揭出。 -->
+    <section class="slide on">
+      <div class="sh">
+        <div class="kick">图片墙 · 第 14 式</div>
+        <h1 class="stitle">弧形内凹式</h1>
+      </div>
+      <div class="sb">
+        <p class="lead">图片顶部与底部形成<b>相反方向的弧形曲线</b>，整体呈现中间收拢、两侧舒展的视觉效果，搭配多图分栏，营造柔和的空间层次。</p>
+        <div class="wall w-conc">
+          <div class="cin">
+            <div class="cl"><img src="img/vg6.jpg" alt=""></div>
+            <div class="cl"><img src="img/vg4.jpg" alt=""></div>
+            <div class="cl"><img src="img/vg5.jpg" alt=""></div>
+          </div>
+        </div>
+        <div class="figcap">图注：上缘内凹下沉、下缘反向拱起，中腰收拢约为端栏七成；三栏等宽，白缝随弧线贯通。</div>
+      </div>
+      <div class="foot"><span>图片墙 · 第 14 式　弧形内凹式</span><span>14 / 14</span></div>
+    </section>
+  </div>
+  <script src="../assets/deck.js"></script>
+</body>
+
+</html>

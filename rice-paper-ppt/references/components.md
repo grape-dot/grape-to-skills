@@ -319,6 +319,25 @@
   <div class="pc"><img src="assets/k2.jpg" alt=""></div>
   <div class="pc"><img src="assets/k1.jpg" alt=""></div>
 </div>
+
+<!-- 13 四季弧线式：四扇底边对齐，高度表 .w-tarc nth-child（244 → 300 → 348 峰 → 320，顶点偏右）；
+     每扇顶边左上一枚金色节点 ::before（骑边 top:-7px），漏了节点只剩高矮四张图 -->
+<div class="wall w-tarc">
+  <div class="pc"><img src="assets/l1.jpg" alt=""></div>
+  <div class="pc"><img src="assets/l2.jpg" alt=""></div>
+  <div class="pc"><img src="assets/l3.jpg" alt=""></div>
+  <div class="pc"><img src="assets/l4.jpg" alt=""></div>
+</div>
+
+<!-- 14 弧形内凹式：整面一条 path——裁切挂内层 .cin（1176×380 坐标写死），投影挂外层 .w-conc
+     的 drop-shadow（clip 裁自身影子）；上缘端 30 → 中 100、下缘端 380 → 中 342，中腰约端栏 69% -->
+<div class="wall w-conc">
+  <div class="cin">
+    <div class="cl"><img src="assets/m1.jpg" alt=""></div>
+    <div class="cl"><img src="assets/m2.jpg" alt=""></div>
+    <div class="cl"><img src="assets/m3.jpg" alt=""></div>
+  </div>
+</div>
 ```
 
 - **缝**：3px，2 / 3 用容器底色 `#FFFDF6`，缝读成白纸；A/D 不留底色，缝露纸底即可。
@@ -335,7 +354,7 @@
   改角度要同步降高度，否则右缘放大后会压页脚。
 - `.wall` 已带 `min-height:0`；`.w-depth` 绝对定位，容器 `.w-depth-stage` 必须留出高度。
 - `cover` 只在「同题材并置、单张不承担唯一证据」时使用，主体落居中 60% 安全区；唯一证据图仍 `contain` + 浅色底。
-- 十二式的尺寸、坑与选型见 `page-patterns.md` 第 12 节；要换 GSAP 编排或加 WebGL 特效，
+- 十四式的尺寸、坑与选型见 `page-patterns.md` 第 12 节；要换 GSAP 编排或加 WebGL 特效，
   按同节末「技术选型与增强层」引入 `assets/fx.js`，用 `data-fx` + `RP.fx.register` 挂载。
 
 ## 九、流程与步骤
