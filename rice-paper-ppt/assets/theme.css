@@ -511,42 +511,58 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
     linear-gradient(to left, rgba(30,21,10,.44) 0, rgba(30,21,10,.10) 55%, rgba(255,250,235,.22) 100%);
 }
 
-/* ── 9 折页长卷式（之字形手风琴）：四片等宽梯形折成 W 形折屏 ────────────────────
-   这一式不用 rotateY：逐片旋转会让相邻两片的公共边错开 3–8px，接缝上出现台阶。
-   做法是把五条折线的上下端点定成同一组数，相邻两片共用同一对端点，梯形裁切自然
-   拼成一条连续折线；纵深交给折角明暗与片间亮度差，不交给形变。
-   轮廓实测自原稿：竖边高度「高—矮—高—矮—高」交替（两端与中缝高、第 1/3 缝矮），
-   是之字形手风琴，不是中间鼓起的拱；落差约为页高 10%，太大两端就塌成窄条。
-   四片等宽——原稿四片边界正好落在四等分点上。 */
+/* ── 9 斜切折页式：左右两翼竖幅，底边向中脊斜切收拢，中脊下方展开漏斗托图注 ──────────
+   这一式不做之字手风琴：立体感来自两段斜切底边向中央折脊逐级收拢——外侧扇全高、
+   中扇斜切、内扇斜得更陡，读出「从单一形态向完整画面展开」。
+   斜切端点实测自参考图（以 310 高计）：第 2/5 片底边 274→230、第 3/4 片 213→168（外→内），
+   漏斗上口贴着内扇内缘（168），向下展开成一梯形，图注落在漏斗里。
+   裁切写在 img 的 clip-path 上，投影挂 .lf 的 filter——clip 会裁掉元素自身的
+   box-shadow / 自身 filter 影子，挂在父级 drop-shadow 才能沿斜边落下。 */
 .w-fold {
-  display: flex; gap: 0; height: 404px; background: none;
-  filter: drop-shadow(0 22px 26px rgba(52,38,20,.34)) drop-shadow(0 4px 8px rgba(52,38,20,.16));
+  position: relative; display: flex; align-items: flex-start; gap: 6px;
+  height: 470px; background: none;
 }
-.w-fold .lf { position: relative; flex: 1 1 0; min-width: 0; }
+.w-fold .lf { position: relative; flex: 1 1 0; min-width: 0; height: 310px;
+  filter: drop-shadow(0 12px 14px rgba(74,58,34,.18)); }
 .w-fold .lf img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* 折线端点：上缘 6 → 46 → 6 → 46 → 6，下缘 398 → 358 → 398 → 358 → 398。
-   相邻两片共用同一对 y，接缝既没有台阶也没有白缝；奇数片向右收、偶数片向右放，
-   拼出「高—矮—高—矮—高」的之字。上下各留 6px，别顶到 404 的边界。 */
-.w-fold .lf:nth-child(1) { clip-path: polygon(0 6px,  100% 46px, 100% 358px, 0 398px); }
-.w-fold .lf:nth-child(2) { clip-path: polygon(0 46px, 100% 6px,  100% 398px, 0 358px); }
-.w-fold .lf:nth-child(3) { clip-path: polygon(0 6px,  100% 46px, 100% 358px, 0 398px); }
-.w-fold .lf:nth-child(4) { clip-path: polygon(0 46px, 100% 6px,  100% 398px, 0 358px); }
-/* 折缝：每片左端一道 3px 高光（#FFFDF6）、右端一道 6% 宽的暗边，
-   相邻两片一拼就是「亮—暗」的折角；两侧都压暗只会糊成一条黑边，读不出折。 */
-.w-fold .lf::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background:
-    linear-gradient(to bottom, rgba(255,251,238,.22) 0, rgba(255,251,238,0) 14%),
-    linear-gradient(to top, rgba(34,24,12,.24) 0, rgba(34,24,12,0) 14%),
-    linear-gradient(to right,
-      rgba(255,253,246,.60) 0, rgba(255,253,246,.14) 0.8%, rgba(255,253,246,0) 2.6%,
-      rgba(34,24,12,0) 94%, rgba(34,24,12,.56) 100%);
+/* 斜切端点：外→内逐级收拢，左右两翼镜像；第 1/6 片齐底不裁 */
+.w-fold .lf:nth-child(2) { clip-path: polygon(0 0, 100% 0, 100% 230px, 0 274px); }
+.w-fold .lf:nth-child(3) { clip-path: polygon(0 0, 100% 0, 100% 168px, 0 213px); }
+.w-fold .lf:nth-child(5) { clip-path: polygon(0 0, 100% 0, 100% 213px, 0 168px); }
+.w-fold .lf:nth-child(6) { clip-path: polygon(0 0, 100% 0, 100% 274px, 0 230px); }
+/* 中脊：两翼之间的折缝，两侧各一道被翼片压出的暗边，中间一线高光读出「脊」 */
+.w-fold .spine { flex: 0 0 30px; height: 310px; pointer-events: none; }
+.w-fold .spine::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to right,
+    rgba(34,24,12,.12) 0, rgba(34,24,12,0) 26%,
+    rgba(255,253,246,.55) 50%,
+    rgba(34,24,12,0) 74%, rgba(34,24,12,.12) 100%);
 }
-/* 片间亮度差：折屏的两片是朝着相反方向转的，不压暗就会读成一整张连续全景图 */
-.w-fold .lf:nth-child(1) img,
-.w-fold .lf:nth-child(4) img { filter: brightness(.84) saturate(.96); }
-.w-fold .lf:nth-child(2) img,
-.w-fold .lf:nth-child(3) img { filter: brightness(1.04); }
+/* 折脊漏斗：内扇斜线向下继续展开成梯形，图注坐在里面；投影向上打在斜切边上。
+   居中用 margin-left 不用 translateX——wallRise 的 transform 会把它整个覆盖掉 */
+.w-fold .funnel {
+  position: absolute; left: 50%; top: 168px; width: 620px; height: 288px;
+  margin-left: -310px; pointer-events: none;
+  filter: drop-shadow(0 -10px 14px rgba(74,58,34,.17)) drop-shadow(0 6px 10px rgba(74,58,34,.08));
+}
+.w-fold .funnel::before {
+  content: ""; position: absolute; inset: 0;
+  clip-path: polygon(calc(50% - 15px) 0, calc(50% + 15px) 0, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, #FBF7EE 0%, #F1E9D9 66%, #E4D8C0 100%);
+}
+.w-fold .funnel .fcap {
+  position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+  width: 82%; text-align: center; font-size: 14px; line-height: 1.65; color: #6F6350;
+}
+/* 顶缘高光与片间亮度差：内扇刚展开、受光最足，往外逐级压暗读出纵深 */
+.w-fold .lf::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 14%; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255,251,238,.20) 0, rgba(255,251,238,0) 100%);
+}
+.w-fold .lf:nth-child(1) img, .w-fold .lf:nth-child(7) img { filter: brightness(.93); }
+.w-fold .lf:nth-child(2) img, .w-fold .lf:nth-child(6) img { filter: brightness(.98); }
+.w-fold .lf:nth-child(3) img, .w-fold .lf:nth-child(5) img { filter: brightness(1.03); }
 
 /* ── 10/11 弧幕连屏式（弧带）：一条相纸带被掰弯 ──────────────────────────────────
    与 9 同法：四片共边裁切，相邻两片共用同一对折线端点，接缝不留台阶——
@@ -718,7 +734,11 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   .slide.on .w-cyl .cc:nth-child(3) { animation-delay: .12s; }
   .slide.on .w-cyl .cc:nth-child(4) { animation-delay: .18s; }
   .slide.on .w-cyl .cc:nth-child(5) { animation-delay: .24s; }
-  .slide.on .w-fold { animation: wallRise .7s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-fold .lf { animation: wallRise .6s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-fold .lf:nth-child(3), .slide.on .w-fold .lf:nth-child(5) { animation-delay: 0s; }
+  .slide.on .w-fold .lf:nth-child(2), .slide.on .w-fold .lf:nth-child(6) { animation-delay: .09s; }
+  .slide.on .w-fold .lf:nth-child(1), .slide.on .w-fold .lf:nth-child(7) { animation-delay: .18s; }
+  .slide.on .w-fold .funnel { animation: wallFade .7s ease-out both; animation-delay: .30s; }
   .slide.on .w-arc .ai { animation: wallFade .55s ease-out both; }
   .slide.on .w-arc .ai:nth-child(2) { animation-delay: .07s; }
   .slide.on .w-arc .ai:nth-child(3) { animation-delay: .14s; }
@@ -742,7 +762,8 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .fx-js .slide.on .w-sec .sd img,
 .fx-js .slide.on .w-crest,
 .fx-js .slide.on .w-cyl .cc,
-.fx-js .slide.on .w-fold,
+.fx-js .slide.on .w-fold .lf,
+.fx-js .slide.on .w-fold .funnel,
 .fx-js .slide.on .w-arc img,
 .fx-js .slide.on .w-depth { animation: none; }
 

@@ -289,12 +289,18 @@
   <div class="cc"><img src="assets/h1.jpg" alt=""><img src="assets/h2.jpg" alt=""><img src="assets/h3.jpg" alt=""></div>
 </div>
 
-<!-- 9 折页长卷式：四片等宽共边梯形 .lf，竖边高矮交替成之字（两端与中缝高）；gap:0，折缝=左高光+右暗边 -->
+<!-- 9 斜切折页式：左右两翼竖幅 .lf（中脊 .spine 隔开），底边 img clip-path 斜切向中脊
+     逐级收拢（外→内：齐底 → 274→230 → 213→168，左右镜像）；投影挂 .lf 的 drop-shadow；
+     .funnel 漏斗贴折脊向下展开，图注 .fcap 坐进漏斗（居中用 margin-left，禁 translateX） -->
 <div class="wall w-fold">
   <div class="lf"><img src="assets/i1.jpg" alt=""></div>
   <div class="lf"><img src="assets/i2.jpg" alt=""></div>
   <div class="lf"><img src="assets/i3.jpg" alt=""></div>
-  <div class="lf"><img src="assets/i4.jpg" alt=""></div>
+  <div class="spine"></div>
+  <div class="lf"><img src="assets/i1.jpg" alt=""></div>
+  <div class="lf"><img src="assets/i2.jpg" alt=""></div>
+  <div class="lf"><img src="assets/i3.jpg" alt=""></div>
+  <div class="funnel"><p class="fcap">图注：底边两段斜切、向中央折脊逐级收拢，图注落在展开的漏斗里。</p></div>
 </div>
 
 <!-- 10/11 弧幕连屏式：共边梯形，.ai 必须包住 img；缝靠每片左右各裁 3px，不能用 gap；
