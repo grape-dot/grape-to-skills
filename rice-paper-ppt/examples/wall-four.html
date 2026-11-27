@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>图片墙 1–4 式 · 齐边错落 / 波浪贯通 / 纵深渐进 / 不对称叶片 · rice-paper-ppt 示例</title>
+  <link rel="stylesheet" href="../assets/theme.css">
+  <style>
+    .pat-d { margin: 10px 0 0; font-size: 20px; line-height: 1.5; color: var(--ink-3); letter-spacing: .02em; }
+  </style>
+</head>
+
+<body>
+  <div class="pbar"></div>
+  <div id="deck">
+
+    <!-- 1 齐边错落式：四张照片卡，白边 + 投影 + 底部渐隐 + 上下错落 -->
+    <section class="slide on">
+      <div class="sh">
+        <div class="kick">图片墙 · 第 1 式</div>
+        <h1 class="stitle">齐边错落式</h1>
+        <p class="pat-d">多张图片独立排列，通过上下错位形成节奏感</p>
+      </div>
+      <div class="sb">
+        <div class="wall w-stag">
+          <div class="pc"><img src="img/vg1.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg2.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg3.jpg" alt=""></div>
+          <div class="pc"><img src="img/vg4.jpg" alt=""></div>
+        </div>
+        <div class="wcap">
+          <div class="figcap">图注：四张同高，只把偶数张下移 66px：白边 7px 与双层投影让它们像摆在纸上。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 波浪贯通式：四张等宽，一整条大 S，左右出血铺满；墙宽写死在 path 里，必须 1280px -->
+    <section class="slide">
+      <div class="sh">
+        <div class="kick">图片墙 · 第 2 式</div>
+        <h1 class="stitle">波浪贯通式</h1>
+        <p class="pat-d">多张图片沿连续波浪曲线拼接，形成整体画面</p>
+      </div>
+      <div class="sb">
+        <div class="wall w-wave">
+          <img src="img/vg1.jpg" alt=""><img src="img/vg2.jpg" alt="">
+          <img src="img/vg3.jpg" alt=""><img src="img/vg4.jpg" alt="">
+        </div>
+        <div class="wcap-l">
+          <div class="figcap">图注：整条只起伏一次，四张等宽、左右出血铺满；缝里透出的是纸色。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 纵深渐进式：左文右墙，右缘出血贴边；rotateY 必须有 perspective -->
+    <section class="slide">
+      <div class="sh">
+        <div class="kick">图片墙 · 第 3 式</div>
+        <h1 class="stitle">纵深渐进式</h1>
+        <p class="pat-d">图片按纵向层次递进排列，营造空间纵深感</p>
+      </div>
+      <div class="sb">
+        <div class="grow" style="display:grid;grid-template-columns:30% 1fr;gap:20px">
+          <div class="col" style="justify-content:flex-end">
+            <p class="cb sm" style="margin:0;line-height:1.7">近端放大、远端收窄，右缘出血贴边；<br>八格沿垂直轴旋转 25°，靠透视而不是<br>斜切。</p>
+          </div>
+          <div class="w-depth-stage">
+            <div class="w-depth">
+              <img src="img/vg1.jpg" alt=""><img src="img/vg2.jpg" alt=""><img src="img/vg3.jpg" alt=""><img src="img/vg4.jpg" alt="">
+              <img src="img/vg4.jpg" alt=""><img src="img/vg3.jpg" alt=""><img src="img/vg2.jpg" alt=""><img src="img/vg1.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 不对称叶片式：标题在上、图注在叶片下方的凹口里 -->
+    <section class="slide">
+      <div class="sh">
+        <div class="kick">图片墙 · 第 4 式</div>
+        <h1 class="stitle">不对称叶片式</h1>
+        <p class="pat-d">图片以不对称弧形边缘连接，形成叶片般的视觉效果</p>
+      </div>
+      <div class="sb">
+        <div class="wall w-fan">
+          <img src="img/vg1.jpg" alt=""><img src="img/vg2.jpg" alt="">
+          <img src="img/vg3.jpg" alt=""><img src="img/vg4.jpg" alt="">
+        </div>
+        <div class="wcap">
+          <div class="figcap" style="margin:0">图注：左端最厚、中间最薄、右端回升；整条由一条遮罩裁出，接缝处没有台阶。</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <script src="../assets/deck.js"></script>
+</body>
+
+</html>

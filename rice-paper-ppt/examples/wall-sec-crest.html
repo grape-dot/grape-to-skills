@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>图片墙 6–7 式 · 半圆扇面 / 弧形切幅 · rice-paper-ppt 示例</title>
+  <link rel="stylesheet" href="../assets/theme.css">
+  <style>
+    /* 两页的图墙、贴条、图注、页脚都保持原样，只把顶部那段标题换成「式名 + 一句定义」 */
+    .pat-d { margin: 10px 0 0; font-size: 20px; line-height: 1.5; color: var(--ink-3); letter-spacing: .02em; }
+  </style>
+</head>
+
+<body>
+  <div class="pbar"></div>
+  <div id="deck">
+
+    <!-- 6 半圆扇面式：多张围绕半圆放射展开，接缝是扇骨，标题贴条落在扇柄空档 -->
+    <section class="slide on">
+      <div class="sh">
+        <h1 class="stitle">半圆扇面式</h1>
+        <p class="pat-d">多张图片围绕半圆展开，呈扇形放射状布局</p>
+      </div>
+      <div class="sb">
+        <div class="sec-wrap">
+          <div class="wall w-sec">
+            <div class="sd"><img src="img/valley.jpg" alt=""></div>
+            <div class="sd"><img src="img/canyon.jpg" alt="" style="object-position:50% 62%"></div>
+            <div class="sd"><img src="img/ridge.jpg" alt=""></div>
+            <div class="sd"><img src="img/dune.jpg" alt=""></div>
+          </div>
+          <div class="sec-cap">
+            <div class="sec-t">四帧一把扇</div>
+            <div class="sec-s">同题四帧 · 放射接缝</div>
+          </div>
+        </div>
+        <div class="figcap">图注：外弧与内弧同出一条 path，扇骨是放射接缝；接缝两端各让 0.08°，窄到读成一条纸缝。</div>
+      </div>
+      <div class="foot"><span>图片墙 · 第 6 式　半圆扇面式</span><span>06 / 11</span></div>
+    </section>
+
+    <!-- 7 弧形切幅式：弧形裁切拉出横向延伸，只弯上缘、下缘齐平，文字落在左上方的纸面里 -->
+    <section class="slide">
+      <div class="sh">
+        <h1 class="stitle">弧形切幅式</h1>
+        <p class="pat-d">通过弧形裁切形成横向视觉延伸，突出图片主体</p>
+      </div>
+      <div class="sb">
+        <div class="crest-wrap">
+          <div class="wall w-crest">
+            <img src="img/valley.jpg" alt="">
+            <img src="img/canyon.jpg" alt="">
+            <img src="img/ridge.jpg" alt="">
+            <img src="img/dune.jpg" alt="">
+          </div>
+          <div class="crest-head">
+            <div class="wt">四帧接成一条地平线</div>
+            <div class="figcap">图注：上缘一条弧只升不落，格内不裁高度。</div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>图片墙 · 第 7 式　弧形切幅式</span><span>07 / 11</span></div>
+    </section>
+
+  </div>
+  <script src="../assets/deck.js"></script>
+</body>
+
+</html>

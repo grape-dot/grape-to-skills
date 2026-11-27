@@ -136,7 +136,7 @@
 立体感只靠四件事：暖白拼缝、沿轮廓的柔投影、边缘顶亮底暗、尺寸或位置错落；不做发光与玻璃：
 
 ```html
-<!-- A 齐边错落式：四张照片卡，白边 + 投影 + 底部渐隐 + 上下错落 -->
+<!-- 1 齐边错落式：四张照片卡，白边 + 投影 + 底部渐隐 + 上下错落 -->
 <div class="wall w-stag">
   <div class="pc"><img src="assets/a1.jpg" alt=""></div>
   <div class="pc"><img src="assets/a2.jpg" alt=""></div>
@@ -145,14 +145,14 @@
 </div>
 <div class="wcap"><div class="wt">同一场景的四次取景</div><div class="figcap">图注：只承担并置比较。</div></div>
 
-<!-- B 波浪贯通式：四张，左右出血铺满；墙宽写死在 path 里，必须 1280px -->
+<!-- 2 波浪贯通式：四张，左右出血铺满；墙宽写死在 path 里，必须 1280px -->
 <div class="wall w-wave">
   <img src="assets/b1.jpg" alt=""><img src="assets/b2.jpg" alt="">
   <img src="assets/b3.jpg" alt=""><img src="assets/b4.jpg" alt="">
 </div>
 <div class="wcap-l"><div class="wt">四张接成一条季节带</div><div class="figcap">图注：整条只起伏一次。</div></div>
 
-<!-- C 纵深渐进式：左文右墙，右缘出血贴边；rotateY 必须有 perspective -->
+<!-- 3 纵深渐进式：左文右墙，右缘出血贴边；rotateY 必须有 perspective -->
 <div class="grow" style="display:grid;grid-template-columns:30% 1fr;gap:20px">
   <div class="col" style="justify-content:center;gap:12px">
     <div class="wt" style="margin:0">八张过程图沿纵深铺开</div>
@@ -166,7 +166,7 @@
   </div>
 </div>
 
-<!-- D 不对称叶片式：标题在上、图注在叶片下方的凹口里 -->
+<!-- 4 不对称叶片式：标题在上、图注在叶片下方的凹口里 -->
 <div class="sb" style="justify-content:center">
   <div class="wcap"><div class="wt" style="font-size:var(--fs-h1); margin:0">五张图托住一句结论</div></div>
   <div class="wall w-fan">
@@ -176,7 +176,7 @@
   <div class="figcap" style="margin:0; text-align:center">图注：左端最厚，中间最薄，右端回升但不超过左端。</div>
 </div>
 
-<!-- E 盘旋丝带：七块拼成一条绕行的带子，右列竖塔；每块 <image> 铺满自己的 bbox 独立取景
+<!-- 5 螺旋长卷式（旧称盘旋丝带）：七块拼成一条绕行的带子，右列竖塔；每块 <image> 铺满自己的 bbox 独立取景
      viewBox 外扩 3px 是留给轮廓描边的，改成 0 0 380 430 会把最外圈描边裁掉 -->
 <div class="grow" style="display:grid;grid-template-columns:1fr 430px;gap:44px;align-items:start">
   <div class="col" style="justify-content:flex-start;gap:16px">
@@ -217,12 +217,12 @@
 ```
 
 <!-- E2 封面满幅：path 与上面完全一样，只改两处 —— class 加 cv-coil、stroke 2.2 → 6。
-     塔按页高 720 定宽 637、右移 30px 出血，上下顶到画布边；样式在 theme.css「封面 · E 式满幅盘绕塔」。
+     塔按页高 720 定宽 637、右移 30px 出血，上下顶到画布边；样式在 theme.css「封面 · 5 式满幅盘绕塔」。
      标题 5 字放一行会压到塔（5×158=790 > 611），所以断成「螺旋 / 长卷式」两行；
      竖排对句这一版没有——定义句（22 字）竖排要拆两列且不好读，横排一句放在左下即可，
      需要诗句式标题时再用 .cv-couplet。 -->
 <section class="slide cover">
-  <div class="kick" style="position:absolute;left:46px;top:44px">图片墙 · 第五式</div>
+  <div class="kick" style="position:absolute;left:46px;top:44px">图片墙 · 第 5 式</div>
   <h1 class="cv-hero"><span>螺旋</span><span>长卷式</span></h1>
   <div class="cv-lede" style="width:560px;bottom:112px">
     <p style="font-size:24px">图片沿 S 形曲线连续展开，形成叙事性长卷。</p>
@@ -232,21 +232,72 @@
 </section>
 ```
 
-- **缝**：3px，B/C 用容器底色 `#FFFDF6`，缝读成白纸；A/D 不留底色，缝露纸底即可。
+```html
+<!-- 6 半圆扇面式：四片从同一圆心拉出的三角形，外弧/内弧由舞台一条 path 统一裁出；
+     贴条必须挂 .sec-wrap（写进 .w-sec 会被整块裁掉）；换张数/张角用 scripts/fan-wall.py 重算 -->
+<div class="sec-wrap">
+  <div class="wall w-sec">
+    <div class="sd"><img src="assets/f1.jpg" alt=""></div>
+    <div class="sd"><img src="assets/f2.jpg" alt=""></div>
+    <div class="sd"><img src="assets/f3.jpg" alt=""></div>
+    <div class="sd"><img src="assets/f4.jpg" alt=""></div>
+  </div>
+  <div class="sec-cap">
+    <div class="sec-t">四帧一把扇</div>
+    <div class="sec-s">同题四帧 · 放射接缝</div>
+  </div>
+</div>
+
+<!-- 7 弧形切幅式：只弯上缘、下缘齐平贴底；文字块 .crest-head 挂墙外，进墙就被 clip-path 裁掉 -->
+<div class="crest-wrap">
+  <div class="crest-head"><div class="wt">四帧接成一条地平线</div></div>
+  <div class="wall w-crest">
+    <img src="assets/g1.jpg" alt=""><img src="assets/g2.jpg" alt="">
+    <img src="assets/g3.jpg" alt=""><img src="assets/g4.jpg" alt="">
+  </div>
+</div>
+
+<!-- 8 矩阵网格式：2×2，两翼绕中缝各转 22°；容器禁 filter（会把 3D 子层压平），投影走 ::before -->
+<div class="wall w-cyl">
+  <div class="cc"><img src="assets/h1.jpg" alt=""></div>
+  <div class="cc"><img src="assets/h2.jpg" alt=""></div>
+  <div class="cc"><img src="assets/h3.jpg" alt=""></div>
+  <div class="cc"><img src="assets/h4.jpg" alt=""></div>
+</div>
+
+<!-- 9 折页长卷式：四片共边梯形 .lf，五条折线端点相邻两片共用；gap:0，折缝=左高光+右暗边 -->
+<div class="wall w-fold">
+  <div class="lf"><img src="assets/i1.jpg" alt=""></div>
+  <div class="lf"><img src="assets/i2.jpg" alt=""></div>
+  <div class="lf"><img src="assets/i3.jpg" alt=""></div>
+  <div class="lf"><img src="assets/i4.jpg" alt=""></div>
+</div>
+
+<!-- 10/11 弧幕连屏式：共边梯形，.ai 必须包住 img；缝靠每片左右各裁 3px，不能用 gap；
+     内弧加 .sag（中段鼓、两端收），五张加 .n5 -->
+<div class="wall w-arc">
+  <div class="ai"><img src="assets/j1.jpg" alt=""></div>
+  <div class="ai"><img src="assets/j2.jpg" alt=""></div>
+  <div class="ai"><img src="assets/j3.jpg" alt=""></div>
+  <div class="ai"><img src="assets/j4.jpg" alt=""></div>
+</div>
+```
+
+- **缝**：3px，2 / 3 用容器底色 `#FFFDF6`，缝读成白纸；A/D 不留底色，缝露纸底即可。
 - **投影**：裁剪类（B）一律 `drop-shadow`，`box-shadow` 会被 `clip-path` 裁掉；
-  A 的阴影挂 `.pc`（挂 `img` 会被底部渐隐一起淡掉）；D 的投影挂**容器**，
+  1 的阴影挂 `.pc`（挂 `img` 会被底部渐隐一起淡掉）；4 的投影挂**容器**，
   沿图片实际轮廓走，逐张加就变成五张独立卡片。
 - **明暗**：B/C 的 `::after` 压一层顶亮底暗（白 50% → 透明 14%、暗 34% → 透明 18%）。
-- **出血**：B/D 用 `width: calc(100% + 92px); margin-left: calc(var(--pad-x) * -1)` 左右铺满；
-  C 用 `right: calc(var(--pad-x) * -1)` 只让右缘贴边。
-- **连续轮廓**：B/D 的上下缘都由容器一条 `clip-path:path()` 裁出，图片一律同一高度；
-  逐张改高度会留台阶（D 以前就是这么错的）。D 的左端下缘画到了 406（容器 400 之外），
-  所以 D 的图片取 `height: calc(100% + 20px); align-self: flex-start`，`::after` 补 `bottom:-20px`。
-- **纵深**：C 是 `perspective(1600px) rotateY(-25deg)`，宽 1100、高 420、`transform-origin:100% 50%`。
+- **出血**：2 / 4 用 `width: calc(100% + 92px); margin-left: calc(var(--pad-x) * -1)` 左右铺满；
+  3 用 `right: calc(var(--pad-x) * -1)` 只让右缘贴边。
+- **连续轮廓**：2 / 4 的上下缘都由容器一条 `clip-path:path()` 裁出，图片一律同一高度；
+  逐张改高度会留台阶（4 以前就是这么错的）。4 的左端下缘画到了 406（容器 400 之外），
+  所以 4 的图片取 `height: calc(100% + 20px); align-self: flex-start`，`::after` 补 `bottom:-20px`。
+- **纵深**：3 是 `perspective(1600px) rotateY(-25deg)`，宽 1100、高 420、`transform-origin:100% 50%`。
   改角度要同步降高度，否则右缘放大后会压页脚。
 - `.wall` 已带 `min-height:0`；`.w-depth` 绝对定位，容器 `.w-depth-stage` 必须留出高度。
 - `cover` 只在「同题材并置、单张不承担唯一证据」时使用，主体落居中 60% 安全区；唯一证据图仍 `contain` + 浅色底。
-- 五式的尺寸、坑与选型见 `page-patterns.md` 第 12 节；要换 GSAP 编排或加 WebGL 特效，
+- 十一式的尺寸、坑与选型见 `page-patterns.md` 第 12 节；要换 GSAP 编排或加 WebGL 特效，
   按同节末「技术选型与增强层」引入 `assets/fx.js`，用 `data-fx` + `RP.fx.register` 挂载。
 
 ## 九、流程与步骤

@@ -293,15 +293,18 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .figcap { font-size: var(--fs-note); line-height: 1.5; color: var(--ink-3); margin-top: 8px; }
 .figcap b { color: var(--ink-2); }
 
-/* ── 图片墙：多图排版五式（立体拼贴）─────────────────────────
-   A 矩形错落 / B 波浪贯通 / C 斜切网格 / D 弧形底托 / E 盘旋丝带
+/* ── 图片墙：多图排版十一式（立体拼贴）─────────────────────────
+   1 齐边错落 / 2 波浪贯通 / 3 纵深渐进 / 4 不对称叶片 / 5 螺旋长卷 / 6 半圆扇面
+   7 弧形切幅 / 8 矩阵网格 / 9 折页长卷 / 10 弧幕连屏 / 11 弧幕连屏·内弧
+   类名：1 .w-stag · 2 .w-wave · 3 .w-depth · 4 .w-fan · 5 .w-coil · 6 .w-sec
+   7 .w-crest · 8 .w-cyl · 9 .w-fold · 10/11 .w-arc（内弧加 .sag）
    立体感只有四个来源：暖白拼缝 / 沿轮廓的柔投影 / 照片白边 / 位置错落与倾斜。
    不做发光、玻璃、彩色阴影。缝用纸色 #FFFDF6，投影用暖褐 rgba(74,58,34)。
    用法与坑见 references/page-patterns.md 第 12 节。 */
 .wall { display: flex; gap: 3px; min-height: 0; background: #FFFDF6; }
 .wall img { flex: 1 1 0; min-width: 0; height: 100%; object-fit: cover; display: block; }
 
-/* A：四张散落成照片卡——白边、投影、底部融进纸面、位置上下错落
+/* 1：四张散落成照片卡——白边、投影、底部融进纸面、位置上下错落
    照片卡必须包一层 .pc：阴影要挂在卡片上，不能挂在 img 上，否则被渐隐一起淡掉 */
 .w-stag {
   gap: 18px; height: 380px; align-items: flex-start;
@@ -319,7 +322,7 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   background: linear-gradient(to top, #FFFDF6 0%, rgba(255,253,246,.62) 42%, rgba(255,253,246,0) 100%);
 }
 
-/* B：一整条 S 形飘带——四张等宽，左右出血铺满画布
+/* 2：一整条 S 形飘带——四张等宽，左右出血铺满画布
    path 按墙宽 1280px 写死：宽度一变曲线就错位。带宽恒定 270px，起伏 100px。
    曲线自参考图逐列量得：波峰在 20%、波谷在 81%、右端回升（不是对称拱门）。 */
 .w-wave {
@@ -330,7 +333,7 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   filter: drop-shadow(8px 12px 10px rgba(74,58,34,.40)) drop-shadow(0 26px 38px rgba(74,58,34,.30));
 }
 
-/* C：真透视——沿垂直轴旋转，右端贴纸边并被放大，向左逐列收进去
+/* 3：真透视——沿垂直轴旋转，右端贴纸边并被放大，向左逐列收进去
    skewX 只是斜切没有纵深，近大远小必须 perspective + rotateY */
 .w-depth-stage { position: relative; min-height: 0; }
 .w-depth {
@@ -350,7 +353,7 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
     linear-gradient(to top, rgba(40,30,16,.26) 0, rgba(40,30,16,0) 17%);
 }
 
-/* D：不对称叶片——左端最厚 393、中间最薄 231、右端回升 283（不超过左端）
+/* 4：不对称叶片——左端最厚 393、中间最薄 231、右端回升 283（不超过左端）
    关键是「一条遮罩裁整墙」，不是五张各改高度：图片同为满高矩形，
    上下边缘由同一条 path 连续裁出，所以接缝处不会出现台阶。
    曲线同样按参考图逐列量得：顶边左高右低并微回升，底边中间上拱。
@@ -369,10 +372,224 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   object-fit: cover; display: block;
 }
 
-/* E：盘旋丝带——七块拼成一条自上而下绕行的带子，末端两块并排落地
-   五式里唯一用内联 SVG 的一式：七块共享轮廓、还要在主图之上描出纸白缝，
+/* 6：半圆扇面式——多张围绕半圆展开，扇骨就是放射接缝
+   圆心落在舞台下方 1039.5px 处：外弧顶点 y=0、半张角 38°、扇面径向厚 290，舞台 1280×449。
+   每片只画「从圆心拉出的三角形」，外弧与内弧由舞台那一条 path 统一裁出——
+   接缝是放射线（扇骨），外轮廓还是同一条弧，两者必然对齐，不会错位成台阶。
+   缝隙靠每片两端各让 0.08°（外弧 2.9px、内弧 2.1px）读成一条纸缝；
+   不能改成固定 px 边距：固定值在圆心收拢处会张成锥形大缝，扇骨就读断了。
+   图宽 460、按本片中径居中（--cx）：每张只裁到自己那一格附近，主体不会被邻片抢走。
+   换张数 / 换张角用 scripts/fan-wall.py 重算，别手改下面这些数。 */
+.w-sec {
+  position: relative;
+  width: calc(100% + var(--pad-x) * 2); margin-left: calc(var(--pad-x) * -1);
+  height: 449px; display: block; background: #FFFDF6;
+  clip-path: path("M0 220 C91 149 193 94 302 57 C410 19 525 0 640 0 C755 0 870 19 978 57 C1087 94 1189 149 1280 220 L1101 449 C1036 398 963 358 884 331 C806 304 723 290 640 290 C557 290 474 304 396 331 C317 358 244 398 179 449 Z");
+  filter: drop-shadow(0 16px 24px rgba(74,58,34,.34)) drop-shadow(0 4px 8px rgba(74,58,34,.16));
+}
+.w-sec .sd { position: absolute; inset: 0; }
+.w-sec .sd img {
+  position: absolute; top: 0; height: 100%; width: 460px;
+  left: calc(var(--cx) - 230px);
+  object-fit: cover; display: block;
+}
+.w-sec .sd:nth-child(1) { --cx: 213px; clip-path: polygon(640px 1040px, 215px -189px, -159px 14px); }
+.w-sec .sd:nth-child(2) { --cx: 492px; clip-path: polygon(640px 1040px, 638px -260px, 219px -190px); }
+.w-sec .sd:nth-child(3) { --cx: 788px; clip-path: polygon(640px 1040px, 1061px -190px, 642px -260px); }
+.w-sec .sd:nth-child(4) { --cx: 1067px; clip-path: polygon(640px 1040px, 1439px 14px, 1065px -189px); }
+/* 标题压在扇柄：半透明纸色贴条，落在内弧下方的空档里；
+   要参考图那种「字直接压在图上」，去掉 background / border / box-shadow，
+   改 .sec-t 为 var(--paper) + 暖褐描边（-webkit-text-stroke 1.2px）。
+   贴条必须挂在 .sec-wrap 里：扇面是裁剪区，贴条写进 .w-sec 会被整块裁掉。 */
+.sec-wrap { position: relative; }
+.sec-cap {
+  position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+  padding: 12px 32px 14px; text-align: center; white-space: nowrap;
+  background: rgba(250,246,233,.88); border: 1px solid #DED4BC;
+  box-shadow: 0 10px 22px -8px rgba(74,58,34,.45);
+}
+.sec-t {
+  font-family: var(--serif); font-size: var(--fs-h1); font-weight: 700;
+  color: var(--green); letter-spacing: .06em; line-height: 1.2;
+}
+.sec-s { font-size: var(--fs-note); color: var(--ink-3); margin-top: 6px; letter-spacing: .04em; }
+
+/* 7：弧形切幅式——只弯上缘，下缘齐平贴内容区底
+   四张竖图并排，上缘自左向右单向抬起（左端最低 200、右端最高 44），下缘齐平：
+   横向长条 + 一条斜上的弧，把视线从左带到右，照片主体因此更显眼。
+   单段三次贝塞尔，别拼两段——两段切向难接，接缝处会露折角。
+   文字落在左上方那块三角纸面里，所以文字块必须挂在墙**外面**：
+   clip-path 会把墙内所有子元素一起裁掉，写在墙里标题会整行消失。 */
+.crest-wrap { position: relative; margin-top: auto; }
+.w-crest {
+  width: calc(100% + var(--pad-x) * 2); margin-left: calc(var(--pad-x) * -1);
+  height: 440px; display: flex; align-items: flex-end; gap: 3px;
+  background: #FFFDF6;
+  clip-path: path("M0 200 C420 196 900 150 1280 44 L1280 440 L0 440 Z");
+  filter: drop-shadow(0 -12px 22px rgba(74,58,34,.22));
+}
+.w-crest img { flex: 1 1 0; min-width: 0; height: 100%; object-fit: cover; display: block; }
+.crest-head { position: absolute; left: 0; top: 0; width: 660px; }
+.crest-head .wt { margin: 0 0 8px; font-size: var(--fs-h1); }
+
+/* ── 8 矩阵网格式（弧墙）：四张两行两列，整面朝观众卷进来 ────────────────────
+   三件套：perspective 挂容器、每列 rotateY 转角、沿 Z 退到圆弧上。
+   θ 与 Z 必须成对：只转不退，边列的四角会翘到邻格上；只退不转，边列只是变小、不变形。
+   立体感的大头不在形变而在光：中缝退得最远也压得最暗、两端外沿最亮，
+   再补一层顶亮底暗和一道贴地影，墙才从纸面上站起来。
+   两列各 24°、Z −110、perspective 1000：中缝比外沿矮 19%，这个差值才够读成「卷」。 */
+.w-cyl {
+  --cg: 5px; --a: 22deg;
+  position: relative;
+  display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr;
+  width: calc(100% + 92px); margin-left: -46px;
+  gap: var(--cg); height: 404px; background: none;
+  perspective: 1100px; perspective-origin: 50% 50%;
+}
+/* 贴地影：只给每格配投影，四面都亮，墙是「悬」着的；先在地上压一道椭圆再谈形变。
+   用绝对定位的伪元素，不占网格位；直接给容器加 filter 会把 3D 子层压平。 */
+.w-cyl::before,
+.w-arc::before {
+  content: ""; position: absolute; left: 3%; right: 3%; bottom: -20px; height: 30px;
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(52,38,20,.42) 0, rgba(52,38,20,.16) 46%, rgba(52,38,20,0) 74%);
+  filter: blur(5px); pointer-events: none;
+}
+.w-cyl .cc {
+  position: relative; min-width: 0; overflow: hidden;
+  transform: rotateY(var(--ry, 0deg));
+}
+.w-cyl .cc img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* 轴在**中缝**不在格心：两列绕同一条竖轴各转 20°，中缝纹丝不动、两翼向后张，
+   接缝宽度不会被转开。轴放格心就成了两块各自歪的板，中缝裂成一条白沟。
+   两翼都朝后张＝中缝离观众最近，中缝最亮、两翼越往外越暗，这面墙才「面朝你」。 */
+.w-cyl .cc:nth-child(odd)  { --ry: calc(var(--a) * -1); transform-origin: 100% 50%;
+  box-shadow: -3px 0 0 #FFFDF6, -10px 0 16px -8px rgba(52,38,20,.30); }
+.w-cyl .cc:nth-child(even) { --ry: var(--a); transform-origin: 0% 50%;
+  box-shadow: 3px 0 0 #FFFDF6, 10px 0 16px -8px rgba(52,38,20,.30); }
+/* 逐格受光：光在上偏左——左翼整体偏亮、右翼偏暗，两翼各自越靠外越暗 */
+.w-cyl .cc::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.30) 0, rgba(255,251,238,0) 22%),
+    linear-gradient(to top, rgba(34,24,12,.30) 0, rgba(34,24,12,0) 20%);
+}
+.w-cyl .cc:nth-child(odd)::after {
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.30) 0, rgba(255,251,238,0) 22%),
+    linear-gradient(to top, rgba(34,24,12,.30) 0, rgba(34,24,12,0) 20%),
+    linear-gradient(to left,
+      rgba(255,250,235,.34) 0, rgba(255,250,235,0) 20%,
+      rgba(30,21,10,.12) 52%, rgba(30,21,10,.58) 100%);
+}
+.w-cyl .cc:nth-child(even)::after {
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.30) 0, rgba(255,251,238,0) 22%),
+    linear-gradient(to top, rgba(34,24,12,.30) 0, rgba(34,24,12,0) 20%),
+    linear-gradient(to right,
+      rgba(255,250,235,.26) 0, rgba(255,250,235,0) 20%,
+      rgba(30,21,10,.16) 52%, rgba(30,21,10,.64) 100%);
+}
+.w-cyl .cc:nth-child(even) img { filter: brightness(.94) saturate(.97); }
+
+/* ── 9 折页长卷式（弧屏）：四片共边梯形折成一道弧，接缝处上下边严丝合缝 ────────
+   这一式不用 rotateY：逐片旋转会让相邻两片的公共边错开 3–8px，接缝上出现台阶。
+   做法是把五条折线的上下端点定成同一组数，相邻两片共用同一对端点，梯形裁切自然
+   拼成一条连续折线；纵深交给折角明暗与片间亮度差，不交给形变。
+   片宽不等：两端各 316px、中间两片 1fr——等宽读成四块等大的板，没有「转过去」的意思。 */
+.w-fold {
+  display: flex; gap: 0; height: 404px; background: none;
+  filter: drop-shadow(0 22px 26px rgba(52,38,20,.34)) drop-shadow(0 4px 8px rgba(52,38,20,.16));
+}
+.w-fold .lf { position: relative; flex: 1 1 0; min-width: 0; }
+.w-fold .lf:nth-child(1),
+.w-fold .lf:nth-child(4) { flex: 0 0 316px; }
+.w-fold .lf img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* 折线端点：上缘 66 → 19 → 6 → 19 → 66，下缘 316 → 385 → 398 → 385 → 316。
+   相邻两片共用同一对 y，接缝既没有台阶也没有白缝；落差 60px 才读得出折角，
+   再大两端就塌成窄条。上下各留 6px，别顶到 404 的边界。 */
+.w-fold .lf:nth-child(1) { clip-path: polygon(0 66px, 100% 19px, 100% 385px, 0 316px); }
+.w-fold .lf:nth-child(2) { clip-path: polygon(0 19px, 100% 6px,  100% 398px, 0 385px); }
+.w-fold .lf:nth-child(3) { clip-path: polygon(0 6px,  100% 19px, 100% 385px, 0 398px); }
+.w-fold .lf:nth-child(4) { clip-path: polygon(0 19px, 100% 66px, 100% 316px, 0 385px); }
+/* 折缝：每片左端一道 3px 高光（#FFFDF6）、右端一道 6% 宽的暗边，
+   相邻两片一拼就是「亮—暗」的折角；两侧都压暗只会糊成一条黑边，读不出折。 */
+.w-fold .lf::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.22) 0, rgba(255,251,238,0) 14%),
+    linear-gradient(to top, rgba(34,24,12,.24) 0, rgba(34,24,12,0) 14%),
+    linear-gradient(to right,
+      rgba(255,253,246,.60) 0, rgba(255,253,246,.14) 0.8%, rgba(255,253,246,0) 2.6%,
+      rgba(34,24,12,0) 94%, rgba(34,24,12,.56) 100%);
+}
+/* 片间亮度差：折屏的两片是朝着相反方向转的，不压暗就会读成一整张连续全景图 */
+.w-fold .lf:nth-child(1) img,
+.w-fold .lf:nth-child(4) img { filter: brightness(.84) saturate(.96); }
+.w-fold .lf:nth-child(2) img,
+.w-fold .lf:nth-child(3) img { filter: brightness(1.04); }
+
+/* ── 10/11 弧幕连屏式（弧带）：一条相纸带被掰弯 ──────────────────────────────────
+   与 9 同法：四片共边裁切，相邻两片共用同一对折线端点，接缝不留台阶——
+   逐片 rotateY 会让相邻两片的公共边一前一后错开，读成「四张歪卡」而不是「一条带子」。
+   端片上下都放大、中片压短，带子才有透视；两端比中段高 13%，再多就成锯齿。
+   默认「中段收」，加 .sag 反过来（中段鼓、两端收）。五张加 .n5。 */
+.w-arc {
+  position: relative;
+  display: flex; gap: 0; background: none;
+  width: calc(100% + 30px); margin-left: -15px;
+  height: 404px;
+}
+.w-arc .ai { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; }
+.w-arc .ai > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* 左右各让 3px 出来当缝：缝靠裁切留白，不靠 gap——gap 会把梯形接缝撕开 */
+.w-arc .ai:nth-child(1) { clip-path: polygon(3px 6%, calc(100% - 3px) 12.5%, calc(100% - 3px) 87.5%, 3px 94%); }
+.w-arc .ai:nth-child(2) { clip-path: polygon(3px 12.5%, calc(100% - 3px) 14.5%, calc(100% - 3px) 85.5%, 3px 87.5%); }
+.w-arc .ai:nth-child(3) { clip-path: polygon(3px 14.5%, calc(100% - 3px) 12.5%, calc(100% - 3px) 87.5%, 3px 85.5%); }
+.w-arc .ai:nth-child(4) { clip-path: polygon(3px 12.5%, calc(100% - 3px) 6%, calc(100% - 3px) 94%, 3px 87.5%); }
+.w-arc.sag .ai:nth-child(1) { clip-path: polygon(3px 14.5%, calc(100% - 3px) 8%, calc(100% - 3px) 92%, 3px 85.5%); }
+.w-arc.sag .ai:nth-child(2) { clip-path: polygon(3px 8%, calc(100% - 3px) 6%, calc(100% - 3px) 94%, 3px 92%); }
+.w-arc.sag .ai:nth-child(3) { clip-path: polygon(3px 6%, calc(100% - 3px) 8%, calc(100% - 3px) 92%, 3px 94%); }
+.w-arc.sag .ai:nth-child(4) { clip-path: polygon(3px 8%, calc(100% - 3px) 14.5%, calc(100% - 3px) 85.5%, 3px 92%); }
+/* 受光：外端离观众近、更亮；中段退远、压暗。方向写在每片自己的渐变里，
+   不靠整体叠一层——整条带子压一层，弯的地方就没有明暗交界了。 */
+.w-arc .ai::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.26) 0, rgba(255,251,238,0) 18%),
+    linear-gradient(to top, rgba(34,24,12,.26) 0, rgba(34,24,12,0) 16%),
+    linear-gradient(to right, rgba(255,253,246,.42) 0, rgba(255,253,246,0) 1%,
+      rgba(34,24,12,.20) 2.4%, rgba(34,24,12,0) 12%);
+}
+.w-arc .ai:nth-child(1)::after,
+.w-arc .ai:nth-child(4)::after {
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.30) 0, rgba(255,251,238,0) 20%),
+    linear-gradient(to top, rgba(34,24,12,.24) 0, rgba(34,24,12,0) 18%);
+}
+.w-arc .ai:nth-child(2)::after {
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.16) 0, rgba(255,251,238,0) 18%),
+    linear-gradient(to top, rgba(34,24,12,.34) 0, rgba(34,24,12,0) 18%),
+    linear-gradient(to right, rgba(30,21,10,.10) 0, rgba(30,21,10,0) 30%, rgba(30,21,10,.18) 100%);
+}
+.w-arc .ai:nth-child(3)::after {
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.16) 0, rgba(255,251,238,0) 18%),
+    linear-gradient(to top, rgba(34,24,12,.34) 0, rgba(34,24,12,0) 18%),
+    linear-gradient(to left, rgba(30,21,10,.10) 0, rgba(30,21,10,0) 30%, rgba(30,21,10,.18) 100%);
+}
+/* 五张：缝更密，端的放大与中段的压缩各让一步，否则端张被挤成细条 */
+.w-arc.n5 .ai:nth-child(1) { clip-path: polygon(3px 9%, calc(100% - 3px) 13%, calc(100% - 3px) 87.6%, 3px 92%); }
+.w-arc.n5 .ai:nth-child(2) { clip-path: polygon(3px 13%, calc(100% - 3px) 12.4%, calc(100% - 3px) 88.2%, 3px 87.6%); }
+.w-arc.n5 .ai:nth-child(3) { clip-path: polygon(3px 12.4%, calc(100% - 3px) 12.4%, calc(100% - 3px) 88.2%, 3px 88.2%); }
+.w-arc.n5 .ai:nth-child(4) { clip-path: polygon(3px 12.4%, calc(100% - 3px) 13%, calc(100% - 3px) 87.6%, 3px 88.2%); }
+.w-arc.n5 .ai:nth-child(5) { clip-path: polygon(3px 13%, calc(100% - 3px) 9%, calc(100% - 3px) 92%, 3px 87.6%); }
+
+/* 5：螺旋长卷式（旧称「盘旋丝带」）——七块拼成一条自上而下绕行的带子，末端两块并排落地
+   十一式里唯一用内联 SVG 的一式：七块共享轮廓、还要在主图之上描出纸白缝，
    CSS 的 clip-path 描不了边，逐块内缩又得手工算；SVG 一次解决裁形、逐块填图与描边，
-   而且 viewBox 让它随列宽自动缩放（B/C/D 的 path 是像素写死的）。
+   而且 viewBox 让它随列宽自动缩放（2/3/4 的 path 是像素写死的）。
    每块的 <image> 铺满自己的 bbox、按 slice 裁切，所以每块都近似独立取景。
    七条 path 与 bbox 原样抄自 components.md 第八节，改动时两边同步。 */
 .w-coil {
@@ -382,7 +599,9 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 
 /* 立体的最后一道：沿遮罩轮廓压一层顶亮底暗，读出弯曲受光 */
 .w-wave::after,
-.w-fan::after {
+.w-fan::after,
+.w-sec::after,
+.w-crest::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background:
     linear-gradient(to bottom, rgba(255,255,255,.50) 0, rgba(255,255,255,0) 14%),
@@ -408,8 +627,24 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   .slide.on .w-fan img:nth-child(3) { animation-delay: .14s; }
   .slide.on .w-fan img:nth-child(4) { animation-delay: .21s; }
   .slide.on .w-fan img:nth-child(5) { animation-delay: .28s; }
-  .slide.on .w-depth { animation: wallTurn .8s cubic-bezier(.22,.75,.2,1) both; }
   .slide.on .w-coil { animation: wallRise .75s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-sec { animation: wallRise .7s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-sec .sd img { animation: wallFade .55s ease-out both; }
+  .slide.on .w-sec .sd:nth-child(2) img { animation-delay: .07s; }
+  .slide.on .w-sec .sd:nth-child(3) img { animation-delay: .14s; }
+  .slide.on .w-sec .sd:nth-child(4) img { animation-delay: .21s; }
+  .slide.on .w-crest { animation: wallRise .7s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-depth { animation: wallTurn .8s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-cyl .cc { animation: wallFade .5s ease-out both; }
+  .slide.on .w-cyl .cc:nth-child(2) { animation-delay: .06s; }
+  .slide.on .w-cyl .cc:nth-child(3) { animation-delay: .12s; }
+  .slide.on .w-cyl .cc:nth-child(4) { animation-delay: .18s; }
+  .slide.on .w-fold { animation: wallRise .7s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-arc .ai { animation: wallFade .55s ease-out both; }
+  .slide.on .w-arc .ai:nth-child(2) { animation-delay: .07s; }
+  .slide.on .w-arc .ai:nth-child(3) { animation-delay: .14s; }
+  .slide.on .w-arc .ai:nth-child(4) { animation-delay: .21s; }
+  .slide.on .w-arc .ai:nth-child(5) { animation-delay: .28s; }
 }
 
 /* 增强层接管时让位：fx.js 只在检测到 GSAP 时加 .fx-js，避免两套动画叠加 */
@@ -418,6 +653,12 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .fx-js .slide.on .w-fan,
 .fx-js .slide.on .w-fan img,
 .fx-js .slide.on .w-coil,
+.fx-js .slide.on .w-sec,
+.fx-js .slide.on .w-sec .sd img,
+.fx-js .slide.on .w-crest,
+.fx-js .slide.on .w-cyl .cc,
+.fx-js .slide.on .w-fold,
+.fx-js .slide.on .w-arc img,
 .fx-js .slide.on .w-depth { animation: none; }
 
 /* 图墙标题带：一条标题 + 一条图注，不逐图配字 */
@@ -560,7 +801,7 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   letter-spacing: .12em; color: #35493B; transform: rotate(-7deg); transform-origin: left center;
 }
 
-/* ── 封面 · E 式满幅盘绕塔（右半出血）────────────────────────
+/* ── 封面 · 5 式满幅盘绕塔（右半出血）────────────────────────
    与 .cover 一起用：塔按页高 720 定宽 637，右移 30px 出血，上下顶到画布边缘。
    必须写在 .w-coil 之后——两者特异度相同，靠顺序把 width:100% 覆盖掉。 */
 .cv-coil {
