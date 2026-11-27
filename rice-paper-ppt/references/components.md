@@ -136,7 +136,7 @@
 立体感只靠四件事：暖白拼缝、沿轮廓的柔投影、边缘顶亮底暗、尺寸或位置错落；不做发光与玻璃：
 
 ```html
-<!-- A 齐边错落：四张照片卡，白边 + 投影 + 底部渐隐 + 上下错落 -->
+<!-- A 齐边错落式：四张照片卡，白边 + 投影 + 底部渐隐 + 上下错落 -->
 <div class="wall w-stag">
   <div class="pc"><img src="assets/a1.jpg" alt=""></div>
   <div class="pc"><img src="assets/a2.jpg" alt=""></div>
@@ -145,14 +145,14 @@
 </div>
 <div class="wcap"><div class="wt">同一场景的四次取景</div><div class="figcap">图注：只承担并置比较。</div></div>
 
-<!-- B 波浪贯通：四张，左右出血铺满；墙宽写死在 path 里，必须 1280px -->
+<!-- B 波浪贯通式：四张，左右出血铺满；墙宽写死在 path 里，必须 1280px -->
 <div class="wall w-wave">
   <img src="assets/b1.jpg" alt=""><img src="assets/b2.jpg" alt="">
   <img src="assets/b3.jpg" alt=""><img src="assets/b4.jpg" alt="">
 </div>
 <div class="wcap-l"><div class="wt">四张接成一条季节带</div><div class="figcap">图注：整条只起伏一次。</div></div>
 
-<!-- C 纵深梯形：左文右墙，右缘出血贴边；rotateY 必须有 perspective -->
+<!-- C 纵深渐进式：左文右墙，右缘出血贴边；rotateY 必须有 perspective -->
 <div class="grow" style="display:grid;grid-template-columns:30% 1fr;gap:20px">
   <div class="col" style="justify-content:center;gap:12px">
     <div class="wt" style="margin:0">八张过程图沿纵深铺开</div>
@@ -166,7 +166,7 @@
   </div>
 </div>
 
-<!-- D 不对称叶片：标题在上、图注在叶片下方的凹口里 -->
+<!-- D 不对称叶片式：标题在上、图注在叶片下方的凹口里 -->
 <div class="sb" style="justify-content:center">
   <div class="wcap"><div class="wt" style="font-size:var(--fs-h1); margin:0">五张图托住一句结论</div></div>
   <div class="wall w-fan">
