@@ -279,7 +279,8 @@ rice-paper-ppt/
 │   ├── content-structure-spec.md  # 文案层·结构：术语提炼 / 压缩 / 章节封面 / 可视化（验收标准）
 │   ├── components.md              # 类名词典 + 可复制片段（含图片墙十二式）
 │   ├── page-patterns.md           # 十二种版式配方 + 症状表
-│   └── image-count-layouts.md     # 按图片个数选骨架：1–10 张与超多图的速查表 + 适配主题
+│   ├── image-count-layouts.md     # 按图片个数选骨架：1–10 张与超多图的速查表 + 适配主题
+│   └── img/                       # 个数规则的 11 张参考图（count-01–11.jpg，对照表内嵌）
 ├── scripts/
 │   ├── audit.js                   # 逐页版式审计
 │   └── contact-sheet.py           # 截图拼缩略图
