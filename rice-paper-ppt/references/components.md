@@ -217,14 +217,16 @@
 ```
 
 <!-- E2 封面满幅：path 与上面完全一样，只改两处 —— class 加 cv-coil、stroke 2.2 → 6。
-     塔按页高 720 定宽 637、右移 30px 出血，上下顶到画布边；样式在 theme.css「封面 · E 式满幅盘绕塔」 -->
+     塔按页高 720 定宽 637、右移 30px 出血，上下顶到画布边；样式在 theme.css「封面 · E 式满幅盘绕塔」。
+     标题 5 字放一行会压到塔（5×158=790 > 611），所以断成「螺旋 / 长卷式」两行；
+     竖排对句这一版没有——定义句（22 字）竖排要拆两列且不好读，横排一句放在左下即可，
+     需要诗句式标题时再用 .cv-couplet。 -->
 <section class="slide cover">
-  <div class="kick" style="position:absolute;left:46px;top:44px">模块 06 · 收束</div>
-  <h1 class="cv-hero"><span>山河</span><span>七景</span></h1>
-  <div class="cv-couplet"><div>一路盘绕七段景</div><div>七段风景收一处</div></div>
-  <div class="cv-lede">
-    <p>七块同题材取景沿丝带自上而下盘绕：缝是纸白，投影只挂整座塔，读者跟着带子走到底。</p>
-    <p class="en">Seven shots on one ribbon — paper-white seams, one shadow under the whole tower.</p>
+  <div class="kick" style="position:absolute;left:46px;top:44px">图片墙 · 第五式</div>
+  <h1 class="cv-hero"><span>螺旋</span><span>长卷式</span></h1>
+  <div class="cv-lede" style="width:560px;bottom:112px">
+    <p style="font-size:24px">图片沿 S 形曲线连续展开，形成叙事性长卷。</p>
+    <p class="en" style="font-size:15px">Images unfold along one S-curve, reading as a single narrative scroll.</p>
   </div>
   <!-- 这里放同一个 <svg>，class="w-coil cv-coil"，stroke-width="6" -->
 </section>
