@@ -1,6 +1,6 @@
 {
   "skill": "rice-paper-ppt",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "intent": "routing",
   "how_to_use": "每条输入单独交给模型（不带上下文），看是否触发本 skill；expect=no_trigger 的用例允许落到 PPT/文档类能力，但不得套用米纸版式、512px 约束与文案规范。",
   "cases": [
@@ -111,6 +111,24 @@
       "input": "四张图并排，高低错落一点，下面压一行标题，别每张都加边框",
       "expect": "trigger",
       "why": "齐边错落 + 单条标题带 + 不加边框，命中图片墙 A 式与通用规则第 2 条"
+    },
+    {
+      "id": "R19",
+      "input": "这条波浪图墙弧度太小了，我要整条只起伏一次、四张图、横向铺满",
+      "expect": "trigger",
+      "why": "大 S 单次起伏 + 四张 + 出血铺满，命中第 12 节 B 式"
+    },
+    {
+      "id": "R20",
+      "input": "这组图要近大远小，右边贴着页面右边缘，看着往里面延伸",
+      "expect": "trigger",
+      "why": "真透视 + 右缘出血，命中 C 式 perspective+rotateY"
+    },
+    {
+      "id": "R21",
+      "input": "五张图左边最高，中间矮一点，右边再高回来但别超过左边",
+      "expect": "trigger",
+      "why": "不对称高度渐变，命中 D 式扇形"
     }
   ]
 }

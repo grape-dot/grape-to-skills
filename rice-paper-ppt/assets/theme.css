@@ -319,45 +319,80 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   background: linear-gradient(to top, #FFFDF6 0%, rgba(255,253,246,.62) 42%, rgba(255,253,246,0) 100%);
 }
 
-/* B：整条图墙一起被曲线切，投影跟着曲线走；path 是像素坐标，墙宽须为 1188px */
+/* B：一整条大 S 通栏贯通——只起伏一次，四张等宽，左右出血铺满画布
+   path 按墙宽 1280px 写死：宽度一变曲线就错位。带宽恒定 260px，起伏约 80px */
 .w-wave {
   position: relative;
-  height: 330px;
-  clip-path: path("M0 34 C 120 6 260 64 400 32 C 540 2 680 62 820 30 C 950 4 1080 52 1188 24 L1188 296 C 1080 322 980 284 860 304 C 720 328 600 288 470 308 C 340 330 220 290 100 312 C 62 320 28 308 0 316 Z");
-  filter: drop-shadow(8px 10px 10px rgba(74,58,34,.42)) drop-shadow(0 24px 34px rgba(74,58,34,.34));
+  width: calc(100% + var(--pad-x) * 2); margin-left: calc(var(--pad-x) * -1);
+  height: 400px;
+  clip-path: path("M0 85 C 170 68 330 42 470 35 C 700 28 1010 80 1280 115 L1280 375 C 1010 320 700 288 470 295 C 330 302 170 328 0 345 Z");
+  filter: drop-shadow(8px 12px 10px rgba(74,58,34,.40)) drop-shadow(0 26px 38px rgba(74,58,34,.30));
 }
 
-/* C：倾斜只发生在容器上，图片反向校正并放大补角；整块悬在纸面上 */
-.w-scene { position: relative; display: flex; min-height: 0; }
-.w-scene::after {
-  content: ""; position: absolute; left: 10%; right: 2%; bottom: 2px; height: 46px;
-  background: radial-gradient(ellipse at 50% 30%, rgba(74,58,34,.34), rgba(74,58,34,0) 72%);
-  filter: blur(8px); pointer-events: none;
+/* C：真透视——沿垂直轴旋转，右端贴纸边并被放大，向左逐列收进去
+   skewX 只是斜切没有纵深，近大远小必须 perspective + rotateY */
+.w-depth-stage { position: relative; min-height: 0; }
+.w-depth {
+  position: absolute; right: calc(var(--pad-x) * -1); top: 50%; margin-top: -210px;
+  width: 1100px; height: 420px;
+  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr);
+  gap: 3px; background: #FFFDF6;
+  transform-origin: 100% 50%;
+  transform: perspective(1600px) rotateY(-25deg);
+  box-shadow: -22px 30px 46px -18px rgba(74,58,34,.42), 0 6px 14px rgba(74,58,34,.14);
 }
-.w-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 3px; min-height: 0; background: #FFFDF6; }
-.w-skew {
-  position: relative;
-  transform: skewX(-8deg); overflow: hidden; width: calc(100% - 48px); margin-left: auto;
-  box-shadow: 0 26px 40px -16px rgba(74,58,34,.40), 0 4px 10px rgba(74,58,34,.14);
+.w-depth img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.w-depth::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.34) 0, rgba(255,255,255,0) 15%),
+    linear-gradient(to top, rgba(40,30,16,.26) 0, rgba(40,30,16,0) 17%);
 }
-.w-skew img { width: 100%; height: 100%; object-fit: cover; transform: skewX(8deg) scale(1.18); display: block; }
 
-/* D：上下双弧，投影沿弧线；path 同样是像素坐标，宽 1188px */
-.w-arc {
+/* D：不对称扇形——左端最高，中间最矮，右端回升但不超过左端
+   只改高度、不加遮罩：每张都是完整矩形，高度差连起来就是那条弧
+   投影挂在容器上（drop-shadow 沿图片实际轮廓走），整条才读成一块，而不是五张卡 */
+.w-fan {
   position: relative;
-  height: 348px;
-  clip-path: path("M0 8 C 300 56 888 56 1188 8 L1188 300 C 888 348 300 348 0 300 Z");
-  filter: drop-shadow(7px 14px 9px rgba(52,44,30,.46)) drop-shadow(0 28px 36px rgba(52,44,30,.30));
+  width: calc(100% + var(--pad-x) * 2); margin-left: calc(var(--pad-x) * -1);
+  height: 350px; align-items: center;
+  background: none; gap: 3px;
+  filter: drop-shadow(0 22px 26px rgba(74,58,34,.34)) drop-shadow(0 4px 8px rgba(74,58,34,.16));
 }
+.w-fan img {
+  flex: 1 1 0; min-width: 0; height: 100%; object-fit: cover; display: block;
+}
+.w-fan img:nth-child(1) { height: 100%; }
+.w-fan img:nth-child(2) { height: 82%; }
+.w-fan img:nth-child(3) { height: 76%; }
+.w-fan img:nth-child(4) { height: 79%; }
+.w-fan img:nth-child(5) { height: 86%; }
 
 /* 立体的最后一道：沿遮罩轮廓压一层顶亮底暗，读出弯曲受光 */
-.w-wave::after,
-.w-arc::after,
-.w-skew::after {
+.w-wave::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background:
     linear-gradient(to bottom, rgba(255,255,255,.50) 0, rgba(255,255,255,0) 14%),
     linear-gradient(to top, rgba(40,30,16,.34) 0, rgba(40,30,16,0) 18%);
+}
+
+/* ── 图墙入场：纯 CSS，不加外部库，离线与打印都安全 ──────────
+   静态形态已经成立，动画只做「浮起 / 转正」一件事，120ms 内结束不抢讲者节奏。 */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes wallRise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes wallFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes wallTurn {
+    from { opacity: 0; transform: perspective(1600px) rotateY(-38deg); }
+    to   { opacity: 1; transform: perspective(1600px) rotateY(-25deg); }
+  }
+  .slide.on .w-wave { animation: wallRise .7s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-fan { animation: wallRise .7s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-fan img { animation: wallFade .55s ease-out both; }
+  .slide.on .w-fan img:nth-child(2) { animation-delay: .07s; }
+  .slide.on .w-fan img:nth-child(3) { animation-delay: .14s; }
+  .slide.on .w-fan img:nth-child(4) { animation-delay: .21s; }
+  .slide.on .w-fan img:nth-child(5) { animation-delay: .28s; }
+  .slide.on .w-depth { animation: wallTurn .8s cubic-bezier(.22,.75,.2,1) both; }
 }
 
 /* 图墙标题带：一条标题 + 一条图注，不逐图配字 */
