@@ -293,8 +293,8 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .figcap { font-size: var(--fs-note); line-height: 1.5; color: var(--ink-3); margin-top: 8px; }
 .figcap b { color: var(--ink-2); }
 
-/* ── 图片墙：多图排版四式（立体拼贴）─────────────────────────
-   A 矩形错落 / B 波浪贯通 / C 斜切网格 / D 弧形底托
+/* ── 图片墙：多图排版五式（立体拼贴）─────────────────────────
+   A 矩形错落 / B 波浪贯通 / C 斜切网格 / D 弧形底托 / E 盘旋丝带
    立体感只有四个来源：暖白拼缝 / 沿轮廓的柔投影 / 照片白边 / 位置错落与倾斜。
    不做发光、玻璃、彩色阴影。缝用纸色 #FFFDF6，投影用暖褐 rgba(74,58,34)。
    用法与坑见 references/page-patterns.md 第 12 节。 */
@@ -369,6 +369,17 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   object-fit: cover; display: block;
 }
 
+/* E：盘旋丝带——七块拼成一条自上而下绕行的带子，末端两块并排落地
+   五式里唯一用内联 SVG 的一式：七块共享轮廓、还要在主图之上描出纸白缝，
+   CSS 的 clip-path 描不了边，逐块内缩又得手工算；SVG 一次解决裁形、逐块填图与描边，
+   而且 viewBox 让它随列宽自动缩放（B/C/D 的 path 是像素写死的）。
+   每块的 <image> 铺满自己的 bbox、按 slice 裁切，所以每块都近似独立取景。
+   七条 path 与 bbox 原样抄自 components.md 第八节，改动时两边同步。 */
+.w-coil {
+  width: 100%; height: auto; display: block;
+  filter: drop-shadow(0 18px 24px rgba(74,58,34,.30)) drop-shadow(0 4px 8px rgba(74,58,34,.14));
+}
+
 /* 立体的最后一道：沿遮罩轮廓压一层顶亮底暗，读出弯曲受光 */
 .w-wave::after,
 .w-fan::after {
@@ -398,6 +409,7 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   .slide.on .w-fan img:nth-child(4) { animation-delay: .21s; }
   .slide.on .w-fan img:nth-child(5) { animation-delay: .28s; }
   .slide.on .w-depth { animation: wallTurn .8s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-coil { animation: wallRise .75s cubic-bezier(.22,.75,.2,1) both; }
 }
 
 /* 增强层接管时让位：fx.js 只在检测到 GSAP 时加 .fx-js，避免两套动画叠加 */
@@ -405,6 +417,7 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .fx-js .slide.on .w-wave,
 .fx-js .slide.on .w-fan,
 .fx-js .slide.on .w-fan img,
+.fx-js .slide.on .w-coil,
 .fx-js .slide.on .w-depth { animation: none; }
 
 /* 图墙标题带：一条标题 + 一条图注，不逐图配字 */

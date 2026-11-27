@@ -35,7 +35,7 @@
   if (!fx.available) return;
 
   var EASE = 'power2.out';
-  var BUILT_IN = '.w-stag .pc, .w-wave, .w-fan, .w-fan img, .w-depth';
+  var BUILT_IN = '.w-stag .pc, .w-wave, .w-fan, .w-fan img, .w-coil, .w-depth';
 
   function play(slide) {
     if (!slide) return;
@@ -60,6 +60,15 @@
         { y: 0, opacity: 1, duration: .7, ease: EASE, clearProps: 'transform,opacity' });
       gsap.fromTo(fan.querySelectorAll('img'), { opacity: 0, y: 16 },
         { opacity: 1, y: 0, duration: .55, stagger: .07, delay: .1, ease: EASE, clearProps: 'transform,opacity' });
+    }
+
+    // 盘旋丝带：整座塔浮起，七块依次淡入（g 的 translate 已占位，只动 opacity）
+    var coil = slide.querySelector('.w-coil');
+    if (coil) {
+      gsap.fromTo(coil, { y: 22, opacity: 0 },
+        { y: 0, opacity: 1, duration: .75, ease: EASE, clearProps: 'transform,opacity' });
+      gsap.fromTo(coil.querySelectorAll('image'), { opacity: 0 },
+        { opacity: 1, duration: .5, stagger: .06, delay: .1, ease: EASE, clearProps: 'opacity' });
     }
 
     // 纵深墙必须带 transformPerspective，否则 rotateY 会丢掉透视
