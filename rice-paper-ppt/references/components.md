@@ -178,7 +178,7 @@
 
 <!-- E 盘旋丝带：七块拼成一条绕行的带子，右列竖塔；每块 <image> 铺满自己的 bbox 独立取景
      viewBox 外扩 3px 是留给轮廓描边的，改成 0 0 380 430 会把最外圈描边裁掉 -->
-<div class="grow" style="display:grid;grid-template-columns:1fr 386px;gap:40px;align-items:start">
+<div class="grow" style="display:grid;grid-template-columns:1fr 430px;gap:44px;align-items:start">
   <div class="col" style="justify-content:flex-start;gap:16px">
     <p class="lead">图墙不是把图贴上去，是<b>给一组并置的图像一条共同的走向</b>。</p>
     <div class="wt" style="font-size:var(--fs-h1);margin:0">自上而下，绕出三段风景</div>
