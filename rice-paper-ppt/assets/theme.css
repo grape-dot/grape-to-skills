@@ -432,86 +432,105 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .crest-head { position: absolute; left: 0; top: 0; width: 660px; }
 .crest-head .wt { margin: 0 0 8px; font-size: var(--fs-h1); }
 
-/* ── 8 矩阵网格式（弧墙）：四张两行两列，整面朝观众卷进来 ────────────────────
-   三件套：perspective 挂容器、每列 rotateY 转角、沿 Z 退到圆弧上。
-   θ 与 Z 必须成对：只转不退，边列的四角会翘到邻格上；只退不转，边列只是变小、不变形。
-   立体感的大头不在形变而在光：中缝退得最远也压得最暗、两端外沿最亮，
-   再补一层顶亮底暗和一道贴地影，墙才从纸面上站起来。
-   两列各 24°、Z −110、perspective 1000：中缝比外沿矮 19%，这个差值才够读成「卷」。 */
+/* ── 8 矩阵网格式：5 列 × 3 行十五格，整面卷成一段圆柱面 ────────────────────
+   做法＝正多边形棱柱面：每列 transform: translateZ(-R) rotateY(φ) translateZ(R)，
+   列宽即弦长 W，R = W ÷ 2sin(δ/2)（δ 为每列圆心角），φ 从 −2δ 到 +2δ——
+   中列正对观众、两侧各两列绕圆柱向后转，相邻列的公共棱在 3D 里近似共点，
+   投影后中缝不裂。只转不退（少 translateZ）边列会翘到邻格上；只退不转只是变小不变形。
+   立体感的大头不在形变而在光：中列离观众最近全亮，越往外越暗越窄；
+   再补顶亮底暗与贴地影。容器禁止 filter——会把 3D 子层压平（投影走伪元素）。 */
 .w-cyl {
-  --cg: 5px; --a: 22deg;
+  --cw: 212px;  /* 列宽（弦长） */
+  --ch: 132px;  /* 格高 */
+  --cg: 10px;   /* 白缝（横竖同宽） */
+  --R: 678px;   /* 圆柱半径 = 212 ÷ 2sin9° */
+  --a: 18deg;   /* 每列圆心角 δ */
   position: relative;
-  display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr;
-  width: calc(100% + 92px); margin-left: -46px;
-  gap: var(--cg); height: 404px; background: none;
-  perspective: 1100px; perspective-origin: 50% 50%;
+  width: 100%; height: 416px; background: none;
+  perspective: 1200px; perspective-origin: 50% 50%;
 }
-/* 贴地影：只给每格配投影，四面都亮，墙是「悬」着的；先在地上压一道椭圆再谈形变。
-   用绝对定位的伪元素，不占网格位；直接给容器加 filter 会把 3D 子层压平。 */
+/* 贴地影：直接给容器加 filter 会把 3D 子层压平，投影用绝对定位伪元素。
+   （此规则与 .w-arc 共用，弧幕几乎全宽所以 left/right 3%，网格墙更窄单独放宽。） */
 .w-cyl::before,
 .w-arc::before {
-  content: ""; position: absolute; left: 3%; right: 3%; bottom: -20px; height: 30px;
+  content: ""; position: absolute; left: 3%; right: 3%; bottom: -18px; height: 30px;
   background: radial-gradient(ellipse at 50% 50%,
-    rgba(52,38,20,.42) 0, rgba(52,38,20,.16) 46%, rgba(52,38,20,0) 74%);
+    rgba(52,38,20,.40) 0, rgba(52,38,20,.15) 46%, rgba(52,38,20,0) 74%);
   filter: blur(5px); pointer-events: none;
 }
+.w-cyl::before { left: 15%; right: 15%; }
+/* 列＝棱柱面的一片：五列全部叠在容器中点（absolute 同一位置），
+   圆柱位置完全交给 transform——若再用 flex 排开，静态位置会与圆柱位移叠加，
+   列距直接翻倍散开（实测踩过）。padding 让出竖缝，列内三格用 margin 让出横缝 */
 .w-cyl .cc {
-  position: relative; min-width: 0; overflow: hidden;
-  transform: rotateY(var(--ry, 0deg));
+  position: absolute; left: calc(50% - var(--cw) / 2); top: 0;
+  width: var(--cw); padding: 0 calc(var(--cg) / 2);
+  transform: translateZ(calc(var(--R) * -1)) rotateY(var(--ry, 0deg)) translateZ(var(--R));
 }
-.w-cyl .cc img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* 轴在**中缝**不在格心：两列绕同一条竖轴各转 20°，中缝纹丝不动、两翼向后张，
-   接缝宽度不会被转开。轴放格心就成了两块各自歪的板，中缝裂成一条白沟。
-   两翼都朝后张＝中缝离观众最近，中缝最亮、两翼越往外越暗，这面墙才「面朝你」。 */
-.w-cyl .cc:nth-child(odd)  { --ry: calc(var(--a) * -1); transform-origin: 100% 50%;
-  box-shadow: -3px 0 0 #FFFDF6, -10px 0 16px -8px rgba(52,38,20,.30); }
-.w-cyl .cc:nth-child(even) { --ry: var(--a); transform-origin: 0% 50%;
-  box-shadow: 3px 0 0 #FFFDF6, 10px 0 16px -8px rgba(52,38,20,.30); }
-/* 逐格受光：光在上偏左——左翼整体偏亮、右翼偏暗，两翼各自越靠外越暗 */
+.w-cyl .cc img {
+  width: 100%; height: var(--ch); object-fit: cover; display: block;
+  margin-bottom: var(--cg);
+}
+.w-cyl .cc img:last-child { margin-bottom: 0; }
+/* 列角：−36 / −18 / 0 / 18 / 36（δ=18°），轴在各列自身格心、R 把棱推回圆柱面 */
+.w-cyl .cc:nth-child(1) { --ry: calc(var(--a) * -2); }
+.w-cyl .cc:nth-child(2) { --ry: calc(var(--a) * -1); }
+.w-cyl .cc:nth-child(4) { --ry: var(--a); }
+.w-cyl .cc:nth-child(5) { --ry: calc(var(--a) * 2); }
+/* 逐列受光：光在上偏中——中列全亮，越往外越暗；外列外缘再压一道背光暗边 */
 .w-cyl .cc::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
+  content: ""; position: absolute; inset: 0 calc(var(--cg) / 2); pointer-events: none;
   background:
     linear-gradient(to bottom, rgba(255,251,238,.30) 0, rgba(255,251,238,0) 22%),
     linear-gradient(to top, rgba(34,24,12,.30) 0, rgba(34,24,12,0) 20%);
 }
-.w-cyl .cc:nth-child(odd)::after {
+.w-cyl .cc:nth-child(2)::after {
   background:
     linear-gradient(to bottom, rgba(255,251,238,.30) 0, rgba(255,251,238,0) 22%),
     linear-gradient(to top, rgba(34,24,12,.30) 0, rgba(34,24,12,0) 20%),
-    linear-gradient(to left,
-      rgba(255,250,235,.34) 0, rgba(255,250,235,0) 20%,
-      rgba(30,21,10,.12) 52%, rgba(30,21,10,.58) 100%);
+    linear-gradient(to right, rgba(255,250,235,.16) 0, rgba(255,250,235,0) 30%,
+      rgba(30,21,10,0) 55%, rgba(30,21,10,.30) 100%);
 }
-.w-cyl .cc:nth-child(even)::after {
+.w-cyl .cc:nth-child(4)::after {
   background:
     linear-gradient(to bottom, rgba(255,251,238,.30) 0, rgba(255,251,238,0) 22%),
     linear-gradient(to top, rgba(34,24,12,.30) 0, rgba(34,24,12,0) 20%),
-    linear-gradient(to right,
-      rgba(255,250,235,.26) 0, rgba(255,250,235,0) 20%,
-      rgba(30,21,10,.16) 52%, rgba(30,21,10,.64) 100%);
+    linear-gradient(to left, rgba(255,250,235,.16) 0, rgba(255,250,235,0) 30%,
+      rgba(30,21,10,0) 55%, rgba(30,21,10,.30) 100%);
 }
-.w-cyl .cc:nth-child(even) img { filter: brightness(.94) saturate(.97); }
+.w-cyl .cc:nth-child(1)::after {
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.26) 0, rgba(255,251,238,0) 22%),
+    linear-gradient(to top, rgba(34,24,12,.32) 0, rgba(34,24,12,0) 20%),
+    linear-gradient(to right, rgba(30,21,10,.44) 0, rgba(30,21,10,.10) 55%, rgba(255,250,235,.22) 100%);
+}
+.w-cyl .cc:nth-child(5)::after {
+  background:
+    linear-gradient(to bottom, rgba(255,251,238,.26) 0, rgba(255,251,238,0) 22%),
+    linear-gradient(to top, rgba(34,24,12,.32) 0, rgba(34,24,12,0) 20%),
+    linear-gradient(to left, rgba(30,21,10,.44) 0, rgba(30,21,10,.10) 55%, rgba(255,250,235,.22) 100%);
+}
 
-/* ── 9 折页长卷式（弧屏）：四片共边梯形折成一道弧，接缝处上下边严丝合缝 ────────
+/* ── 9 折页长卷式（之字形手风琴）：四片等宽梯形折成 W 形折屏 ────────────────────
    这一式不用 rotateY：逐片旋转会让相邻两片的公共边错开 3–8px，接缝上出现台阶。
    做法是把五条折线的上下端点定成同一组数，相邻两片共用同一对端点，梯形裁切自然
    拼成一条连续折线；纵深交给折角明暗与片间亮度差，不交给形变。
-   片宽不等：两端各 316px、中间两片 1fr——等宽读成四块等大的板，没有「转过去」的意思。 */
+   轮廓实测自原稿：竖边高度「高—矮—高—矮—高」交替（两端与中缝高、第 1/3 缝矮），
+   是之字形手风琴，不是中间鼓起的拱；落差约为页高 10%，太大两端就塌成窄条。
+   四片等宽——原稿四片边界正好落在四等分点上。 */
 .w-fold {
   display: flex; gap: 0; height: 404px; background: none;
   filter: drop-shadow(0 22px 26px rgba(52,38,20,.34)) drop-shadow(0 4px 8px rgba(52,38,20,.16));
 }
 .w-fold .lf { position: relative; flex: 1 1 0; min-width: 0; }
-.w-fold .lf:nth-child(1),
-.w-fold .lf:nth-child(4) { flex: 0 0 316px; }
 .w-fold .lf img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* 折线端点：上缘 66 → 19 → 6 → 19 → 66，下缘 316 → 385 → 398 → 385 → 316。
-   相邻两片共用同一对 y，接缝既没有台阶也没有白缝；落差 60px 才读得出折角，
-   再大两端就塌成窄条。上下各留 6px，别顶到 404 的边界。 */
-.w-fold .lf:nth-child(1) { clip-path: polygon(0 66px, 100% 19px, 100% 385px, 0 316px); }
-.w-fold .lf:nth-child(2) { clip-path: polygon(0 19px, 100% 6px,  100% 398px, 0 385px); }
-.w-fold .lf:nth-child(3) { clip-path: polygon(0 6px,  100% 19px, 100% 385px, 0 398px); }
-.w-fold .lf:nth-child(4) { clip-path: polygon(0 19px, 100% 66px, 100% 316px, 0 385px); }
+/* 折线端点：上缘 6 → 46 → 6 → 46 → 6，下缘 398 → 358 → 398 → 358 → 398。
+   相邻两片共用同一对 y，接缝既没有台阶也没有白缝；奇数片向右收、偶数片向右放，
+   拼出「高—矮—高—矮—高」的之字。上下各留 6px，别顶到 404 的边界。 */
+.w-fold .lf:nth-child(1) { clip-path: polygon(0 6px,  100% 46px, 100% 358px, 0 398px); }
+.w-fold .lf:nth-child(2) { clip-path: polygon(0 46px, 100% 6px,  100% 398px, 0 358px); }
+.w-fold .lf:nth-child(3) { clip-path: polygon(0 6px,  100% 46px, 100% 358px, 0 398px); }
+.w-fold .lf:nth-child(4) { clip-path: polygon(0 46px, 100% 6px,  100% 398px, 0 358px); }
 /* 折缝：每片左端一道 3px 高光（#FFFDF6）、右端一道 6% 宽的暗边，
    相邻两片一拼就是「亮—暗」的折角；两侧都压暗只会糊成一条黑边，读不出折。 */
 .w-fold .lf::after {
@@ -645,6 +664,7 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   .slide.on .w-cyl .cc:nth-child(2) { animation-delay: .06s; }
   .slide.on .w-cyl .cc:nth-child(3) { animation-delay: .12s; }
   .slide.on .w-cyl .cc:nth-child(4) { animation-delay: .18s; }
+  .slide.on .w-cyl .cc:nth-child(5) { animation-delay: .24s; }
   .slide.on .w-fold { animation: wallRise .7s cubic-bezier(.22,.75,.2,1) both; }
   .slide.on .w-arc .ai { animation: wallFade .55s ease-out both; }
   .slide.on .w-arc .ai:nth-child(2) { animation-delay: .07s; }

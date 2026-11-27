@@ -279,15 +279,18 @@
   </div>
 </div>
 
-<!-- 8 矩阵网格式：2×2，两翼绕中缝各转 22°；容器禁 filter（会把 3D 子层压平），投影走 ::before -->
+<!-- 8 矩阵网格式：5×3 十五格卷成圆柱面；每列 .cc 是棱柱面的一片（列内三格纵排），
+     transform: translateZ(-R) rotateY(φ) translateZ(R)，φ=−36/−18/0/18/36、R=678=列宽212÷2sin9°；
+     五列 absolute 叠在容器中点（flex 排开会与圆柱位移叠加散开）；容器禁 filter（压平 3D），投影走 ::before -->
 <div class="wall w-cyl">
-  <div class="cc"><img src="assets/h1.jpg" alt=""></div>
-  <div class="cc"><img src="assets/h2.jpg" alt=""></div>
-  <div class="cc"><img src="assets/h3.jpg" alt=""></div>
-  <div class="cc"><img src="assets/h4.jpg" alt=""></div>
+  <div class="cc"><img src="assets/h1.jpg" alt=""><img src="assets/h2.jpg" alt=""><img src="assets/h3.jpg" alt=""></div>
+  <div class="cc"><img src="assets/h4.jpg" alt=""><img src="assets/h1.jpg" alt=""><img src="assets/h2.jpg" alt=""></div>
+  <div class="cc"><img src="assets/h3.jpg" alt=""><img src="assets/h4.jpg" alt=""><img src="assets/h1.jpg" alt=""></div>
+  <div class="cc"><img src="assets/h2.jpg" alt=""><img src="assets/h3.jpg" alt=""><img src="assets/h4.jpg" alt=""></div>
+  <div class="cc"><img src="assets/h1.jpg" alt=""><img src="assets/h2.jpg" alt=""><img src="assets/h3.jpg" alt=""></div>
 </div>
 
-<!-- 9 折页长卷式：四片共边梯形 .lf，五条折线端点相邻两片共用；gap:0，折缝=左高光+右暗边 -->
+<!-- 9 折页长卷式：四片等宽共边梯形 .lf，竖边高矮交替成之字（两端与中缝高）；gap:0，折缝=左高光+右暗边 -->
 <div class="wall w-fold">
   <div class="lf"><img src="assets/i1.jpg" alt=""></div>
   <div class="lf"><img src="assets/i2.jpg" alt=""></div>

@@ -11,20 +11,25 @@
   <div class="pbar"></div>
   <div id="deck">
 
+    <!-- 8 矩阵网格式：5 列 × 3 行十五格，整面卷成一段圆柱面（参考图重做）。
+         每列 .cc 是棱柱面的一片：translateZ(-R) rotateY(φ) translateZ(R)，φ=−36/−18/0/18/36，
+         R=678（=列宽 212 ÷ 2sin9°）；中列正对观众，越往外越窄、越暗。
+         列内三格纵向排，横竖缝都是 10px；容器禁 filter（会压平 3D 子层）。 -->
     <section class="slide on">
       <div class="sh">
         <div class="kick">图片墙 · 第 8 式</div>
         <h1 class="stitle">矩阵网格式</h1>
       </div>
       <div class="sb">
-        <p class="lead">多张图片<b>按照规则网格排列</b>，强调整体性与秩序感。</p>
+        <p class="lead">多张图片<b>按照规则网格排列</b>，整面卷成圆柱，强调整体性与秩序感。</p>
         <div class="wall w-cyl">
-          <div class="cc"><img src="img/vg1.jpg" alt=""></div>
-          <div class="cc"><img src="img/vg2.jpg" alt=""></div>
-          <div class="cc"><img src="img/vg3.jpg" alt=""></div>
-          <div class="cc"><img src="img/vg4.jpg" alt=""></div>
+          <div class="cc"><img src="img/vg1.jpg" alt=""><img src="img/vg6.jpg" alt=""><img src="img/vg5.jpg" alt=""></div>
+          <div class="cc"><img src="img/vg2.jpg" alt=""><img src="img/vg1.jpg" alt=""><img src="img/vg6.jpg" alt=""></div>
+          <div class="cc"><img src="img/vg3.jpg" alt=""><img src="img/vg2.jpg" alt=""><img src="img/vg1.jpg" alt=""></div>
+          <div class="cc"><img src="img/vg4.jpg" alt=""><img src="img/vg3.jpg" alt=""><img src="img/vg2.jpg" alt=""></div>
+          <div class="cc"><img src="img/vg5.jpg" alt=""><img src="img/vg4.jpg" alt=""><img src="img/vg3.jpg" alt=""></div>
         </div>
-        <div class="figcap">图注：中缝不动、两翼各转 22°，端列比中缝矮 17%；外缘留一道 3px 纸边。</div>
+        <div class="figcap">图注：十五格 5×3 卷成一段圆柱面——中列正对观众，越往外越窄、越暗；横竖缝都是 10px。</div>
       </div>
       <div class="foot"><span>图片墙 · 第 8 式　矩阵网格式</span><span>08 / 11</span></div>
     </section>
