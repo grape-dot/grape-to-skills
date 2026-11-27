@@ -61,16 +61,21 @@ serif display type, projection-scaled typography, a writing-style spec, and a Pl
 下面四张都是 1280×720 的整页实拍，不是拼图：标题即式名，标题下那句就是这一式的形态定义，
 其余部分全是这一式的真实渲染。用的是同一组四张约 3:2 的横构图素材，所以裁切差异可以直接对比。
 
-<table>
-  <tr>
-    <td width="50%"><img src="examples/wall-stagger.jpg" alt="A 齐边错落式：多张图片独立排列，通过上下错位形成节奏感" /></td>
-    <td width="50%"><img src="examples/wall-wave.jpg" alt="B 波浪贯通式：多张图片沿连续波浪曲线拼接，形成整体画面" /></td>
-  </tr>
-  <tr>
-    <td><img src="examples/wall-depth.jpg" alt="C 纵深渐进式：图片按纵向层次递进排列，营造空间纵深感" /></td>
-    <td><img src="examples/wall-fan.jpg" alt="D 不对称叶片式：图片以不对称弧形边缘连接，形成叶片般的视觉效果" /></td>
-  </tr>
-</table>
+**A 齐边错落式** — 多张图片独立排列，通过上下错位形成节奏感。
+
+<p align="center"><img src="examples/wall-stagger.jpg" width="760" alt="A 齐边错落式：四张照片卡等权并排，偶数张下移 66px 形成错落" /></p>
+
+**B 波浪贯通式** — 多张图片沿连续波浪曲线拼接，形成整体画面。
+
+<p align="center"><img src="examples/wall-wave.jpg" width="760" alt="B 波浪贯通式：四张等宽通栏，上下缘一条连续大 S，只起伏一次" /></p>
+
+**C 纵深渐进式** — 图片按纵向层次递进排列，营造空间纵深感。
+
+<p align="center"><img src="examples/wall-depth.jpg" width="760" alt="C 纵深渐进式：八格沿垂直轴透视旋转，右缘出血贴边、近大远小" /></p>
+
+**D 不对称叶片式** — 图片以不对称弧形边缘连接，形成叶片般的视觉效果。
+
+<p align="center"><img src="examples/wall-fan.jpg" width="760" alt="D 不对称叶片式：一条遮罩裁出左厚中薄右回升的连续轮廓" /></p>
 
 同一组素材在四式下的裁切差异一眼可见：C 的格子最接近原比例、几乎不裁，
 A 保留 67%，B / D 的竖格只留 57%。
