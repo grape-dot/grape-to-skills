@@ -690,43 +690,37 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   filter: blur(4px); pointer-events: none;
 }
 
-/* ── 13 四季弧线式：四扇底边对齐，顶边沿拱形时间轴起伏，弧顶偏右、节点钉顶边 ──────────
-   与 12 峰谷天际线的分野：那一式对称压轴、靠深色主塔收束；这一式讲「时间」，
-   弧是单向行进的——从第 1 扇爬到第 3 扇顶点、第 4 扇缓缓回落，
-   顶点不放正中（放正中就退回 12 的对称骨架了）。
-   每扇顶边左上钉一枚哑光金节点（暖白描边），读成钉在弧形时间轴上的四帧。
-   高度表 244 → 300 → 348（峰）→ 320：爬升缓、回落更缓，才有「逐季而行」的方向感。 */
+/* ── 13 四季弧线式：整页通栏、左右贴边，一条贝塞尔弧裁出「远小近大」─────────────────
+   顶边是**一条连续弧线**（贝塞尔），不是四栏各自高度的台阶：
+   左端沉到 159 → 向右爬升 → 弧顶偏右（≈x 1160 处 y≈45）→ 右端 52 微落；
+   底边一条缓弧：右端满高 420、中段抬到 ≈291、左端 340。
+   两条弧合起来把四栏照片裁成左薄右厚（左厚 ≈ 右厚的 49%），读出
+   「从左侧远小、到右侧近大」的行进纵深——这是本式的骨架本体。
+   左右出血贴纸边（同 2 式波浪的负边距模式），path 按 1280×420 写死、宽度一变就错位；
+   裁切挂内层 .cin 的 path()，投影挂外层 .w-tarc 的 drop-shadow——
+   clip 会裁掉元素自身的影子；金色弧线与四枚节点用一层 svg.axis 叠在外层
+   （放 .cin 里会被 clip 裁一半），节点圆心正好落在顶弧上，即弧形时间轴的四格刻度。
+   与 12 峰谷天际线的分野：那式对称压轴靠深色主塔；这式弧顶偏右、单向行进讲时间。 */
 .w-tarc {
   position: relative;
-  display: flex; align-items: flex-end; gap: 10px;
-  width: 100%; height: 380px; background: none;
+  width: calc(100% + var(--pad-x) * 2); margin-left: calc(var(--pad-x) * -1);
+  height: 420px; background: none;
+  filter: drop-shadow(0 16px 20px rgba(74,58,34,.20)) drop-shadow(0 3px 6px rgba(74,58,34,.10));
 }
-.w-tarc .pc {
-  position: relative; flex: 1 1 0; min-width: 0;
-  box-shadow: 0 14px 18px rgba(74,58,34,.16), 0 3px 6px rgba(74,58,34,.10);
+.w-tarc .cin {
+  display: flex; gap: 8px; width: 100%; height: 100%;
+  clip-path: path("M0 159 C522 74 892 23 1280 52 L1280 420 C697 293 261 220 0 340 Z");
 }
-.w-tarc .pc img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.w-tarc .pc:nth-child(1) { height: 244px; }
-.w-tarc .pc:nth-child(2) { height: 300px; }
-.w-tarc .pc:nth-child(3) { height: 348px; }
-.w-tarc .pc:nth-child(4) { height: 320px; }
-/* 时间节点 */
-.w-tarc .pc::before {
-  content: ""; position: absolute; top: -7px; left: 16px; width: 12px; height: 12px; z-index: 2;
-  border-radius: 50%; background: var(--gold); border: 2px solid #FFFDF6;
-}
-/* 受光：共用顶亮底暗；贴地影一条整影压在底边线上 */
-.w-tarc .pc::after {
+.w-tarc .cl { position: relative; flex: 1 1 0; min-width: 0; }
+.w-tarc .cl img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* 弧形时间轴：金色细线沿顶弧走，四枚金节点钉在弧线上（圆心即弧上的点） */
+.w-tarc .axis { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+/* 受光随弧走：顶缘补亮、底缘压暗；::after 在 .cin 内，跟着同一条 path 裁 */
+.w-tarc .cin::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background:
-    linear-gradient(to bottom, rgba(255,251,238,.24) 0, rgba(255,251,238,0) 16%),
-    linear-gradient(to top, rgba(34,24,12,.20) 0, rgba(34,24,12,0) 14%);
-}
-.w-tarc::before {
-  content: ""; position: absolute; left: 1%; right: 1%; bottom: -16px; height: 26px;
-  background: radial-gradient(ellipse at 50% 50%,
-    rgba(52,38,20,.30) 0, rgba(52,38,20,.10) 48%, rgba(52,38,20,0) 74%);
-  filter: blur(4px); pointer-events: none;
+    linear-gradient(to bottom, rgba(255,251,238,.20) 0, rgba(255,251,238,0) 14%),
+    linear-gradient(to top, rgba(34,24,12,.22) 0, rgba(34,24,12,0) 12%);
 }
 
 /* ── 14 弧形内凹式：整面一条 path，上缘内凹、下缘反向拱起，中腰收拢两侧舒展 ──────────
@@ -849,10 +843,11 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   .slide.on .w-arc .ai:nth-child(5) { animation-delay: .28s; }
   .slide.on .w-sky .pc { animation: wallRise .6s cubic-bezier(.22,.75,.2,1) both; }
   .slide.on .w-sky .pc.pk { animation: wallRise .75s cubic-bezier(.22,.75,.2,1) both; animation-delay: .20s; }
-  .slide.on .w-tarc .pc { animation: wallRise .6s cubic-bezier(.22,.75,.2,1) both; }
-  .slide.on .w-tarc .pc:nth-child(2) { animation-delay: .07s; }
-  .slide.on .w-tarc .pc:nth-child(3) { animation-delay: .14s; }
-  .slide.on .w-tarc .pc:nth-child(4) { animation-delay: .21s; }
+  .slide.on .w-tarc .cl { animation: wallRise .6s cubic-bezier(.22,.75,.2,1) both; }
+  .slide.on .w-tarc .cl:nth-child(2) { animation-delay: .07s; }
+  .slide.on .w-tarc .cl:nth-child(3) { animation-delay: .14s; }
+  .slide.on .w-tarc .cl:nth-child(4) { animation-delay: .21s; }
+  .slide.on .w-tarc .axis { animation: wallFade .5s ease-out .28s both; }
   .slide.on .w-conc .cl { animation: wallRise .6s cubic-bezier(.22,.75,.2,1) both; }
   .slide.on .w-conc .cl:nth-child(2) { animation-delay: .08s; }
   .slide.on .w-conc .cl:nth-child(3) { animation-delay: .16s; }
@@ -868,7 +863,8 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
 .fx-js .slide.on .w-fan img,
 .fx-js .slide.on .w-coil,
 .fx-js .slide.on .w-sky .pc,
-.fx-js .slide.on .w-tarc .pc,
+.fx-js .slide.on .w-tarc .cl,
+.fx-js .slide.on .w-tarc .axis,
 .fx-js .slide.on .w-conc .cl,
 .fx-js .slide.on .w-sec,
 .fx-js .slide.on .w-sec .sd img,

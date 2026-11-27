@@ -11,11 +11,12 @@
   <div class="pbar"></div>
   <div id="deck">
 
-    <!-- 13 四季弧线式：四扇底边对齐（align-items:flex-end），顶边沿拱形时间轴起伏——
-         高度表 244 → 300 → 348（峰，偏右不放正中）→ 320，爬升缓、回落更缓。
-         每扇顶边左上一枚哑光金节点（暖白描边），读成钉在弧形时间轴上的四帧。
-         与 12 峰谷天际线的分野：那式对称压轴靠深色主塔，这式单向行进讲时间。
-         动画：四扇沿时间轴从左到右逐扇浮起。 -->
+    <!-- 13 四季弧线式：整页通栏、左右贴边出血——一条贝塞尔弧裁出「远小近大」：
+         顶边一条连续上拱弧线（左端沉 159 → 弧顶偏右 y≈45 → 右端 52 微落），
+         底边一条缓弧（右端满高 420、中段抬 ≈291、左端 340），
+         四栏照片被裁成左薄右厚（左厚 ≈ 右厚的 49%）——左侧远小、右侧近大。
+         金色弧线 + 四枚节点叠在外层 svg.axis（viewBox 1280×420），圆心落在顶弧上。
+         动画：四栏沿弧从左到右逐栏浮起，时间轴最后淡入。 -->
     <section class="slide on">
       <div class="sh">
         <div class="kick">图片墙 · 第 13 式</div>
@@ -24,12 +25,21 @@
       <div class="sb">
         <p class="lead">图片<b>沿弧形时间轴排列</b>，适合表达季节、时间与变化。</p>
         <div class="wall w-tarc">
-          <div class="pc"><img src="img/vg6.jpg" alt=""></div>
-          <div class="pc"><img src="img/vg2.jpg" alt=""></div>
-          <div class="pc"><img src="img/vg3.jpg" alt=""></div>
-          <div class="pc"><img src="img/vg5.jpg" alt=""></div>
+          <div class="cin">
+            <div class="cl"><img src="img/vg6.jpg" alt=""></div>
+            <div class="cl"><img src="img/vg2.jpg" alt=""></div>
+            <div class="cl"><img src="img/vg3.jpg" alt=""></div>
+            <div class="cl"><img src="img/vg5.jpg" alt=""></div>
+          </div>
+          <svg class="axis" viewBox="0 0 1280 420" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 159 C522 74 892 23 1280 52" fill="none" stroke="#A87F3F" stroke-width="2.5"/>
+            <circle cx="157" cy="134" r="6.5" fill="#A87F3F" stroke="#FFFDF6" stroke-width="2"/>
+            <circle cx="480" cy="87" r="6.5" fill="#A87F3F" stroke="#FFFDF6" stroke-width="2"/>
+            <circle cx="800" cy="54" r="6.5" fill="#A87F3F" stroke="#FFFDF6" stroke-width="2"/>
+            <circle cx="1123" cy="45" r="6.5" fill="#A87F3F" stroke="#FFFDF6" stroke-width="2"/>
+          </svg>
         </div>
-        <div class="figcap">图注：四扇底边对齐，顶边沿拱形时间轴爬升再回落（244 → 300 → 348 → 320），弧顶偏右；顶边金色节点即时间轴刻度。</div>
+        <div class="figcap">图注：整页通栏贴边——顶边连续上拱贝塞尔弧，底边反向缓抬，四栏左薄右厚（远小近大）；金色节点落在弧上即时间轴刻度。</div>
       </div>
       <div class="foot"><span>图片墙 · 第 13 式　四季弧线式</span><span>13 / 15</span></div>
     </section>

@@ -320,13 +320,24 @@
   <div class="pc"><img src="assets/k1.jpg" alt=""></div>
 </div>
 
-<!-- 13 四季弧线式：四扇底边对齐，高度表 .w-tarc nth-child（244 → 300 → 348 峰 → 320，顶点偏右）；
-     每扇顶边左上一枚金色节点 ::before（骑边 top:-7px），漏了节点只剩高矮四张图 -->
+<!-- 13 四季弧线式：整页通栏贴边（.w-tarc 负边距出血），整面一条贝塞尔 path——
+     裁切挂内层 .cin（1280×420 坐标写死：顶弧左沉 159 → 弧顶偏右 ≈45 → 右端 52；
+     底弧右满 420 → 中抬 ≈291 → 左 340），四栏被裁成左薄右厚（远小近大）；
+     金弧线 + 四节点叠在外层 svg.axis（viewBox 1280×420，放 .cin 内会被裁） -->
 <div class="wall w-tarc">
-  <div class="pc"><img src="assets/l1.jpg" alt=""></div>
-  <div class="pc"><img src="assets/l2.jpg" alt=""></div>
-  <div class="pc"><img src="assets/l3.jpg" alt=""></div>
-  <div class="pc"><img src="assets/l4.jpg" alt=""></div>
+  <div class="cin">
+    <div class="cl"><img src="assets/l1.jpg" alt=""></div>
+    <div class="cl"><img src="assets/l2.jpg" alt=""></div>
+    <div class="cl"><img src="assets/l3.jpg" alt=""></div>
+    <div class="cl"><img src="assets/l4.jpg" alt=""></div>
+  </div>
+  <svg class="axis" viewBox="0 0 1280 420" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 159 C522 74 892 23 1280 52" fill="none" stroke="#A87F3F" stroke-width="2.5"/>
+    <circle cx="157" cy="134" r="6.5" fill="#A87F3F" stroke="#FFFDF6" stroke-width="2"/>
+    <circle cx="480" cy="87" r="6.5" fill="#A87F3F" stroke="#FFFDF6" stroke-width="2"/>
+    <circle cx="800" cy="54" r="6.5" fill="#A87F3F" stroke="#FFFDF6" stroke-width="2"/>
+    <circle cx="1123" cy="45" r="6.5" fill="#A87F3F" stroke="#FFFDF6" stroke-width="2"/>
+  </svg>
 </div>
 
 <!-- 14 弧形内凹式：整面一条 path——裁切挂内层 .cin（1176×380 坐标写死），投影挂外层 .w-conc
