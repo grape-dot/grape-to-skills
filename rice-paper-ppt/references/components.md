@@ -272,7 +272,6 @@
 
 <!-- 7 弧形切幅式：只弯上缘、下缘齐平贴底；文字块 .crest-head 挂墙外，进墙就被 clip-path 裁掉 -->
 <div class="crest-wrap">
-  <div class="crest-head"><div class="wt">四帧接成一条地平线</div></div>
   <div class="wall w-crest">
     <img src="assets/g1.jpg" alt=""><img src="assets/g2.jpg" alt="">
     <img src="assets/g3.jpg" alt=""><img src="assets/g4.jpg" alt="">
