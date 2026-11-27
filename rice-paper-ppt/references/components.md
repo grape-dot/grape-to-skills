@@ -184,9 +184,9 @@
     <div class="wt" style="font-size:var(--fs-h1);margin:0">自上而下，绕出三段风景</div>
     <div class="cb">每块只放一张图，块与块之间留纸白缝，整条读成一个动作。</div>
     <div class="cb sm">横带承担起势与转折，竖带承担停留；末端两块并排，收住全篇。</div>
-    <div class="figcap" style="margin:0">图注：七块同题材取景沿丝带盘绕，投影只挂整座塔。</div>
+    <div class="figcap" style="margin:0">图注：七块同题材取景沿丝带盘绕，逐段投影（SVG 滤镜）、交替受光读出层叠。</div>
   </div>
-  <svg class="w-coil" viewBox="-3 -3 386 436" role="img" aria-label="七段取景沿一条盘绕的丝带自上而下铺开">
+  <svg class="w-coil" viewBox="-3 -3 386 423.4" preserveAspectRatio="none" role="img" aria-label="七段取景沿一条盘绕的丝带自上而下铺开">
     <defs>
       <clipPath id="coil1"><path d="M0.0 0.0 Q14.9 5.9 22.4 8.1 Q29.8 10.4 37.3 12.0 Q44.7 13.7 52.2 15.2 Q59.6 16.7 67.1 18.3 Q74.5 19.9 82.0 21.0 Q89.5 22.2 96.9 23.7 Q104.4 25.3 111.8 26.3 Q119.3 27.3 126.7 28.8 Q134.2 30.3 141.6 31.6 Q149.1 33.0 156.5 34.8 Q164.0 36.6 171.4 38.6 Q178.9 40.7 180.9 41.3 L183.0 42.0 L183.0 47.4 183.0 47.4 Q178.9 48.8 171.4 50.9 Q164.0 53.0 156.5 54.5 Q149.1 56.0 141.6 57.6 Q134.2 59.2 126.7 60.8 Q119.3 62.5 111.8 64.4 Q104.4 66.4 96.9 66.4 Q89.5 66.4 82.0 66.4 Q74.5 66.4 67.1 66.4 Q59.6 66.4 52.2 66.4 Q44.7 66.4 37.3 66.4 Q29.8 66.4 22.4 66.4 Q14.9 66.4 7.5 65.7 L0.0 65.1 Z"/></clipPath>
       <clipPath id="coil2"><path d="M115.2 71.8 Q130.1 66.9 137.6 65.2 Q145.0 63.6 152.5 62.0 Q159.9 60.5 167.4 59.0 Q174.8 57.4 182.3 55.1 Q189.7 52.9 191.8 52.2 L193.8 51.5 L193.8 96.2 193.8 96.2 Q189.7 95.0 182.3 93.7 Q174.8 92.3 167.4 90.9 Q159.9 89.5 152.5 88.0 Q145.0 86.6 137.6 85.1 Q130.1 83.6 122.7 81.1 L115.2 78.6 Z"/></clipPath>
@@ -195,14 +195,24 @@
       <clipPath id="coil5"><path d="M6.8 261.6 Q21.7 267.0 29.1 268.3 Q36.6 269.7 44.0 270.4 Q51.5 271.1 59.0 271.8 Q66.4 272.6 73.9 273.2 Q81.3 273.8 88.8 274.5 Q96.2 275.1 103.7 275.4 Q111.1 275.6 118.6 276.0 Q126.0 276.5 133.5 276.7 Q141.0 276.9 148.4 277.4 Q155.9 277.8 160.6 278.5 L165.3 279.2 L165.3 416.1 165.3 416.1 Q155.9 417.4 148.4 417.4 Q141.0 417.4 133.5 417.4 Q126.0 417.4 118.6 417.4 Q111.1 417.4 103.7 417.4 Q96.2 417.4 88.8 417.4 Q81.3 417.4 73.9 417.4 Q66.4 417.4 59.0 417.4 Q51.5 417.4 44.0 417.4 Q36.6 417.4 29.1 417.4 Q21.7 417.4 14.2 416.8 L6.8 416.1 Z"/></clipPath>
       <clipPath id="coil6"><path d="M173.5 277.8 Q188.4 279.2 195.8 279.2 Q203.3 279.2 210.8 279.4 Q218.2 279.7 225.7 280.1 Q233.1 280.5 240.6 281.0 Q248.0 281.4 255.5 281.7 Q262.9 281.9 270.4 282.6 Q277.8 283.3 285.3 283.9 Q292.7 284.6 300.2 285.3 Q307.7 286.0 315.1 287.1 Q322.6 288.2 330.0 289.6 Q337.5 290.9 344.9 293.4 Q352.4 295.8 357.1 299.7 L361.9 303.6 L361.9 314.4 361.9 314.4 Q352.4 327.5 344.9 334.5 Q337.5 341.5 330.0 347.6 Q322.6 353.6 315.1 359.1 Q307.7 364.6 300.2 369.9 Q292.7 375.3 285.3 380.9 Q277.8 386.4 270.4 392.4 Q262.9 398.5 255.5 407.1 Q248.0 415.7 240.6 416.6 Q233.1 417.4 225.7 417.4 Q218.2 417.4 210.8 417.4 Q203.3 417.4 195.8 417.4 Q188.4 417.4 180.9 416.8 L173.5 416.1 Z"/></clipPath>
       <clipPath id="coil7"><path d="M258.9 413.4 Q273.8 398.5 281.2 392.4 Q288.7 386.4 296.1 380.9 Q303.6 375.4 311.0 369.9 Q318.5 364.5 326.0 358.9 Q333.4 353.3 340.9 347.4 Q348.3 341.5 355.8 333.8 Q363.2 326.2 365.9 323.0 L368.6 319.9 L368.6 420.1 368.6 420.1 Q363.2 420.1 355.8 420.1 Q348.3 420.1 340.9 420.1 Q333.4 420.1 326.0 420.1 Q318.5 420.1 311.0 420.1 Q303.6 420.1 296.1 420.1 Q288.7 420.1 281.2 420.1 Q273.8 420.1 266.3 420.1 L258.9 420.1 Z"/></clipPath>
+      <filter id="coilShadow" x="-40%" y="-40%" width="180%" height="180%">
+        <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#4A3A22" flood-opacity=".30"/>
+        <feDropShadow dx="0" dy="1.2" stdDeviation="1" flood-color="#4A3A22" flood-opacity=".16"/>
+      </filter>
+      <linearGradient id="coilLiteA" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FFFDF6" stop-opacity=".28"/><stop offset=".45" stop-color="#FFFDF6" stop-opacity="0"/><stop offset="1" stop-color="#4A3A22" stop-opacity=".26"/>
+      </linearGradient>
+      <linearGradient id="coilLiteB" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#4A3A22" stop-opacity=".20"/><stop offset=".5" stop-color="#4A3A22" stop-opacity="0"/><stop offset="1" stop-color="#FFFDF6" stop-opacity=".16"/>
+      </linearGradient>
     </defs>
-    <g clip-path="url(#coil1)"><image href="assets/e1.jpg" x="0.0" y="0.0" width="191.0" height="74.4" preserveAspectRatio="xMidYMid slice"/></g>
-    <g clip-path="url(#coil2)"><image href="assets/e1.jpg" x="115.2" y="51.5" width="86.6" height="52.7" preserveAspectRatio="xMidYMid slice"/></g>
-    <g clip-path="url(#coil3)"><image href="assets/e2.jpg" x="109.8" y="85.4" width="138.1" height="111.0" preserveAspectRatio="xMidYMid slice"/></g>
-    <g clip-path="url(#coil4)"><image href="assets/e3.jpg" x="8.1" y="136.9" width="241.1" height="146.2" preserveAspectRatio="xMidYMid slice"/></g>
-    <g clip-path="url(#coil5)"><image href="assets/e4.jpg" x="6.8" y="261.6" width="166.6" height="163.9" preserveAspectRatio="xMidYMid slice"/></g>
-    <g clip-path="url(#coil6)"><image href="assets/e5.jpg" x="173.5" y="277.8" width="196.4" height="147.6" preserveAspectRatio="xMidYMid slice"/></g>
-    <g clip-path="url(#coil7)"><image href="assets/e5.jpg" x="258.9" y="319.9" width="117.8" height="108.3" preserveAspectRatio="xMidYMid slice"/></g>
+    <g clip-path="url(#coil1)" class="seg" filter="url(#coilShadow)"><image href="assets/e1.jpg" x="0.0" y="0.0" width="191.0" height="74.4" preserveAspectRatio="xMidYMid slice"/></g>
+    <g clip-path="url(#coil2)" class="seg" filter="url(#coilShadow)"><image href="assets/e1.jpg" x="115.2" y="51.5" width="86.6" height="52.7" preserveAspectRatio="xMidYMid slice"/></g>
+    <g clip-path="url(#coil3)" class="seg" filter="url(#coilShadow)"><image href="assets/e2.jpg" x="109.8" y="85.4" width="138.1" height="111.0" preserveAspectRatio="xMidYMid slice"/></g>
+    <g clip-path="url(#coil4)" class="seg" filter="url(#coilShadow)"><image href="assets/e3.jpg" x="8.1" y="136.9" width="241.1" height="146.2" preserveAspectRatio="xMidYMid slice"/></g>
+    <g clip-path="url(#coil5)" class="seg" filter="url(#coilShadow)"><image href="assets/e4.jpg" x="6.8" y="261.6" width="166.6" height="163.9" preserveAspectRatio="xMidYMid slice"/></g>
+    <g clip-path="url(#coil6)" class="seg" filter="url(#coilShadow)"><image href="assets/e5.jpg" x="173.5" y="277.8" width="196.4" height="147.6" preserveAspectRatio="xMidYMid slice"/></g>
+    <g clip-path="url(#coil7)" class="seg" filter="url(#coilShadow)"><image href="assets/e5.jpg" x="258.9" y="319.9" width="117.8" height="108.3" preserveAspectRatio="xMidYMid slice"/></g>
     <g fill="none" stroke="#FFFDF6" stroke-width="2.2" stroke-linejoin="round">
       <path d="M0.0 0.0 Q14.9 5.9 22.4 8.1 Q29.8 10.4 37.3 12.0 Q44.7 13.7 52.2 15.2 Q59.6 16.7 67.1 18.3 Q74.5 19.9 82.0 21.0 Q89.5 22.2 96.9 23.7 Q104.4 25.3 111.8 26.3 Q119.3 27.3 126.7 28.8 Q134.2 30.3 141.6 31.6 Q149.1 33.0 156.5 34.8 Q164.0 36.6 171.4 38.6 Q178.9 40.7 180.9 41.3 L183.0 42.0 L183.0 47.4 183.0 47.4 Q178.9 48.8 171.4 50.9 Q164.0 53.0 156.5 54.5 Q149.1 56.0 141.6 57.6 Q134.2 59.2 126.7 60.8 Q119.3 62.5 111.8 64.4 Q104.4 66.4 96.9 66.4 Q89.5 66.4 82.0 66.4 Q74.5 66.4 67.1 66.4 Q59.6 66.4 52.2 66.4 Q44.7 66.4 37.3 66.4 Q29.8 66.4 22.4 66.4 Q14.9 66.4 7.5 65.7 L0.0 65.1 Z"/>
       <path d="M115.2 71.8 Q130.1 66.9 137.6 65.2 Q145.0 63.6 152.5 62.0 Q159.9 60.5 167.4 59.0 Q174.8 57.4 182.3 55.1 Q189.7 52.9 191.8 52.2 L193.8 51.5 L193.8 96.2 193.8 96.2 Q189.7 95.0 182.3 93.7 Q174.8 92.3 167.4 90.9 Q159.9 89.5 152.5 88.0 Q145.0 86.6 137.6 85.1 Q130.1 83.6 122.7 81.1 L115.2 78.6 Z"/>
@@ -212,23 +222,35 @@
       <path d="M173.5 277.8 Q188.4 279.2 195.8 279.2 Q203.3 279.2 210.8 279.4 Q218.2 279.7 225.7 280.1 Q233.1 280.5 240.6 281.0 Q248.0 281.4 255.5 281.7 Q262.9 281.9 270.4 282.6 Q277.8 283.3 285.3 283.9 Q292.7 284.6 300.2 285.3 Q307.7 286.0 315.1 287.1 Q322.6 288.2 330.0 289.6 Q337.5 290.9 344.9 293.4 Q352.4 295.8 357.1 299.7 L361.9 303.6 L361.9 314.4 361.9 314.4 Q352.4 327.5 344.9 334.5 Q337.5 341.5 330.0 347.6 Q322.6 353.6 315.1 359.1 Q307.7 364.6 300.2 369.9 Q292.7 375.3 285.3 380.9 Q277.8 386.4 270.4 392.4 Q262.9 398.5 255.5 407.1 Q248.0 415.7 240.6 416.6 Q233.1 417.4 225.7 417.4 Q218.2 417.4 210.8 417.4 Q203.3 417.4 195.8 417.4 Q188.4 417.4 180.9 416.8 L173.5 416.1 Z"/>
       <path d="M258.9 413.4 Q273.8 398.5 281.2 392.4 Q288.7 386.4 296.1 380.9 Q303.6 375.4 311.0 369.9 Q318.5 364.5 326.0 358.9 Q333.4 353.3 340.9 347.4 Q348.3 341.5 355.8 333.8 Q363.2 326.2 365.9 323.0 L368.6 319.9 L368.6 420.1 368.6 420.1 Q363.2 420.1 355.8 420.1 Q348.3 420.1 340.9 420.1 Q333.4 420.1 326.0 420.1 Q318.5 420.1 311.0 420.1 Q303.6 420.1 296.1 420.1 Q288.7 420.1 281.2 420.1 Q273.8 420.1 266.3 420.1 L258.9 420.1 Z"/>
     </g>
+    <g class="lit">
+      <g clip-path="url(#coil1)"><rect x="-3" y="-3" width="386" height="426.4" fill="url(#coilLiteA)"/></g>
+      <g clip-path="url(#coil2)"><rect x="-3" y="-3" width="386" height="426.4" fill="url(#coilLiteB)"/></g>
+      <g clip-path="url(#coil3)"><rect x="-3" y="-3" width="386" height="426.4" fill="url(#coilLiteA)"/></g>
+      <g clip-path="url(#coil4)"><rect x="-3" y="-3" width="386" height="426.4" fill="url(#coilLiteB)"/></g>
+      <g clip-path="url(#coil5)"><rect x="-3" y="-3" width="386" height="426.4" fill="url(#coilLiteA)"/></g>
+      <g clip-path="url(#coil6)"><rect x="-3" y="-3" width="386" height="426.4" fill="url(#coilLiteB)"/></g>
+      <g clip-path="url(#coil7)"><rect x="-3" y="-3" width="386" height="426.4" fill="url(#coilLiteA)"/></g>
+    </g>
   </svg>
 </div>
 ```
 
-<!-- E2 封面满幅：path 与上面完全一样，只改两处 —— class 加 cv-coil、stroke 2.2 → 6。
-     塔按页高 720 定宽 637、右移 30px 出血，上下顶到画布边；样式在 theme.css「封面 · 5 式满幅盘绕塔」。
-     标题 5 字放一行会压到塔（5×158=790 > 611），所以断成「螺旋 / 长卷式」两行；
-     竖排对句这一版没有——定义句（22 字）竖排要拆两列且不好读，横排一句放在左下即可，
-     需要诗句式标题时再用 .cv-couplet。 -->
-<section class="slide cover">
-  <div class="kick" style="position:absolute;left:46px;top:44px">图片墙 · 第 5 式</div>
-  <h1 class="cv-hero"><span>螺旋</span><span>长卷式</span></h1>
-  <div class="cv-lede" style="width:560px;bottom:112px">
-    <p style="font-size:24px">图片沿 S 形曲线连续展开，形成叙事性长卷。</p>
-    <p class="en" style="font-size:15px">Images unfold along one S-curve, reading as a single narrative scroll.</p>
+<!-- E2 整页通栏：path 与上面完全一样，改四处 —— class 加 cv-coil、stroke 2.2 → 6、
+     svg 加 preserveAspectRatio="none"（viewBox 已收到内容底 420.1+3=423.4）、
+     CSS 由 .cv-coil 定 height:720 拉满，塔底与页底出血衔接。
+     文字不另设类：.sh（kick 15px + stitle 40px）+ .sb（宽限到 520px）+ .lead + .figcap + .foot，
+     与其他十式同一套规格；样式只剩 .cv-coil，在 theme.css「5 式整页通栏盘绕塔」段。 -->
+<section class="slide">
+  <div class="sh">
+    <div class="kick">图片墙 · 第 5 式</div>
+    <h1 class="stitle">螺旋长卷式</h1>
   </div>
-  <!-- 这里放同一个 <svg>，class="w-coil cv-coil"，stroke-width="6" -->
+  <div class="sb" style="width:520px;right:auto">
+    <p class="lead">图片<b>沿 S 形曲线连续展开</b>，形成叙事性长卷。</p>
+    <div class="figcap">图注：七段共用一条带子盘绕一圈半，起点在顶部横带、终点两块并排落地；逐段投影、交替受光读出扭转。</div>
+  </div>
+  <!-- 这里放同一个 <svg>，class="w-coil cv-coil" preserveAspectRatio="none"，stroke-width="6" -->
+  <div class="foot"><span>图片墙 · 第 5 式　螺旋长卷式</span><span>05 / 11</span></div>
 </section>
 ```
 

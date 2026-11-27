@@ -594,8 +594,14 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
    七条 path 与 bbox 原样抄自 components.md 第八节，改动时两边同步。 */
 .w-coil {
   width: 100%; height: auto; display: block;
-  filter: drop-shadow(0 18px 24px rgba(74,58,34,.30)) drop-shadow(0 4px 8px rgba(74,58,34,.14));
+  filter: drop-shadow(0 16px 22px rgba(74,58,34,.22)) drop-shadow(0 3px 6px rgba(74,58,34,.10));
 }
+/* 立体感主力在逐段投影：后画的段压在前一段上，各带自己的影，带子才读得出层叠；
+   只留塔级一层会显得平（2026-11-27 用户反馈后从「投影只挂 svg」改过来）。
+   投影必须用 SVG 原生滤镜（defs 里的 #coilShadow，挂在每段 filter 属性上）——
+   CSS filter 挂内层 <g> 会先按用户单位栅格化再放大，整塔发虚。 */
+/* 受光层：.lit 内按段交替铺 coilLiteA（上亮下暗）/ coilLiteB（反向），渐变写在 SVG defs 里 */
+.w-coil .lit { pointer-events: none; }
 
 /* 立体的最后一道：沿遮罩轮廓压一层顶亮底暗，读出弯曲受光 */
 .w-wave::after,
@@ -801,28 +807,15 @@ em { font-style: normal; font-weight: 700; color: var(--green); }
   letter-spacing: .12em; color: #35493B; transform: rotate(-7deg); transform-origin: left center;
 }
 
-/* ── 封面 · 5 式满幅盘绕塔（右半出血）────────────────────────
-   与 .cover 一起用：塔按页高 720 定宽 637，右移 30px 出血，上下顶到画布边缘。
-   必须写在 .w-coil 之后——两者特异度相同，靠顺序把 width:100% 覆盖掉。 */
+/* ── 5 式整页通栏盘绕塔（右缘 + 底缘出血）────────────────────────
+   常规 .slide 页用：svg 上写 preserveAspectRatio="none"，viewBox 收到内容底
+   （-3 -3 386 423.4），CSS 定 height:720 拉满后塔底与页底出血衔接。
+   必须写在 .w-coil 之后——两者特异度相同，靠顺序把 width:100% 覆盖掉。
+   文字不另设类：.sh / .sb（宽限到 520px）/ .foot 与其他页同一套。 */
 .cv-coil {
-  position: absolute; right: -30px; top: 0; width: 637px; height: auto; display: block;
-  filter: drop-shadow(0 18px 26px rgba(74,58,34,.26));
+  position: absolute; right: -30px; top: 0; width: 637px; height: 720px; display: block;
+  filter: drop-shadow(0 14px 20px rgba(74,58,34,.16));
 }
-.cv-hero {
-  position: absolute; left: 44px; top: 104px; margin: 0;
-  font-family: var(--serif); font-size: 158px; font-weight: 900; line-height: 1;
-  letter-spacing: .02em; color: var(--ink);
-}
-.cv-hero span { display: block; }
-.cv-couplet { position: absolute; left: 478px; top: 118px; display: flex; gap: 30px; }
-.cv-couplet div {
-  writing-mode: vertical-rl; text-orientation: upright;
-  font-family: var(--serif); font-size: 23px; line-height: 1.7;
-  letter-spacing: .36em; color: var(--ink-2);
-}
-.cv-lede { position: absolute; left: 46px; bottom: 100px; width: 500px; margin: 0; }
-.cv-lede p { margin: 0; font-size: 20px; line-height: 1.72; color: var(--ink-2); }
-.cv-lede .en { margin-top: 9px; font-size: 14px; line-height: 1.6; letter-spacing: .04em; color: var(--ink-3); }
 
 /* ── 章节页 ───────────────────────────────────────────────── */
 .sec-num {
