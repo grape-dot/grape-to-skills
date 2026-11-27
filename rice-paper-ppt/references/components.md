@@ -184,8 +184,9 @@
 - **明暗**：B/C 的 `::after` 压一层顶亮底暗（白 50% → 透明 14%、暗 34% → 透明 18%）。
 - **出血**：B/D 用 `width: calc(100% + 92px); margin-left: calc(var(--pad-x) * -1)` 左右铺满；
   C 用 `right: calc(var(--pad-x) * -1)` 只让右缘贴边。
-- **连续轮廓**：B/D 的上下缘都由容器一条 `clip-path:path()` 裁出，图片一律 `height:100%`；
-  逐张改高度会留台阶（D 以前就是这么错的）。
+- **连续轮廓**：B/D 的上下缘都由容器一条 `clip-path:path()` 裁出，图片一律同一高度；
+  逐张改高度会留台阶（D 以前就是这么错的）。D 的左端下缘画到了 406（容器 400 之外），
+  所以 D 的图片取 `height: calc(100% + 20px); align-self: flex-start`，`::after` 补 `bottom:-20px`。
 - **纵深**：C 是 `perspective(1600px) rotateY(-25deg)`，宽 1100、高 420、`transform-origin:100% 50%`。
   改角度要同步降高度，否则右缘放大后会压页脚。
 - `.wall` 已带 `min-height:0`；`.w-depth` 绝对定位，容器 `.w-depth-stage` 必须留出高度。
